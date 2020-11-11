@@ -2,7 +2,7 @@
     package="com.example.the_jewel">
    <application
         android:label="the_jewel"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

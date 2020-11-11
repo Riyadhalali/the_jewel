@@ -29,12 +29,23 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/splashscreen/splashscreen.png'),
+                image: AssetImage(
+                    'images/splashscreen/splashscreenbackground.png'),
                 fit: BoxFit.cover),
+          ),
+        ),
+        Container(
+          width: 273.0,
+          height: 287.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/splashscreen/logo.png'),
+                fit: BoxFit.fill),
           ),
         ),
         Container(
