@@ -38,11 +38,12 @@ class _StartScreenState extends State<StartScreen> {
           ),
         ),
         Container(
+          padding: EdgeInsets.all(50.0),
           alignment: Alignment.bottomCenter,
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
           ),
-        )
+        ),
       ],
     );
   }
