@@ -40,15 +40,6 @@ class _StartScreenState extends State<StartScreen> {
           ),
         ),
         Container(
-          width: 273.0,
-          height: 287.0,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/splashscreen/logo.png'),
-                fit: BoxFit.fill),
-          ),
-        ),
-        Container(
           padding: EdgeInsets.all(50.0),
           alignment: Alignment.bottomCenter,
           child: CircularProgressIndicator(
