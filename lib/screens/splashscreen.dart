@@ -35,7 +35,7 @@ class _StartScreenState extends State<StartScreen> {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                    'images/splashscreen/splashscreenbackground.png'),
+                    'assets/splashscreen/splashscreenbackground.png'),
                 fit: BoxFit.cover),
           ),
         ),
