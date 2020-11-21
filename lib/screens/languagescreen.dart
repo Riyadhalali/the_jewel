@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LanguageScreen extends StatefulWidget {
@@ -19,6 +18,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return Scaffold(
       body: Column(
         children: [
+          // background top of screen
           Container(
             height: 375.0,
             decoration: BoxDecoration(
@@ -31,22 +31,37 @@ class _LanguageScreenState extends State<LanguageScreen> {
           SizedBox(
             height: 50.0,
           ),
-          Container(
-            height: 51.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.contain,
-                image: AssetImage(
-                  "assets/languagescreen/chooselanguage.png",
+          //-> Select Language text
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 51.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage(
+                      "assets/languagescreen/chooselanguage.png",
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Text(
+                "Select Language",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 30.0,
           ),
+          //Arabic Language Select
           GestureDetector(
             child: Container(
+              alignment: Alignment.center,
               width: 238.0,
               height: 48.0,
               decoration: BoxDecoration(
@@ -64,6 +79,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     blurRadius: 10,
                   ),
                 ],
+              ),
+              child: Text(
+                "Arabic",
+                style: TextStyle(color: Color(0xFFF5AF4B), fontSize: 20.0),
               ),
             ),
             onTap: () {
@@ -73,8 +92,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
           SizedBox(
             height: 30.0,
           ),
+          //English Language Select
           GestureDetector(
             child: Container(
+              alignment: Alignment.center,
               width: 238.0,
               height: 48.0,
               decoration: BoxDecoration(
@@ -92,6 +113,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     blurRadius: 10,
                   ),
                 ],
+              ),
+              child: Text(
+                "English",
+                style: TextStyle(color: Color(0xFFF5AF4B), fontSize: 20.0),
               ),
             ),
             onTap: () {
