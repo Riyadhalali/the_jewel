@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/sharedpref.dart';
 
 import 'privacypolicy.dart';
 
@@ -11,13 +12,19 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   int counter = 0;
+  SharedPref sharedPref = SharedPref();
 
-  void CheckLangugaeSelected() {
-    print(EasyLocalization.of(context).locale.toString());
-    if (EasyLocalization.of(context).locale.toString() ==
-        'ar') // if user already selected arabic
-    {
-      //navigate to another screen
+  void CheckLangugaeSelected() async {
+    String lang;
+    lang = await sharedPref.LoadData('selectedlanguage');
+    print(lang);
+    //check if user already selected arabic
+    if (lang == 'ar') {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+    }
+    //check if user already select english
+    if (lang == 'en') {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
     }
@@ -26,12 +33,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    //  CheckLangugaeSelected();
     super.didChangeDependencies();
   }
 
   @override
   void initState() {
+    CheckLangugaeSelected();
     super.initState();
   }
 
@@ -102,9 +109,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 setState(() {
                   EasyLocalization.of(context).locale =
                       Locale("ar"); // set language to arabic
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("تم اختيار العربية"),
-                  ));
+                  sharedPref.setData(
+                      'selectedlanguage', 'ar'); // save it to sharedpref
                 });
                 ;
               },
@@ -142,10 +148,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 setState(() {
                   EasyLocalization.of(context).locale =
                       Locale("en"); // set language to English
-
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("English Selected"),
-                  ));
+                  sharedPref.setData('selectedlanguage', 'en');
                 });
               },
             ),
