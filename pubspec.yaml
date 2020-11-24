@@ -26,6 +26,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   sizer: ^1.1.7
   device_preview: ^0.5.5
+  easy_localization: ^2.3.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -57,6 +58,8 @@ flutter:
   assets:
      - assets/splashscreen/
      - assets/languagescreen/
+     - assets/resources/strings/en.json
+     - assets/resources/strings/ar.json
 
   #   - images/a_dot_ham.jpeg
 

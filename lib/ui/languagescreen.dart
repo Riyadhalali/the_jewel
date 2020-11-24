@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+
+import 'privacypolicy.dart';
 
 class LanguageScreen extends StatefulWidget {
   @override
@@ -8,9 +11,27 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   int counter = 0;
+
+  void CheckLangugaeSelected() {
+    print(EasyLocalization.of(context).locale.toString());
+    if (EasyLocalization.of(context).locale.toString() ==
+        'ar') // if user already selected arabic
+    {
+      //navigate to another screen
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    //  CheckLangugaeSelected();
+    super.didChangeDependencies();
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -21,6 +42,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
         child: Column(
           children: [
             Container(
+              width: double.infinity,
               child: Image.asset(
                 "assets/languagescreen/languageactivity_background.png",
                 fit: BoxFit.fill,
@@ -39,7 +61,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   ),
                 ),
                 Text(
-                  "Select Language",
+                  'selectlanguage'.tr().toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -72,12 +94,19 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   ],
                 ),
                 child: Text(
-                  "Arabic",
+                  "العربية",
                   style: TextStyle(color: Color(0xFFF5AF4B), fontSize: 20.0),
                 ),
               ),
               onTap: () {
-                print("you clicked my");
+                setState(() {
+                  EasyLocalization.of(context).locale =
+                      Locale("ar"); // set language to arabic
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("تم اختيار العربية"),
+                  ));
+                });
+                ;
               },
             ),
             SizedBox(
@@ -110,7 +139,14 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
               ),
               onTap: () {
-                print("you clicked my");
+                setState(() {
+                  EasyLocalization.of(context).locale =
+                      Locale("en"); // set language to English
+
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("English Selected"),
+                  ));
+                });
               },
             ),
           ],

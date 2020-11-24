@@ -1,13 +1,16 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/ui/splashscreen.dart';
 
-void main() => runApp(
-      DevicePreview(
-        builder: (context) => MyApp(), // Wrap your app
-      ),
-    );
+void main() {
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('ar')],
+        path: 'assets/resources/strings', // <-- change patch to your
+        child: MyApp()),
+  );
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,10 +25,10 @@ class MyApp extends StatelessWidget {
             //initialize SizerUtil()
             SizerUtil().init(constraints, orientation); //initialize SizerUtil
             return MaterialApp(
-              locale: DevicePreview.locale(context), // Add the locale here
-              builder: DevicePreview.appBuilder, // Add the builder her
               debugShowCheckedModeBanner: false,
-              title: 'Sizer',
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
               theme: ThemeData.light(),
               home: StartScreen(),
             );
