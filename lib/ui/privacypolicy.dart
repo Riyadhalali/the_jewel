@@ -8,8 +8,11 @@ class PrivacyPolicy extends StatefulWidget {
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Hello"),
+    return SafeArea(
+      child: Container(
+        alignment: Alignment.center,
+        child: Text("Hello Riyad "),
+      ),
     );
   }
 }
