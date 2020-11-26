@@ -14,22 +14,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
   int counter = 0;
   SharedPref sharedPref = SharedPref();
 
-  /* void CheckLangugaeSelected() async {
-    String lang;
-    lang = await sharedPref.LoadData('selectedlanguage');
-    print(lang);
-    //check if user already selected arabic
-    if (lang == 'ar') {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
-    }
-    //check if user already select english
-    if (lang == 'en') {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
-    }
-  }*/
-
   Future<String> CheckLangugaeSelected() async {
     String lang;
     lang = await sharedPref.LoadData('selectedlanguage');
@@ -56,7 +40,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   @override
   void initState() {
-    CheckLangugaeSelected();
     super.initState();
   }
 
@@ -69,6 +52,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (snapshot.hasData) {
               //return my widget
+              return CircularProgressIndicator();
+            } else
               return Scaffold(
                 body: Container(
                   child: Column(
@@ -189,8 +174,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   ),
                 ),
               );
-            } else
-              return CircularProgressIndicator();
           }),
     );
 

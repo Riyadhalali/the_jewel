@@ -60,6 +60,7 @@ flutter:
      - assets/languagescreen/
      - assets/resources/strings/en.json
      - assets/resources/strings/ar.json
+     - assets/privacypolicy/
 
   #   - images/a_dot_ham.jpeg
 
