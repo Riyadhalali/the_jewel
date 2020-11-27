@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:sizer/sizer.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   @override
@@ -34,6 +36,16 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             child: ImageForground(),
           ),
           ImageBackground(),
+          Positioned(
+            top: 29.0.h,
+            right: 1.0.w,
+            child: PrivavyPolicLogo(),
+          ),
+          Positioned(
+            top: 32.0.h,
+            right: 17.0.w,
+            child: PrivacyPolicyText(),
+          ),
           ImageBottomBar(),
         ],
       ),
@@ -44,10 +56,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   Widget ImageBackground() {
     return Container(
       width: double.infinity,
-      alignment: Alignment.topCenter,
       child: Image.asset(
         'assets/privacypolicy/privacypolicy_topbackground.png',
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -73,6 +84,30 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       ),
     );
   }
+
+  //-> Privacy Policy Text
+  Widget PrivacyPolicyText() {
+    return Text(
+      "privacypolicy".tr().toString(),
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        fontSize: 30.0,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget PrivavyPolicLogo() {
+    return Container(
+      child: Image.asset(
+        'assets/privacypolicy/privacypolicy_logo.png',
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
+  //-> Privacy Policy Logo
 
 //------------------------------------------------------------------------------
 } //end class
