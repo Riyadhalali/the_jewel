@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:sizer/sizer.dart';
@@ -9,12 +10,12 @@ class PrivacyPolicy extends StatefulWidget {
 }
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
+  bool _checked = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             StackImages(),
           ],
@@ -37,12 +38,16 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           ),
           ImageBackground(),
           Positioned(
-            top: 29.0.h,
+            top: 25.0.h,
             right: 1.0.w,
             child: PrivavyPolicLogo(),
           ),
           Positioned(
-            top: 32.0.h,
+            top: 80.0.h,
+            child: AcceptPrivacyPolicyRadioButton(),
+          ),
+          Positioned(
+            top: 30.0.h,
             right: 17.0.w,
             child: PrivacyPolicyText(),
           ),
@@ -51,6 +56,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       ),
     );
   }
+  //============================================================================
 
   //-> Image Background for top background of app
   Widget ImageBackground() {
@@ -98,6 +104,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
   }
 
+  //-> Privacy Policy Logo
+
   Widget PrivavyPolicLogo() {
     return Container(
       child: Image.asset(
@@ -107,7 +115,37 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
   }
 
-  //-> Privacy Policy Logo
+  //-> radio button widget
+
+  Widget AcceptPrivacyPolicyRadioButton() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      width: 90.0.w,
+      color: Colors.transparent,
+      height: 7.0.h,
+      child: CheckboxListTile(
+        controlAffinity:
+            ListTileControlAffinity.leading, // to make checkbox left aligned
+        title: Text(
+          "Accept Privacy Policy",
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Colors.black,
+          ),
+        ),
+        secondary: Icon(Icons.privacy_tip),
+        value: _checked,
+        onChanged: (bool value) {
+          setState(() {
+            _checked = value;
+            print(_checked);
+          });
+        },
+      ),
+    );
+  }
 
 //------------------------------------------------------------------------------
+
 } //end class

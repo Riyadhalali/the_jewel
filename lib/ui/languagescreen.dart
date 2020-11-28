@@ -20,13 +20,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
     print(lang);
     //check if user already selected arabic
     if (lang == 'ar') {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => PrivacyPolicy()));
     }
     //check if user already select english
     if (lang == 'en') {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => PrivacyPolicy()));
 
       return lang;
     }
