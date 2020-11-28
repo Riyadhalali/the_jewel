@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/ui/selectcountry.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   @override
@@ -145,6 +146,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         onChanged: (bool value) {
           setState(() {
             _checked = value;
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => SelectCountry()));
+
             print(_checked);
           });
         },

@@ -62,6 +62,7 @@ flutter:
      - assets/resources/strings/en.json
      - assets/resources/strings/ar.json
      - assets/privacypolicy/
+     - assets/selectcountry/
 
   #   - images/a_dot_ham.jpeg
 
