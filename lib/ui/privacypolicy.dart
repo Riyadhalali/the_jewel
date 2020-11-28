@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             child: PrivavyPolicLogo(),
           ),
           Positioned(
-            top: 80.0.h,
+            top: 78.0.h,
             child: AcceptPrivacyPolicyRadioButton(),
           ),
           Positioned(
@@ -51,7 +52,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             right: 17.0.w,
             child: PrivacyPolicyText(),
           ),
-          ImageBottomBar(),
+          ImageBottomBar(), // bar background
+          Positioned(
+            top: 52.0.h,
+            child: PrivacyPolicyAgreement(),
+          ), // privacy policy
         ],
       ),
     );
@@ -93,11 +98,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
 
   //-> Privacy Policy Text
   Widget PrivacyPolicyText() {
-    return Text(
+    return AutoSizeText(
       "privacypolicy".tr().toString(),
       textAlign: TextAlign.right,
       style: TextStyle(
-        fontSize: 30.0,
+        fontSize: 20.0,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -143,6 +148,27 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             print(_checked);
           });
         },
+      ),
+    );
+  }
+
+  //-> Privacy Policy agreement text
+  Widget PrivacyPolicyAgreement() {
+    return Container(
+      width: 100.0.w,
+      height: 27.0.h,
+      padding: EdgeInsets.all(10.0),
+      color: Colors.transparent,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Text(
+          "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything" +
+              "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything." +
+              "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything." +
+              "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything." +
+              "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything.",
+          style: TextStyle(fontSize: 20.0),
+        ),
       ),
     );
   }
