@@ -124,6 +124,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       color: Colors.transparent,
       height: 7.0.h,
       child: CheckboxListTile(
+        activeColor: Colors.black87,
         controlAffinity:
             ListTileControlAffinity.leading, // to make checkbox left aligned
         title: Text(
