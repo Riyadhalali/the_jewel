@@ -2,6 +2,7 @@
 "_comment": "Select Language Activity ",
   "selectlanguage": "Select Language",
   "language": "English",
-  "privacypolicy": "PrivacyPolicy"
+  "privacypolicy": "PrivacyPolicy",
+  "selectcountry": "Select Country"
 
 }
