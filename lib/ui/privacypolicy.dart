@@ -103,7 +103,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       "privacypolicy".tr().toString(),
       textAlign: TextAlign.right,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 20.0.sp,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -137,7 +137,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           "Accept Privacy Policy",
           textAlign: TextAlign.left,
           style: TextStyle(
-            fontSize: 18.0,
+            fontSize: 18.0.sp,
             color: Colors.black,
           ),
         ),
@@ -171,7 +171,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything." +
               "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything." +
               "Hello Eng. Riyad this is privacy policy of app please be acrefull about everything.",
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 20.0.sp),
         ),
       ),
     );

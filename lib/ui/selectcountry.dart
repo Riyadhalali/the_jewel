@@ -11,8 +11,10 @@ class SelectCountry extends StatefulWidget {
 class _SelectCountryState extends State<SelectCountry> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StackImages(),
+    return SafeArea(
+      child: Scaffold(
+        body: StackImages(),
+      ),
     );
   }
 
@@ -20,20 +22,19 @@ class _SelectCountryState extends State<SelectCountry> {
   Widget StackImages() {
     return Stack(
       children: [
-        SelectCountyForground(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SelectCountyForground(),
+        ),
         SelectCountryBackground(),
         Positioned(
-          top: 40.0.h,
-          child: SelectCountryButton(),
-        ),
-        Positioned(
-          top: 49.0.h,
-          left: 10.0.w,
+          top: 60.0.h,
+          left: 15.0.w,
           child: SelectedCountrySaudiArabia(),
         ),
         Positioned(
-          bottom: 2.0.h,
-          right: 5.0.w,
+          top: 60.0.h,
+          right: 15.0.w,
           child: SelectedCountryUAE(),
         ),
       ],
@@ -43,23 +44,34 @@ class _SelectCountryState extends State<SelectCountry> {
   //----------------------------------------------------------------------------
   //-> top background for select country activity
   Widget SelectCountryBackground() {
-    return Container(
-      width: double.infinity,
-      child: Image.asset(
-        'assets/selectcountry/selectcountry_background.png',
-        fit: BoxFit.fitHeight,
-      ),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          child: Image.asset(
+            'assets/selectcountry/selectcountry_background.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(
+          bottom: -25,
+          child: SelectCountryButton(),
+        ),
+      ],
+      overflow: Overflow.visible,
     );
   }
 
   //-> forground for select country activity
   Widget SelectCountyForground() {
     return Container(
-      alignment: Alignment.bottomCenter, // to be this bottom alignent in screen
+      padding: EdgeInsets.all(0.0),
+
+      // alignment: Alignment.bottomCenter, // to be this bottom alignent in screen
       width: double.infinity,
       child: Image.asset(
         'assets/selectcountry/selectcountry_forground.png',
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -67,7 +79,7 @@ class _SelectCountryState extends State<SelectCountry> {
   //-> select Country
   Widget SelectCountryButton() {
     return Container(
-      width: 100.0.w, // for being in center in screen
+      width: MediaQuery.of(context).size.width, // for being in center in screen
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -81,7 +93,7 @@ class _SelectCountryState extends State<SelectCountry> {
           Text(
             'selectcountry'.tr().toString(),
             style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
@@ -94,7 +106,8 @@ class _SelectCountryState extends State<SelectCountry> {
   Widget SelectedCountrySaudiArabia() {
     return GestureDetector(
         child: Container(
-          width: 100.0.w,
+          height: 30.0.h,
+          width: 30.0.w,
           child: Image.asset(
             'assets/selectcountry/selectcountry_saudiarabia.png',
             fit: BoxFit.fill,
@@ -111,7 +124,8 @@ class _SelectCountryState extends State<SelectCountry> {
   Widget SelectedCountryUAE() {
     return GestureDetector(
       child: Container(
-        width: 100.0.w,
+        height: 30.0.h,
+        width: 30.0.w,
         child: Image.asset(
           'assets/selectcountry/selectcountry_uae.png',
           fit: BoxFit.fill,
