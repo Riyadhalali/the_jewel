@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart'; //
+import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/sharedpref.dart';
+
+import 'signin.dart';
 
 class SelectCountry extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class SelectCountry extends StatefulWidget {
 }
 
 class _SelectCountryState extends State<SelectCountry> {
+  SharedPref sharedPref = new SharedPref();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -121,7 +125,14 @@ class _SelectCountryState extends State<SelectCountry> {
         ),
         onTap: () {
           setState(() {
+            sharedPref.setData('selectedcountry',
+                'ksa'); //saving selected country to shared pref
             _displaySnackBar(context, 'KSA Selected');
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => SignIn(),
+              ),
+            );
           });
         });
   }
@@ -140,8 +151,13 @@ class _SelectCountryState extends State<SelectCountry> {
       onTap: () {
         setState(
           () {
-            // print('You Selected UAE');
+            sharedPref.setData('selectedcountry', 'uae');
             _displaySnackBar(context, 'UAE Selected');
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => SignIn(),
+              ),
+            );
           },
         );
       },
