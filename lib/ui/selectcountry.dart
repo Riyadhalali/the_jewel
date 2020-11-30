@@ -13,13 +13,19 @@ class _SelectCountryState extends State<SelectCountry> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: StackImages(),
+        // body: StackImages(),
+        body: Builder(builder: (context) => StackImages(context)),
       ),
     );
   }
 
+  _displaySnackBar(BuildContext context) {
+    final snackBar = SnackBar(content: Text('Are you talkin\' to me?'));
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
 //--------------------------Stack Widget----------------------------------------
-  Widget StackImages() {
+  Widget StackImages(BuildContext context) {
     return Stack(
       children: [
         Align(
@@ -35,7 +41,7 @@ class _SelectCountryState extends State<SelectCountry> {
         Positioned(
           top: 60.0.h,
           right: 15.0.w,
-          child: SelectedCountryUAE(),
+          child: SelectedCountryUAE(context),
         ),
       ],
     );
@@ -121,7 +127,7 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
 //-> Selected Country is UAE
-  Widget SelectedCountryUAE() {
+  Widget SelectedCountryUAE(BuildContext context) {
     return GestureDetector(
       child: Container(
         height: 30.0.h,
@@ -135,7 +141,7 @@ class _SelectCountryState extends State<SelectCountry> {
         setState(
           () {
             print('You Selected UAE');
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text("tap")));
+            _displaySnackBar(context);
           },
         );
       },
