@@ -19,8 +19,8 @@ class _SelectCountryState extends State<SelectCountry> {
     );
   }
 
-  _displaySnackBar(BuildContext context) {
-    final snackBar = SnackBar(content: Text('Are you talkin\' to me?'));
+  _displaySnackBar(BuildContext context, message) {
+    final snackBar = SnackBar(content: Text(message));
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
@@ -36,7 +36,7 @@ class _SelectCountryState extends State<SelectCountry> {
         Positioned(
           top: 60.0.h,
           left: 15.0.w,
-          child: SelectedCountrySaudiArabia(),
+          child: SelectedCountrySaudiArabia(context),
         ),
         Positioned(
           top: 60.0.h,
@@ -109,7 +109,7 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
   //-> Selected Country is Saudi Arabia Country
-  Widget SelectedCountrySaudiArabia() {
+  Widget SelectedCountrySaudiArabia(BuildContext context) {
     return GestureDetector(
         child: Container(
           height: 30.0.h,
@@ -121,7 +121,7 @@ class _SelectCountryState extends State<SelectCountry> {
         ),
         onTap: () {
           setState(() {
-            print('You Selected Saudi Arabia');
+            _displaySnackBar(context, 'KSA Selected');
           });
         });
   }
@@ -140,8 +140,8 @@ class _SelectCountryState extends State<SelectCountry> {
       onTap: () {
         setState(
           () {
-            print('You Selected UAE');
-            _displaySnackBar(context);
+            // print('You Selected UAE');
+            _displaySnackBar(context, 'UAE Selected');
           },
         );
       },

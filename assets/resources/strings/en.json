@@ -3,6 +3,8 @@
   "selectlanguage": "Select Language",
   "language": "English",
   "privacypolicy": "PrivacyPolicy",
-  "selectcountry": "Select Country"
+  "selectcountry": "Select Country",
+  "selectedcountryksa": "You Selected Saudi Arabia",
+  "selectedcountryuae":"You Selected UAE"
 
 }

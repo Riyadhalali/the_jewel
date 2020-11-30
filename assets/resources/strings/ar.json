@@ -3,6 +3,8 @@
   "selectlanguage": "اختر اللغة",
   "language": "العربية",
   "privacypolicy": "سياسة التطبيق",
-  "selectcountry": "اختر البلد"
+  "selectcountry": "اختر البلد",
+  "selectedcountryksa": "تم اختيار البلد السعودية",
+  "selectedcountryuae":" تم اخنيار البلد الإمارات"
 
 }
