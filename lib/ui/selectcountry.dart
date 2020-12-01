@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
+import 'package:the_jewel/services/snackbarmessage.dart';
 
 import 'signin.dart';
 
@@ -13,19 +14,25 @@ class SelectCountry extends StatefulWidget {
 
 class _SelectCountryState extends State<SelectCountry> {
   SharedPref sharedPref = new SharedPref();
+  snackbarMessage snackbarmessage = new snackbarMessage();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // body: StackImages(),
         body: Builder(builder: (context) => StackImages(context)),
       ),
     );
+
+//-----------------------------------------------------------------------------
   }
 
-  _displaySnackBar(BuildContext context, message) {
-    final snackBar = SnackBar(content: Text(message));
-    Scaffold.of(context).showSnackBar(snackBar);
+  //-> Check if user already Selected Country
+  Future<String> checkSelectedCountry() async {
+    String selectedCountry;
+    selectedCountry = await sharedPref.LoadData(
+        'selectedcountry'); // wait until it returns data
+    print(selectedCountry);
   }
 
 //--------------------------Stack Widget----------------------------------------
@@ -127,7 +134,7 @@ class _SelectCountryState extends State<SelectCountry> {
           setState(() {
             sharedPref.setData('selectedcountry',
                 'ksa'); //saving selected country to shared pref
-            _displaySnackBar(context, 'KSA Selected');
+            snackbarmessage.displaySnackBar(context, 'KSA Selected');
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => SignIn(),
@@ -152,7 +159,8 @@ class _SelectCountryState extends State<SelectCountry> {
         setState(
           () {
             sharedPref.setData('selectedcountry', 'uae');
-            _displaySnackBar(context, 'UAE Selected');
+            snackbarmessage.displaySnackBar(
+                context, 'UAE Selected'); // display message
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => SignIn(),

@@ -45,7 +45,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //i have wrapped it with center because it was displkaying in all of screen
+    //i have wrapped it with center because it was displaying in all of screen
     return Center(
       child: FutureBuilder(
           future: CheckLangugaeSelected(),
