@@ -15,24 +15,52 @@ class SelectCountry extends StatefulWidget {
 class _SelectCountryState extends State<SelectCountry> {
   SharedPref sharedPref = new SharedPref();
   snackbarMessage snackbarmessage = new snackbarMessage();
+  String return_country;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Builder(builder: (context) => StackImages(context)),
-      ),
-    );
-
+    return FutureBuilder(
+        future: checkSelectedCountry(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              print('Selected Country returned by shard:${snapshot.data}');
+              return SignIn(); //navigae to another screen
+            } else {
+              return SafeArea(
+                child: Scaffold(
+                  body: Builder(builder: (context) => StackImages(context)),
+                ),
+              );
+            }
+          }
+          //-> any error occurs will show progress indicator
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }); //end future builder
+  } // end build widget
 //-----------------------------------------------------------------------------
-  }
 
   //-> Check if user already Selected Country
   Future<String> checkSelectedCountry() async {
     String selectedCountry;
     selectedCountry = await sharedPref.LoadData(
         'selectedcountry'); // wait until it returns data
-    print(selectedCountry);
+    // print(selectedCountry);
+
+    /*  if (selectedCountry == 'uae') {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => SignIn()));
+    }
+    //check if user already select english
+    if (selectedCountry == 'ksa') {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => SignIn()));
+    }*/
+    return selectedCountry;
   }
 
 //--------------------------Stack Widget----------------------------------------
