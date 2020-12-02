@@ -5,6 +5,7 @@
   "privacypolicy": "PrivacyPolicy",
   "selectcountry": "Select Country",
   "selectedcountryksa": "You Selected Saudi Arabia",
-  "selectedcountryuae":"You Selected UAE"
+  "selectedcountryuae":"You Selected UAE",
+  "signin_username": "Username"
 
 }
