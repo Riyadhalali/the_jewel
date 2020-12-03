@@ -7,5 +7,9 @@
   "selectedcountryksa": "تم اختيار البلد السعودية",
   "selectedcountryuae":" تم اخنيار البلد الإمارات",
   "signin_username": "اسم المستخدم",
-  "signin_password": "كلمة المرور"
+  "signin_password": "كلمة المرور",
+  "signin_button": "تسجيل الدخول",
+  "havenoaccount": "ليس لديك حساب؟",
+  "signinasguest": "الدخول كضيف"
+
 }

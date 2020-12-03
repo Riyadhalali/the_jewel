@@ -7,6 +7,9 @@
   "selectedcountryksa": "You Selected Saudi Arabia",
   "selectedcountryuae":"You Selected UAE",
   "signin_username": "Username",
-  "signin_password": "Password"
+  "signin_password": "Password",
+  "signin_button": "Sign In",
+  "havenoaccount": "Have No Account?",
+  "signinasguest": "Sign In As Guest"
 
 }

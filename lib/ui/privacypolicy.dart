@@ -45,7 +45,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             child: PrivavyPolicLogo(),
           ),
           Positioned(
-            top: 78.0.h,
+            top: 75.0.h,
             child: AcceptPrivacyPolicyRadioButton(),
           ),
           Positioned(
@@ -55,7 +55,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           ),
           ImageBottomBar(), // bar background
           Positioned(
-            top: 52.0.h,
+            top: 45.0.h,
             child: PrivacyPolicyAgreement(),
           ), // privacy policy
         ],
@@ -126,7 +126,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   Widget AcceptPrivacyPolicyRadioButton() {
     return Container(
       alignment: Alignment.bottomLeft,
-      width: 90.0.w,
+      width: 100.0.w,
       color: Colors.transparent,
       height: 7.0.h,
       child: CheckboxListTile(

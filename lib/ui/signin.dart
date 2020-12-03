@@ -22,6 +22,8 @@ class _SignInState extends State<SignIn> {
             PasswordInput(),
             RememberMeCheckBox(),
             SignInButton(),
+            NoAccountButton(),
+            SignInAsGuestButton(),
           ],
         ),
       ),
@@ -141,13 +143,65 @@ class _SignInState extends State<SignIn> {
 
   //-> Button for Sign in
   Widget SignInButton() {
-    return TextButton(
-      onPressed: () {
-        print('pressed');
-      },
-      child: Text("Sign in"),
-      style: ButtonStyle(),
+    return Container(
+      width: 170,
+      height: 45.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: const Color(0xff2d2e39),
+      ),
+      child: TextButton(
+        onPressed: () {
+          print('pressed');
+        },
+        child: Text(
+          "signin_button".tr().toString(),
+          style: TextStyle(color: Colors.white),
+        ),
+        style: ButtonStyle(),
+      ),
     );
   }
+
+  //-> Don't have account button
+  Widget NoAccountButton() {
+    return Container(
+      height: 40,
+      child: TextButton(
+        onPressed: () {
+          print('pressed');
+        },
+        child: Text(
+          "havenoaccount".tr().toString(),
+          style: TextStyle(
+            color: Color(0xFF2D2E39),
+          ),
+        ),
+        style: ButtonStyle(),
+      ),
+    );
+  }
+
+//-> Sign in As guest Button
+  Widget SignInAsGuestButton() {
+    return Container(
+      width: 125,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: const Color(0xfffdb952),
+      ),
+      child: TextButton(
+        onPressed: () {
+          print('pressed');
+        },
+        child: Text(
+          "signinasguest".tr().toString(),
+          style: TextStyle(color: Color(0xFF2D2E39), fontSize: 10.0.sp),
+        ),
+      ),
+    );
+  }
+
 //------------------------------------------------------------------------------
 } // end class

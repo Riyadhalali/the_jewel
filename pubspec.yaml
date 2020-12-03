@@ -64,6 +64,7 @@ flutter:
      - assets/privacypolicy/
      - assets/selectcountry/
      - assets/signin/
+     - assets/signin/signin_button.png
 
   #   - images/a_dot_ham.jpeg
 
