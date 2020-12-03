@@ -11,16 +11,17 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
+
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             SignInImageBackground(),
-            SizedBox(
-              height: 2.0.h,
-            ),
-            UsernameTextView(), // i comment it because i already make it in usernameinput
             UsernameInput(),
+            PasswordInput(),
+            RememberMeCheckBox(),
+            SignInButton(),
           ],
         ),
       ),
@@ -34,9 +35,10 @@ class _SignInState extends State<SignIn> {
       children: [
         Container(
           width: double.infinity,
+          // height: 40.0.h,
           child: Image.asset(
             'assets/signin/signin_background.png',
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         ),
         Positioned(
@@ -82,14 +84,69 @@ class _SignInState extends State<SignIn> {
   Widget UsernameInput() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(left: 10.0),
+      padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Enter a search term',
-          labelText: "username",
-          border: OutlineInputBorder(),
+            // hintText: 'Enter u',
+            labelText: "signin_username".tr().toString(),
+            suffixIcon: Icon(Icons.sentiment_satisfied_alt)),
+      ),
+    );
+  }
+
+  //-> password user
+
+  Widget PasswordInput() {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+      child: TextField(
+        decoration: InputDecoration(
+          // hintText: 'Enter u',
+          labelText: "signin_password".tr().toString(),
+          suffixIcon: Icon(Icons.security),
+          //   helperText: "Please put your password",
         ),
       ),
+    );
+  }
+
+  //-> CheckBox for remember password
+  Widget RememberMeCheckBox() {
+    return Container(
+      //alignment: Alignment.bottomLeft,
+      width: double.infinity,
+      color: Colors.transparent,
+      height: 7.0.h,
+      child: CheckboxListTile(
+        activeColor: Colors.black87,
+        controlAffinity:
+            ListTileControlAffinity.leading, // to make checkbox left aligned
+        title: Text(
+          "Remember Me",
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontSize: 12.0.sp,
+            color: Colors.black,
+          ),
+        ),
+        secondary: Icon(Icons.privacy_tip),
+        value: true,
+        onChanged: (bool value) {
+          setState(() {});
+        },
+      ),
+    );
+  }
+
+  //-> Button for Sign in
+  Widget SignInButton() {
+    return TextButton(
+      onPressed: () {
+        print('pressed');
+      },
+      child: Text("Sign in"),
+      style: ButtonStyle(),
     );
   }
 //------------------------------------------------------------------------------

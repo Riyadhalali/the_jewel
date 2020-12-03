@@ -6,6 +6,7 @@
   "selectcountry": "Select Country",
   "selectedcountryksa": "You Selected Saudi Arabia",
   "selectedcountryuae":"You Selected UAE",
-  "signin_username": "Username"
+  "signin_username": "Username",
+  "signin_password": "Password"
 
 }

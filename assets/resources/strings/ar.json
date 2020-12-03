@@ -6,5 +6,6 @@
   "selectcountry": "اختر البلد",
   "selectedcountryksa": "تم اختيار البلد السعودية",
   "selectedcountryuae":" تم اخنيار البلد الإمارات",
-  "signin_username": "اسم المستخدم"
+  "signin_username": "اسم المستخدم",
+  "signin_password": "كلمة المرور"
 }

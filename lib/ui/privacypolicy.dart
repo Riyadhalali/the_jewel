@@ -121,7 +121,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
   }
 
-  //-> radio button widget
+  //-> Check Box
 
   Widget AcceptPrivacyPolicyRadioButton() {
     return Container(
