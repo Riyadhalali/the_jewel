@@ -1,0 +1,7 @@
+class Constants
+{
+const String ServerAPI='http://87.98.187.79/dal/API.asmx';  // server API
+
+
+
+}

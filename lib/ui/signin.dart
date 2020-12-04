@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/snackbarmessage.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -9,11 +13,18 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final TextEditingController username_text =
+      TextEditingController(); // variable for holding username
+  final TextEditingController password_text =
+      TextEditingController(); // variable for holding password
+  snackbarMessage snackmessage = snackbarMessage();
+
   @override
   Widget build(BuildContext context) {
+    // getData(); // get data
+
     return Scaffold(
       //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -88,6 +99,7 @@ class _SignInState extends State<SignIn> {
       width: double.infinity,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: TextField(
+        controller: username_text,
         decoration: InputDecoration(
             // hintText: 'Enter u',
             labelText: "signin_username".tr().toString(),
@@ -103,6 +115,7 @@ class _SignInState extends State<SignIn> {
       width: double.infinity,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: TextField(
+        controller: password_text,
         decoration: InputDecoration(
           // hintText: 'Enter u',
           labelText: "signin_password".tr().toString(),
@@ -152,7 +165,8 @@ class _SignInState extends State<SignIn> {
       ),
       child: TextButton(
         onPressed: () {
-          print('pressed');
+          PostData();
+          showLoaderDialog(context);
         },
         child: Text(
           "signin_button".tr().toString(),
@@ -203,5 +217,55 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+//------------------------------------------------------------------------------
+//****************************Functions*****************************************
+//-> Get Data From Server
+  void getData() async {
+    http.Response response = await http.get(
+        'https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1');
+    //  print(response.body);
+    if (response.statusCode == 200) {
+      String data = response.body;
+      var decodedData = jsonDecode(data); // decoding data
+      var temperature = decodedData['city']['name'];
+      print(temperature);
+    }
+  }
+
+  //-> Post Data to Server
+  void PostData() async {
+    String API_link = 'http://87.98.187.79/dal/API.asmx/' + 'Login';
+    http.Response response = await http
+        .post(API_link, body: {"username": "riyad", "password": "61158"});
+    if (response.statusCode == 200) {
+      String data = response.body;
+      var decodedData = jsonDecode(data); // decoding data
+      var id = decodedData['customer_id'];
+      var message = decodedData['message'];
+      //snackmessage.displaySnackBar(context1, 'Your Id is:');
+      print(message);
+      print(id);
+    }
+  }
+
+  //-> Show Dialog
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(
+              margin: EdgeInsets.only(left: 7), child: Text("Loading...")),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 //------------------------------------------------------------------------------
 } // end class
