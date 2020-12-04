@@ -1,11 +1,11 @@
-import 'dart:convert';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
+import 'package:the_jewel/webservices/webservices.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -13,31 +13,35 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool _saving = false;
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
   final TextEditingController password_text =
       TextEditingController(); // variable for holding password
   snackbarMessage snackmessage = snackbarMessage();
+  WebServices webServices = new WebServices();
+  ShowToast _showToast = new ShowToast();
 
   @override
   Widget build(BuildContext context) {
-    // getData(); // get data
-
-    return Scaffold(
-      //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SignInImageBackground(),
-            UsernameInput(),
-            PasswordInput(),
-            RememberMeCheckBox(),
-            SignInButton(),
-            NoAccountButton(),
-            SignInAsGuestButton(),
-          ],
+    return ModalProgressHUD(
+      child: Scaffold(
+        //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SignInImageBackground(),
+              UsernameInput(),
+              PasswordInput(),
+              RememberMeCheckBox(),
+              SignInButton(),
+              NoAccountButton(),
+              SignInAsGuestButton(),
+            ],
+          ),
         ),
       ),
+      inAsyncCall: _saving,
     );
   } // end build
 
@@ -164,9 +168,17 @@ class _SignInState extends State<SignIn> {
         color: const Color(0xff2d2e39),
       ),
       child: TextButton(
-        onPressed: () {
-          PostData();
-          showLoaderDialog(context);
+        onPressed: () async {
+          setState(() {
+            _saving = true;
+          });
+          var messageResponse = await webServices.LoginPost(
+              username_text.text, password_text.text); // get the responose
+          print(messageResponse);
+          _showToast.showToast(messageResponse.toString());
+          setState(() {
+            _saving = false;
+          });
         },
         child: Text(
           "signin_button".tr().toString(),
@@ -182,9 +194,7 @@ class _SignInState extends State<SignIn> {
     return Container(
       height: 40,
       child: TextButton(
-        onPressed: () {
-          print('pressed');
-        },
+        onPressed: () {},
         child: Text(
           "havenoaccount".tr().toString(),
           style: TextStyle(
@@ -207,7 +217,9 @@ class _SignInState extends State<SignIn> {
       ),
       child: TextButton(
         onPressed: () {
-          print('pressed');
+          setState(() {
+            _saving = true;
+          });
         },
         child: Text(
           "signinasguest".tr().toString(),
@@ -219,34 +231,6 @@ class _SignInState extends State<SignIn> {
 
 //------------------------------------------------------------------------------
 //****************************Functions*****************************************
-//-> Get Data From Server
-  void getData() async {
-    http.Response response = await http.get(
-        'https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1');
-    //  print(response.body);
-    if (response.statusCode == 200) {
-      String data = response.body;
-      var decodedData = jsonDecode(data); // decoding data
-      var temperature = decodedData['city']['name'];
-      print(temperature);
-    }
-  }
-
-  //-> Post Data to Server
-  void PostData() async {
-    String API_link = 'http://87.98.187.79/dal/API.asmx/' + 'Login';
-    http.Response response = await http
-        .post(API_link, body: {"username": "riyad", "password": "61158"});
-    if (response.statusCode == 200) {
-      String data = response.body;
-      var decodedData = jsonDecode(data); // decoding data
-      var id = decodedData['customer_id'];
-      var message = decodedData['message'];
-      //snackmessage.displaySnackBar(context1, 'Your Id is:');
-      print(message);
-      print(id);
-    }
-  }
 
   //-> Show Dialog
   showLoaderDialog(BuildContext context) {
@@ -267,5 +251,6 @@ class _SignInState extends State<SignIn> {
       },
     );
   }
+
 //------------------------------------------------------------------------------
 } // end class
