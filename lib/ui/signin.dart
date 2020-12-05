@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
 import 'package:the_jewel/webservices/webservices.dart';
@@ -13,8 +14,9 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  //-----------------------------Varaibles--------------------------------------
   bool _saving = false;
-  bool _rememberme = false; // checkbox state
+  bool _rememberme = true; // checkbox state
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
   final TextEditingController password_text =
@@ -22,6 +24,21 @@ class _SignInState extends State<SignIn> {
   snackbarMessage snackmessage = snackbarMessage();
   WebServices webServices = new WebServices();
   ShowToast _showToast = new ShowToast();
+  SharedPref sharedPref = new SharedPref();
+  //----------------------------------------------------------------------------
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    getLoginInfo(); // load user info
+    super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // getLoginInfo(); // load user info
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,15 +163,22 @@ class _SignInState extends State<SignIn> {
           "rememberme".tr().toString(),
           textAlign: TextAlign.left,
           style: TextStyle(
+            fontWeight: FontWeight.normal,
             fontSize: 12.0.sp,
-            color: Colors.black,
+            color: Color(0xFF2D2E39),
           ),
         ),
         secondary: Icon(Icons.privacy_tip),
         value: _rememberme,
         onChanged: (bool value) {
           setState(() {
-            _rememberme = value; //
+            _rememberme = value; //checkbox remember me
+            if (_rememberme == true) {
+              sharedPref.setData('signin_username',
+                  username_text.text); // save username to shared pref
+              sharedPref.setData('signin_password',
+                  password_text.text); // save password to shared pref
+            }
           });
         },
       ),
@@ -234,6 +258,17 @@ class _SignInState extends State<SignIn> {
 
 //------------------------------------------------------------------------------
 //****************************Functions*****************************************
-
+  //-> this function will check if there is username and password saved in shared pref
+  void getLoginInfo() async {
+    String username_sharedpref; // get username from shared pref
+    String password_sharedpref; // get password from shared pref
+    username_sharedpref = await sharedPref.LoadData('signin_username');
+    password_sharedpref = await sharedPref.LoadData('signin_password');
+    if (username_sharedpref != null && password_sharedpref != null) {
+      username_text.text = username_sharedpref.toString();
+      password_text.text = password_sharedpref.toString();
+      _rememberme = true;
+    }
+  }
 //------------------------------------------------------------------------------
 } // end class

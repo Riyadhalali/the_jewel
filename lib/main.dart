@@ -43,7 +43,9 @@ class MyApp extends StatelessWidget {
               locale: context.locale,
 
               theme: ThemeData(
-                fontFamily: lang == 'ar' ? 'Ajannat' : 'Roboto',
+                fontFamily: lang == 'ar'
+                    ? 'Ajannat'
+                    : 'Roboto', // select font based on country
               ),
               home: StartScreen(),
             );
