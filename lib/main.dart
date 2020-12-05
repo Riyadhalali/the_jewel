@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -33,14 +32,19 @@ class MyApp extends StatelessWidget {
           builder: (context, orientation) {
             //initialize SizerUtil()
             SizerUtil().init(constraints, orientation); //initialize SizerUtil
+            var lang = context.locale.toString(); // get lang of app
+            // print('your app language is:$lang');
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               //locale: DevicePreview.locale(context), // for device preview
               //builder: DevicePreview.appBuilder, // for device preview
-               locale: context.locale,
-              theme: ThemeData.light(),
+              locale: context.locale,
+
+              theme: ThemeData(
+                fontFamily: lang == 'ar' ? 'Ajannat' : 'Roboto',
+              ),
               home: StartScreen(),
             );
           },
