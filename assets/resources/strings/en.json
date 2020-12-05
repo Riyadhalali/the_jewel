@@ -10,6 +10,7 @@
   "signin_password": "Password",
   "signin_button": "Sign In",
   "havenoaccount": "Have No Account?",
-  "signinasguest": "Sign In As Guest"
+  "signinasguest": "Sign In As Guest",
+  "rememberme": "Remember Me"
 
 }

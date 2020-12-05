@@ -10,6 +10,7 @@
   "signin_password": "كلمة المرور",
   "signin_button": "تسجيل الدخول",
   "havenoaccount": "ليس لديك حساب؟",
-  "signinasguest": "الدخول كضيف"
+  "signinasguest": "الدخول كضيف",
+  "rememberme": "تذكرني"
 
 }

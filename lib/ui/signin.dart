@@ -14,6 +14,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool _saving = false;
+  bool _rememberme = false; // checkbox state
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
   final TextEditingController password_text =
@@ -71,7 +72,7 @@ class _SignInState extends State<SignIn> {
   //-> Widget Sign in user Icon
   Widget SignInIcon() {
     return FittedBox(
-      fit: BoxFit.contain,
+      // fit: BoxFit.contain,
       child: Image.asset(
         'assets/signin/signin_icon.png',
         fit: BoxFit.contain,
@@ -142,7 +143,7 @@ class _SignInState extends State<SignIn> {
         controlAffinity:
             ListTileControlAffinity.leading, // to make checkbox left aligned
         title: Text(
-          "Remember Me",
+          "rememberme".tr().toString(),
           textAlign: TextAlign.left,
           style: TextStyle(
             fontSize: 12.0.sp,
@@ -150,9 +151,11 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         secondary: Icon(Icons.privacy_tip),
-        value: true,
+        value: _rememberme,
         onChanged: (bool value) {
-          setState(() {});
+          setState(() {
+            _rememberme = value; //
+          });
         },
       ),
     );

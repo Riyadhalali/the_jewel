@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/selectcountry.dart';
 
 class PrivacyPolicy extends StatefulWidget {
@@ -13,17 +14,41 @@ class PrivacyPolicy extends StatefulWidget {
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
   bool _checked = false;
+  SharedPref sharedPref = new SharedPref();
+  //-> get privay policy state from shared prefereneces
+  Future<String> checkprivacypolicyagree() async {
+    var privacypolicy;
+    privacypolicy = await sharedPref.LoadData(
+        'privacypolicystate'); // get the privacy policy state from shared pref in aysnc mode
+    return privacypolicy;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            StackImages(),
-          ],
-        ),
-      ),
-    );
+    return FutureBuilder(
+        future: checkprivacypolicyagree(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              return SelectCountry(); // go to select country activity
+            } else {
+              return SafeArea(
+                child: Scaffold(
+                  body: Column(
+                    children: [
+                      StackImages(),
+                    ],
+                  ),
+                ),
+              );
+            } // end else
+          }
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        });
   } // end build
 
 //============================Widgets Tree======================================
@@ -146,6 +171,8 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         onChanged: (bool value) {
           setState(() {
             _checked = value;
+            sharedPref.setData('privacypolicystate',
+                'privacypolicyaccepted'); // saving privacy policy accept to shared pref
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SelectCountry()));
 
