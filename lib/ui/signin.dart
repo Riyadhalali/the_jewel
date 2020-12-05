@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
+import 'package:the_jewel/ui/home.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
 class SignIn extends StatefulWidget {
@@ -203,9 +204,15 @@ class _SignInState extends State<SignIn> {
               username_text.text, password_text.text); // get the responose
           print(messageResponse);
           _showToast.showToast(messageResponse.toString());
+
           setState(() {
             _saving = false;
           });
+          // if we have a success user login in then navigate to another activity
+          if (messageResponse == 'login success') {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage()));
+          }
         },
         child: Text(
           "signin_button".tr().toString(),

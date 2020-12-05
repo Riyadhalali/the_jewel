@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
               //locale: DevicePreview.locale(context), // for device preview
               //builder: DevicePreview.appBuilder, // for device preview
               locale: context.locale,
-
               theme: ThemeData(
                 fontFamily: lang == 'ar'
                     ? 'Ajannat'
