@@ -7,6 +7,7 @@ import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
 import 'package:the_jewel/ui/home.dart';
+import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
 class SignIn extends StatefulWidget {
@@ -228,7 +229,13 @@ class _SignInState extends State<SignIn> {
     return Container(
       height: 40,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => RegisterActivity(),
+            ),
+          );
+        },
         child: Text(
           "havenoaccount".tr().toString(),
           style: TextStyle(

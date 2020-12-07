@@ -68,6 +68,7 @@ flutter:
      - assets/selectcountry/
      - assets/signin/
      - assets/signin/signin_button.png
+     - assets/register/
 
   fonts:
      - family: Ajannat
