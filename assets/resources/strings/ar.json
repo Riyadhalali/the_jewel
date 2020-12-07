@@ -12,6 +12,11 @@
   "havenoaccount": "ليس لديك حساب؟",
   "signinasguest": "الدخول كضيف",
   "rememberme": "تذكرني",
-  "register": "تسجيل"
+  "register": "تسجيل",
+  "confirmpassword": "تأكيد كلمة السر",
+  "email": "البريد الإلكتروني",
+  "phonenumber": "رقم الهاتف",
+  "city": "المدينة",
+  "address": "العنوان"
 
 }

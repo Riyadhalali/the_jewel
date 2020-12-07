@@ -25,22 +25,68 @@ class _RegisterActivityState extends State<RegisterActivity> {
 
 //-----------------------------Widget Tree--------------------------------------
   Widget ColumnElements() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        SizedBox(
-          height: 4.5.h,
-        ),
-        UserImage(),
-        SizedBox(
-          height: 7.0.h,
-        ),
-        Button(
-          colour: Colors.white,
-          text: "register", //pass key from json file
-        ),
-        TextInputField(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          SizedBox(
+            height: 4.5.h,
+          ),
+          UserImage(),
+          SizedBox(
+            height: 7.0.h,
+          ),
+          Button(
+            colour: Colors.white,
+            text: "register", //pass key from json file
+          ),
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "signin_username",
+          ), // username
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "signin_password",
+          ), // password
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "confirmpassword",
+          ), // confirm password
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "email",
+          ), // Email
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "phonenumber",
+          ), //phone number
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "city",
+          ), // city
+          SizedBox(
+            height: 2.0.h,
+          ),
+          TextInputField(
+            hint_text: "address",
+          ), // address
+          SizedBox(
+            height: 2.0.h,
+          ),
+        ],
+      ),
     );
   }
 

@@ -12,6 +12,12 @@
   "havenoaccount": "Have No Account?",
   "signinasguest": "Sign In As Guest",
   "rememberme": "Remember Me",
-  "register": "Register"
+  "register": "Register",
+  "confirmpassword": "Confirm Password",
+  "email": "Email",
+  "phonenumber": "Phone Number",
+  "city": "City",
+  "address": "Address"
+
 
 }
