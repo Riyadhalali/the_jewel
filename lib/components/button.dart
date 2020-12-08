@@ -5,8 +5,10 @@ import 'package:sizer/sizer.dart';
 class Button extends StatelessWidget {
   final Color colour;
   final String text;
+  final String username_input;
+  final Function onPressed;
 
-  Button({this.colour, this.text});
+  Button({this.colour, this.text, this.username_input, this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +19,7 @@ class Button extends StatelessWidget {
         color: const Color(0xff2d2e39),
       ),
       child: TextButton(
-        onPressed: () {
-          print('pressed');
-        },
+        onPressed: onPressed,
         child: Text(
           text.tr().toString(),
           style: TextStyle(color: colour, fontSize: 22.0.sp),

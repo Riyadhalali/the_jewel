@@ -90,7 +90,7 @@ class _SignInState extends State<SignIn> {
 
   //-> Widget Sign in user Icon
   Widget SignInIcon() {
-    return FittedBox(
+    return Container(
       // fit: BoxFit.contain,
       child: Image.asset(
         'assets/signin/signin_icon.png',

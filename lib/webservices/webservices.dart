@@ -18,6 +18,38 @@ class WebServices {
     }
   }
 
-//-------------------End Login API--------------------------------------------
-
+//----------------------Sign Up Page--------------------------------------------
+//-> post Data to server for registering user
+  Future<String> RegisterPost(
+      String username,
+      String phone,
+      String passworrd,
+      String con_password,
+      String email,
+      String country,
+      String city,
+      String address,
+      String picture) async {
+    http.Response response =
+        await http.post(Constants.api_link + 'sign_up', body: {
+      "username": username,
+      "phone": phone,
+      "password": passworrd,
+      "conf_password": con_password,
+      "email": email,
+      "country": country,
+      "city": city,
+      "address": address,
+      "picture": picture
+    });
+    if (response.statusCode == 200) {
+      String data = response.body;
+      var decodedData = jsonDecode(data); // decoding data
+      var id = decodedData['customer_id'];
+      var message = decodedData['message'];
+      print(message);
+      return message; // to return message from server
+    }
+  }
+//------------------------------------------------------------------------------
 } // end class
