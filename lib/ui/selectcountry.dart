@@ -138,7 +138,7 @@ class _SelectCountryState extends State<SelectCountry> {
           Text(
             'selectcountry'.tr().toString(),
             style: TextStyle(
-                fontSize: 15.0.sp,
+                fontSize: 10.0.sp,
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
@@ -152,7 +152,7 @@ class _SelectCountryState extends State<SelectCountry> {
     return GestureDetector(
         child: Container(
           height: 30.0.h,
-          width: 30.0.w,
+          width: 35.0.w,
           child: Image.asset(
             'assets/selectcountry/selectcountry_saudiarabia.png',
             fit: BoxFit.fill,
@@ -177,7 +177,7 @@ class _SelectCountryState extends State<SelectCountry> {
     return GestureDetector(
       child: Container(
         height: 30.0.h,
-        width: 30.0.w,
+        width: 35.0.w,
         child: Image.asset(
           'assets/selectcountry/selectcountry_uae.png',
           fit: BoxFit.fill,

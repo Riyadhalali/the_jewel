@@ -54,6 +54,9 @@ class _SignInState extends State<SignIn> {
               UsernameInput(),
               PasswordInput(),
               RememberMeCheckBox(),
+              SizedBox(
+                height: 3.0.h,
+              ),
               SignInButton(),
               NoAccountButton(),
               SignInAsGuestButton(),
@@ -250,8 +253,8 @@ class _SignInState extends State<SignIn> {
 //-> Sign in As guest Button
   Widget SignInAsGuestButton() {
     return Container(
-      width: 125,
-      height: 30,
+      width: 40.0.w,
+      height: 5.0.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
         color: const Color(0xfffdb952),
