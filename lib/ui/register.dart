@@ -20,6 +20,8 @@ class _RegisterActivityState extends State<RegisterActivity> {
   final _citycontroller = TextEditingController();
   final _addresscontroller = TextEditingController();
   final _picturecontroller = TextEditingController();
+  bool _validateerrormsg =
+      false; // this error will be toggled true if user did not fill all information about registering
   WebServices webServices = new WebServices();
   ShowToast _showToast = new ShowToast();
 
@@ -63,6 +65,7 @@ class _RegisterActivityState extends State<RegisterActivity> {
           TextInputField(
             controller_text: _usernamecontroller,
             hint_text: "signin_username",
+            error_msg: _validateerrormsg ? 'Value can not be empty' : null,
           ), // username
           SizedBox(
             height: 2.0.h,
@@ -70,6 +73,7 @@ class _RegisterActivityState extends State<RegisterActivity> {
           TextInputField(
             controller_text: _passwordcontroller,
             hint_text: "signin_password",
+            error_msg: _validateerrormsg ? 'Value can not be empty' : null,
           ), // password
           SizedBox(
             height: 2.0.h,
@@ -77,6 +81,7 @@ class _RegisterActivityState extends State<RegisterActivity> {
           TextInputField(
             controller_text: _confpasswordcontroller,
             hint_text: "confirmpassword",
+            error_msg: _validateerrormsg ? 'Value can not be empty' : null,
           ), // confirm password
           SizedBox(
             height: 2.0.h,
@@ -151,17 +156,25 @@ class _RegisterActivityState extends State<RegisterActivity> {
 
   //----------------------------------------------------------------------------
   Future<String> register() async {
-    var messageResponse = await webServices.RegisterPost(
-        _usernamecontroller.text,
-        _phonecontroller.text,
-        _passwordcontroller.text,
-        _confpasswordcontroller.text,
-        _emailcontroller.text,
-        _countrycontrller.text,
-        _citycontroller.text,
-        _addresscontroller.text,
-        _picturecontroller.text); // get the responose
-    _showToast.showToast(messageResponse.toString());
+    setState(() {
+      _usernamecontroller.text.isEmpty || _passwordcontroller.text.isEmpty
+          ? _validateerrormsg = true
+          : _validateerrormsg = false;
+    });
+    // if all data is completed submit the request
+    if (_validateerrormsg == false) {
+      var messageResponse = await webServices.RegisterPost(
+          _usernamecontroller.text,
+          _phonecontroller.text,
+          _passwordcontroller.text,
+          _confpasswordcontroller.text,
+          _emailcontroller.text,
+          _countrycontrller.text,
+          _citycontroller.text,
+          _addresscontroller.text,
+          _picturecontroller.text); // get the responose
+      _showToast.showToast(messageResponse.toString());
+    }
   }
   //-----------------------------------------------------------------------------
 } //end class

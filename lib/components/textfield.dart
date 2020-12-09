@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class TextInputField extends StatelessWidget {
   final TextEditingController controller_text;
   final String hint_text;
+  final String error_msg;
 
-  TextInputField({this.hint_text, this.controller_text});
+  TextInputField({this.hint_text, this.controller_text, this.error_msg});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class TextInputField extends StatelessWidget {
           filled: true,
           fillColor: Color(0xFFCCCAD2),
           hintText: hint_text.tr().toString(),
+          errorText: error_msg,
 
           // labelText: "signin_password".tr().toString(),
           // suffixIcon: Icon(Icons.security),
