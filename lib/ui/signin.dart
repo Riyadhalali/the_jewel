@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
-import 'package:the_jewel/ui/home.dart';
+import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
