@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:the_jewel/ui/register.dart';
+import 'package:the_jewel/ui/signin.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,46 +8,39 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      "Index 0: Home",
-      style: optionStyle,
-    ),
-    Text(
-      "Index 1: Settings",
-      style: optionStyle,
-    ),
-    Text(
-      "Index 2: Profile",
-      style: optionStyle,
-    ),
+  int selectedPage = 0;
+  //-> list Pages
+  final _pageOptions = [
+    SignIn(),
+    RegisterActivity(),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _pageOptions[selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Business'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Settings')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_offer), label: 'Offers'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: 'Cart'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: 'Notifications'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.perm_identity), label: 'Profile'),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedPage,
+        showUnselectedLabels: true,
+        unselectedItemColor: Color(0xFFB1B1B1),
         selectedItemColor: Colors.amber,
-        onTap: _onItemTapped,
+        backgroundColor: Color(0xFF707070),
+        onTap: (index) {
+          setState(() {
+            selectedPage = index;
+          });
+        },
       ),
     );
   }
