@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_jewel/components/imageslider.dart';
+import 'package:the_jewel/components/textfield.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,12 +22,23 @@ class _HomeState extends State<Home> {
   Widget ColumnElements() {
     return Column(
       children: [
-        imageSlider(),
+        Stack(
+          children: [
+            imageSlider(),
+            TextInputField(
+              controller_text: _search,
+              hint_text: "Search",
+              //TODO: Change color to the text input  and add radius
+              //TODO: add menu icon and row
+              icon_widget: Icon(Icons.search),
+            ),
+          ],
+        ),
       ],
     );
   }
 
-//--------------------------------- Slider -------------------------------------
+//--------------------------------- Search Box ---------------------------------
 
 //------------------------------------------------------------------------------
 } // end class
