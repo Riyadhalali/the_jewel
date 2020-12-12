@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Offers extends StatefulWidget {
+class Cart extends StatefulWidget {
   @override
-  _OffersState createState() => _OffersState();
+  _CartState createState() => _CartState();
 }
 
-class _OffersState extends State<Offers> {
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Container();

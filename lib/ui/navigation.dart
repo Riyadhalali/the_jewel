@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:the_jewel/ui/cart.dart';
 import 'package:the_jewel/ui/home.dart';
-import 'package:the_jewel/ui/register.dart';
-import 'package:the_jewel/ui/signin.dart';
+import 'package:the_jewel/ui/notifications.dart';
+import 'package:the_jewel/ui/offers.dart';
+import 'package:the_jewel/ui/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +15,10 @@ class _HomePageState extends State<HomePage> {
   //-> list Pages
   final _pageOptions = [
     Home(),
-    RegisterActivity(),
+    Offers(),
+    Cart(),
+    Notifications(),
+    Profile(),
   ];
 
   @override

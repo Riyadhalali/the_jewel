@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Offers extends StatefulWidget {
+class Profile extends StatefulWidget {
   @override
-  _OffersState createState() => _OffersState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _OffersState extends State<Offers> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container();

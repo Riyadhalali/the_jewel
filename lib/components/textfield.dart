@@ -5,8 +5,10 @@ class TextInputField extends StatelessWidget {
   final TextEditingController controller_text;
   final String hint_text;
   final String error_msg;
+  final Icon icon_widget;
 
-  TextInputField({this.hint_text, this.controller_text, this.error_msg});
+  TextInputField(
+      {this.hint_text, this.controller_text, this.error_msg, this.icon_widget});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class TextInputField extends StatelessWidget {
           errorText: error_msg,
 
           // labelText: "signin_password".tr().toString(),
-          // suffixIcon: Icon(Icons.security),
+          suffixIcon: icon_widget, // passing icon
           //   helperText: "Please put your password",
         ),
       ),
