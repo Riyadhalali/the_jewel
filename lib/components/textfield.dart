@@ -7,6 +7,7 @@ class TextInputField extends StatelessWidget {
   final String error_msg;
   final Icon icon_widget;
 
+
   TextInputField(
       {this.hint_text, this.controller_text, this.error_msg, this.icon_widget});
 
