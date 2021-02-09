@@ -17,39 +17,18 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   bool _checked = false;
   SharedPref sharedPref = new SharedPref();
   //-> get privay policy state from shared prefereneces
-  Future<String> checkprivacypolicyagree() async {
-    var privacypolicy;
-    privacypolicy = await sharedPref.LoadData(
-        'privacypolicystate'); // get the privacy policy state from shared pref in aysnc mode
-    return privacypolicy;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: checkprivacypolicyagree(),
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              return SelectCountry(); // go to select country activity
-            } else {
-              return SafeArea(
-                child: Scaffold(
-                  body: Column(
-                    children: [
-                      StackImages(),
-                    ],
-                  ),
-                ),
-              );
-            } // end else
-          }
-          return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        });
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            StackImages(),
+          ],
+        ),
+      ),
+    );
   } // end build
 
 //============================Widgets Tree======================================
@@ -136,6 +115,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
   }
 
+  //-------------------------Privacy Policy Logo--------------------------------
   //-> Privacy Policy Logo
 
   Widget PrivavyPolicLogo() {
@@ -148,7 +128,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   }
 
   //-> Check Box
-
+//-----------------------------------Accept Privacy Policy----------------------
   Widget AcceptPrivacyPolicyRadioButton() {
     return Container(
       alignment: Alignment.bottomLeft,
@@ -176,8 +156,6 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 'privacypolicyaccepted'); // saving privacy policy accept to shared pref
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => SelectCountry()));
-
-            print(_checked);
           });
         },
       ),

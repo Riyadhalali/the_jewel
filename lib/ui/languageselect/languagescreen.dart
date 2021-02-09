@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
-import 'package:the_jewel/ui/privacypolicy.dart';
+
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/privacypolicy/privacypolicy.dart';
 
 class LanguageScreen extends StatefulWidget {
   static final id = 'langugae_screen';

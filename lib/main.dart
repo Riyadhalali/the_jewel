@@ -5,7 +5,6 @@ import 'package:the_jewel/ui/cart.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
-import 'package:the_jewel/ui/privacypolicy.dart';
 import 'package:the_jewel/ui/profile.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/ui/selectcountry.dart';
@@ -13,6 +12,7 @@ import 'package:the_jewel/ui/splashscreen.dart';
 
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/home/home.dart';
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/languageselect/languagescreen.dart';
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/privacypolicy/privacypolicy.dart';
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/signin/signin.dart';
 
 //this just for preview design on different screen sizes

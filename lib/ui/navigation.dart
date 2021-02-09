@@ -28,6 +28,7 @@ class _NavigationBarState extends State<NavigationBar> {
     return Scaffold(
       body: _pageOptions[selectedPage],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
