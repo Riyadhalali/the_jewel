@@ -6,6 +6,7 @@ import 'package:the_jewel/services/sharedpref.dart';
 import 'privacypolicy.dart';
 
 class LanguageScreen extends StatefulWidget {
+  static final id = 'langugae_screen';
   @override
   _LanguageScreenState createState() => _LanguageScreenState();
 }

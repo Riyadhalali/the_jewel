@@ -8,6 +8,7 @@ import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/selectcountry.dart';
 
 class PrivacyPolicy extends StatefulWidget {
+  static final id = 'privacy_policy';
   @override
   _PrivacyPolicyState createState() => _PrivacyPolicyState();
 }

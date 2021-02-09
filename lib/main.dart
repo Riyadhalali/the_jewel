@@ -1,6 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/ui/cart.dart';
+import 'package:the_jewel/ui/home.dart';
+import 'package:the_jewel/ui/languagescreen.dart';
+import 'package:the_jewel/ui/navigation.dart';
+import 'package:the_jewel/ui/notifications.dart';
+import 'package:the_jewel/ui/offers.dart';
+import 'package:the_jewel/ui/privacypolicy.dart';
+import 'package:the_jewel/ui/profile.dart';
+import 'package:the_jewel/ui/register.dart';
+import 'package:the_jewel/ui/selectcountry.dart';
+import 'package:the_jewel/ui/signin.dart';
 import 'package:the_jewel/ui/splashscreen.dart';
 
 //this just for preview design on different screen sizes
@@ -41,12 +52,28 @@ class MyApp extends StatelessWidget {
               //locale: DevicePreview.locale(context), // for device preview
               //builder: DevicePreview.appBuilder, // for device preview
               locale: context.locale,
+              initialRoute: StartScreen.id, // the initial route for the app
+
               theme: ThemeData(
                 fontFamily: lang == 'ar'
                     ? 'Ajannat'
                     : 'Roboto', // select font based on country
               ),
-              home: StartScreen(),
+              routes: {
+                StartScreen.id: (context) =>
+                    StartScreen(), // creating the routes of the page
+                LanguageScreen.id: (context) => LanguageScreen(),
+                Cart.id: (context) => Cart(),
+                Home.id: (context) => Home(),
+                NavigationBar.id: (context) => NavigationBar(),
+                Notifications.id: (context) => Notifications(),
+                Offers.id: (context) => Offers(),
+                PrivacyPolicy.id: (context) => PrivacyPolicy(),
+                Profile.id: (context) => PrivacyPolicy(),
+                RegisterActivity.id: (context) => RegisterActivity(),
+                SelectCountry.id: (context) => SelectCountry(),
+                SignIn.id: (context) => SignIn(),
+              },
             );
           },
         );

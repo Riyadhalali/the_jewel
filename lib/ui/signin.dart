@@ -11,6 +11,7 @@ import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
 class SignIn extends StatefulWidget {
+  static final id = 'sign_in';
   @override
   _SignInState createState() => _SignInState();
 }
@@ -215,7 +216,7 @@ class _SignInState extends State<SignIn> {
           // if we have a success user login in then navigate to another activity
           if (messageResponse == 'login success') {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage()));
+                .push(MaterialPageRoute(builder: (context) => NavigationBar()));
           }
         },
         child: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {
+  static final id = 'notifications';
   @override
   _NotificationsState createState() => _NotificationsState();
 }

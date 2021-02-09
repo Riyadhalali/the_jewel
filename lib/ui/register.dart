@@ -6,6 +6,7 @@ import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
 class RegisterActivity extends StatefulWidget {
+  static final id = 'register';
   @override
   _RegisterActivityState createState() => _RegisterActivityState();
 }

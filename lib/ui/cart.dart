@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Cart extends StatefulWidget {
+  static final id = 'cart';
   @override
   _CartState createState() => _CartState();
 }

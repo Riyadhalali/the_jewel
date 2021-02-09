@@ -3,6 +3,7 @@ import 'package:the_jewel/components/imageslider.dart';
 import 'package:the_jewel/components/textfield.dart';
 
 class Home extends StatefulWidget {
+  static final id = 'home';
   @override
   _HomeState createState() => _HomeState();
 }

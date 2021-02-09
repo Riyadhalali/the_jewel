@@ -5,12 +5,13 @@ import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/profile.dart';
 
-class HomePage extends StatefulWidget {
+class NavigationBar extends StatefulWidget {
+  static final id = 'navigation_main';
   @override
-  _HomePageState createState() => _HomePageState();
+  _NavigationBarState createState() => _NavigationBarState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _NavigationBarState extends State<NavigationBar> {
   int selectedPage = 0;
   //-> list Pages
   final _pageOptions = [

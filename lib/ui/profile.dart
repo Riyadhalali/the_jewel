@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
+  static final id = 'profile';
   @override
   _ProfileState createState() => _ProfileState();
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'languagescreen.dart';
 
 class StartScreen extends StatefulWidget {
+  static final id = 'splash_screen';
   @override
   _StartScreenState createState() => _StartScreenState();
 }

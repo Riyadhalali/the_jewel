@@ -8,6 +8,7 @@ import 'package:the_jewel/services/snackbarmessage.dart';
 import 'signin.dart';
 
 class SelectCountry extends StatefulWidget {
+  static final id = 'select_country';
   @override
   _SelectCountryState createState() => _SelectCountryState();
 }
