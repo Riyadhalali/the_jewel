@@ -2,8 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/ui/cart.dart';
-import 'package:the_jewel/ui/home.dart';
-import 'package:the_jewel/ui/languagescreen.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
@@ -11,8 +9,11 @@ import 'package:the_jewel/ui/privacypolicy.dart';
 import 'package:the_jewel/ui/profile.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/ui/selectcountry.dart';
-import 'package:the_jewel/ui/signin.dart';
 import 'package:the_jewel/ui/splashscreen.dart';
+
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/home/home.dart';
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/languageselect/languagescreen.dart';
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/signin/signin.dart';
 
 //this just for preview design on different screen sizes
 /*void main() => runApp(

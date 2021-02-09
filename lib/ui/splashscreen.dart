@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'languagescreen.dart';
+import 'languageselect/languagescreen.dart';
 
 class StartScreen extends StatefulWidget {
   static final id = 'splash_screen';
