@@ -13,9 +13,10 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  int selectedPage = 0;
-  //-> list Pages
-  final _pageOptions = [
+  int _pageIndex = 0;
+  PageController _pageController;
+
+  List<Widget> tabPages = [
     Home(),
     Offers(),
     Cart(),
@@ -24,9 +25,37 @@ class _NavigationBarState extends State<NavigationBar> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: _pageIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void onTabTapped(int index) {
+    this._pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      this._pageIndex = page;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageOptions[selectedPage],
+      body: PageView(
+        children: tabPages,
+        onPageChanged: onPageChanged,
+        controller: _pageController,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -40,16 +69,12 @@ class _NavigationBarState extends State<NavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.perm_identity), label: 'Profile'),
         ],
-        currentIndex: selectedPage,
+        currentIndex: _pageIndex,
         showUnselectedLabels: true,
         unselectedItemColor: Color(0xFFB1B1B1),
         selectedItemColor: Colors.amber,
         backgroundColor: Color(0xFF707070),
-        onTap: (index) {
-          setState(() {
-            selectedPage = index;
-          });
-        },
+        onTap: onTabTapped,
       ),
     );
   }
