@@ -8,6 +8,7 @@ import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/register.dart';
+import 'package:the_jewel/webservices/Signin/Login.dart';
 import 'package:the_jewel/webservices/webservices.dart';
 
 class SignIn extends StatefulWidget {
@@ -249,16 +250,24 @@ class _SignInState extends State<SignIn> {
             _saving = true;
           });
 
-          var messageResponse = await webServices.LoginPost(
-              username_text.text, password_text.text); // get the responose
-          print(messageResponse);
+          Login login = await webServices.LoginPost(
+              username_text.text, password_text.text);
+          var messageResponse = login.message; // get the message from the api
+          var userId =
+              login.customerId; //  get the user id and save it to shared
+
+          // var messageResponse = await webServices.LoginPost(
+          //     username_text.text, password_text.text); // get the responose
+          //print(messageResponse);
           _showToast.showToast(messageResponse.toString());
 
           setState(() {
             _saving = false;
           });
-          // if we have a success user login in then navigate to another activity
+          //  if we have a success user login in then navigate to another activity
           if (messageResponse == 'login success') {
+            sharedPref.setData(
+                'userID', userId.toString()); // save the user id to shared pref
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => NavigationBar()));
           }
@@ -337,3 +346,4 @@ class _SignInState extends State<SignIn> {
   }
 //------------------------------------------------------------------------------
 } // end class
+//TODO: get the user id and save it to shared pref
