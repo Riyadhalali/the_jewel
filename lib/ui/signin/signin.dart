@@ -346,4 +346,3 @@ class _SignInState extends State<SignIn> {
   }
 //------------------------------------------------------------------------------
 } // end class
-//TODO: get the user id and save it to shared pref
