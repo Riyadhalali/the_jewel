@@ -18,6 +18,7 @@
   "phonenumber": "رقم الهاتف",
   "city": "المدينة",
   "address": "العنوان",
-  "county": "البلد"
+  "county": "البلد",
+  "valuecannotbeempty": "يرجى تعبئة الحقل"
 
 }

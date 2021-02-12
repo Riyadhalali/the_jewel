@@ -5,9 +5,9 @@ import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/privacypolicy/privacypolicy.dart';
-import 'package:the_jewel/ui/signin/signin.dart';
 
 import 'languageselect/languagescreen.dart';
+import 'signin/signin.dart';
 
 class StartScreen extends StatefulWidget {
   static final id = 'splash_screen';

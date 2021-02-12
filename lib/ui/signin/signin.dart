@@ -18,12 +18,15 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   //-----------------------------Varaibles--------------------------------------
+  bool _isHidden = false; // this is for hide / show the password
   bool _saving = false;
-  bool _rememberme = true; // checkbox state
+  bool _rememberme = false; // checkbox state
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
   final TextEditingController password_text =
       TextEditingController(); // variable for holding password
+  bool validatorUsername = false;
+  bool validatorPassword = false;
   snackbarMessage snackmessage = snackbarMessage();
   WebServices webServices = new WebServices();
   ShowToast _showToast = new ShowToast();
@@ -32,14 +35,14 @@ class _SignInState extends State<SignIn> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    getLoginInfo(); // load user info
+    getLoginInfo();
     super.didChangeDependencies();
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    // getLoginInfo(); // load user info
+
     super.initState();
   }
 
@@ -48,20 +51,22 @@ class _SignInState extends State<SignIn> {
     return ModalProgressHUD(
       child: Scaffold(
         //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SignInImageBackground(),
-              UsernameInput(),
-              PasswordInput(),
-              RememberMeCheckBox(),
-              SizedBox(
-                height: 3.0.h,
-              ),
-              SignInButton(),
-              NoAccountButton(),
-              SignInAsGuestButton(),
-            ],
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SignInImageBackground(),
+                UsernameInput(),
+                PasswordInput(),
+                RememberMeCheckBox(),
+                SizedBox(
+                  height: 3.0.h,
+                ),
+                SignInButton(),
+                NoAccountButton(),
+                SignInAsGuestButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -75,16 +80,16 @@ class _SignInState extends State<SignIn> {
     return Stack(
       children: [
         Container(
-          width: double.infinity,
-          // height: 40.0.h,
+          width: MediaQuery.of(context).size.width,
+          height: 51.0.h,
           child: Image.asset(
             'assets/signin/signin_background.png',
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ),
         Positioned(
           bottom: 0,
-          right: 20,
+          right: 10,
           child:
               SignInIcon(), // stacking icon in the botto of the background at the right postion
         ),
@@ -103,8 +108,8 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+//----------------------------------Username------------------------------------
   //-> Text view of username
-
   Widget UsernameTextView() {
     return Container(
       width: double.infinity,
@@ -121,7 +126,6 @@ class _SignInState extends State<SignIn> {
   }
 
   //-> Username Input
-
   Widget UsernameInput() {
     return Container(
       width: double.infinity,
@@ -130,30 +134,45 @@ class _SignInState extends State<SignIn> {
         controller: username_text,
         decoration: InputDecoration(
             // hintText: 'Enter u',
+            errorText:
+                validatorUsername ? "valuecannotbeempty".tr().toString() : null,
             labelText: "signin_username".tr().toString(),
             suffixIcon: Icon(Icons.sentiment_satisfied_alt)),
       ),
     );
   }
 
+//---------------------------------Password Input-------------------------------
   //-> password user
-
   Widget PasswordInput() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       child: TextField(
+        autofocus: false,
+        obscureText: _isHidden,
         controller: password_text,
         decoration: InputDecoration(
-          // hintText: 'Enter u',
+          errorText:
+              validatorPassword ? "valuecannotbeempty".tr().toString() : null,
           labelText: "signin_password".tr().toString(),
-          suffixIcon: Icon(Icons.security),
-          //   helperText: "Please put your password",
+          suffix: InkWell(
+            onTap: () {
+              setState(() {
+                _isHidden = !_isHidden;
+              });
+            },
+            child:
+                _isHidden ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+          ),
+
+          // helperText: "Please put your password",
         ),
       ),
     );
   }
 
+//---------------------------Remember Password----------------------------------
   //-> CheckBox for remember password
   Widget RememberMeCheckBox() {
     return Container(
@@ -185,12 +204,21 @@ class _SignInState extends State<SignIn> {
               sharedPref.setData('signin_password',
                   password_text.text); // save password to shared pref
             }
+
+            // if user changed to not rememmber it will add null for loading null data
+            if (_rememberme == false) {
+              sharedPref.setData(
+                  'signin_username', null); // save username to shared pref
+              sharedPref.setData(
+                  'signin_password', null); // save password to shared pref
+            }
           });
         },
       ),
     );
   }
 
+//---------------------------------Sign In--------------------------------------
   //-> Button for Sign in
   Widget SignInButton() {
     return Container(
@@ -202,9 +230,25 @@ class _SignInState extends State<SignIn> {
       ),
       child: TextButton(
         onPressed: () async {
+          // check if the text field all is not empty
+          setState(() {
+            username_text.text.isEmpty
+                ? validatorUsername = true
+                : validatorUsername = false;
+
+            password_text.text.isEmpty
+                ? validatorPassword = true
+                : validatorPassword = false;
+          });
+
+          // if username and password are empty return
+          if (validatorUsername || validatorPassword) {
+            return;
+          }
           setState(() {
             _saving = true;
           });
+
           var messageResponse = await webServices.LoginPost(
               username_text.text, password_text.text); // get the responose
           print(messageResponse);
@@ -228,6 +272,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+//---------------------------Don't have an account------------------------------
   //-> Don't have account button
   Widget NoAccountButton() {
     return Container(
@@ -251,7 +296,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-//-> Sign in As guest Button
+//---------------------------Sign in as Guest----------------------------------
   Widget SignInAsGuestButton() {
     return Container(
       width: 40.0.w,
@@ -283,9 +328,11 @@ class _SignInState extends State<SignIn> {
     username_sharedpref = await sharedPref.LoadData('signin_username');
     password_sharedpref = await sharedPref.LoadData('signin_password');
     if (username_sharedpref != null && password_sharedpref != null) {
-      username_text.text = username_sharedpref.toString();
-      password_text.text = password_sharedpref.toString();
-      _rememberme = true;
+      setState(() {
+        username_text.text = username_sharedpref.toString();
+        password_text.text = password_sharedpref.toString();
+        _rememberme = true; // change the remember check box to true
+      });
     }
   }
 //------------------------------------------------------------------------------
