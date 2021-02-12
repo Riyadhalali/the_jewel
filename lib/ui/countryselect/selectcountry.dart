@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
 
-import 'signin/signin.dart';
+import '../signin/signin.dart';
 
 class SelectCountry extends StatefulWidget {
   static final id = 'select_country';

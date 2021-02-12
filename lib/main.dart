@@ -7,9 +7,9 @@ import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/profile.dart';
 import 'package:the_jewel/ui/register.dart';
-import 'package:the_jewel/ui/selectcountry.dart';
 import 'package:the_jewel/ui/splashscreen.dart';
 
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/countryselect/selectcountry.dart';
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/home/home.dart';
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/languageselect/languagescreen.dart';
 import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/privacypolicy/privacypolicy.dart';

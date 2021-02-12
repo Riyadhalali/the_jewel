@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/services/sharedpref.dart';
-import 'package:the_jewel/ui/selectcountry.dart';
+import 'package:the_jewel/ui/countryselect/selectcountry.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   static final id = 'privacy_policy';
