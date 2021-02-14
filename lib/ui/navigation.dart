@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:the_jewel/ui/cart.dart';
+import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/profile.dart';
-
-import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/ui/home/home.dart';
 
 class NavigationBar extends StatefulWidget {
   static final id = 'navigation_main';
@@ -79,3 +78,5 @@ class _NavigationBarState extends State<NavigationBar> {
     );
   }
 }
+
+//----------------------------Custom App Bar------------------------------------
