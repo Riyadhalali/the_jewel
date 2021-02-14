@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:the_jewel/components/imageslider.dart';
 
@@ -215,3 +214,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(height);
 }
 //------------------------------------------------------------------------------
+//TODO: add locaozation for all screen
+//TODO: add localization for drawer
+//TODO: load username from shared pref and display it in the drawer
+//TODO: work with image picker
