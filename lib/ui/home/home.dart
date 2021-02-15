@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_jewel/components/imageslider.dart';
+import 'package:the_jewel/components/imageSliderPro.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -167,7 +167,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          imageSlider(),
+          imageSliderPro(),
           Positioned(
             // To take AppBar Size only
             top: 10.0,
