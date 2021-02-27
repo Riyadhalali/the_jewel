@@ -19,7 +19,17 @@
   "city": "City",
   "address": "Address",
   "county": "Country",
-  "valuecannotbeempty": "Value can no be empty please fill !"
+  "valuecannotbeempty": "Value can no be empty please fill !",
+  "username": "Username",
+  "myaccount": "My Account",
+  "balance": "Balance",
+  "orders": "Orders",
+  "contactus": "Contact Us",
+  "settings": "Settings",
+  "competitions": "Competitions",
+  "shareapp": "Share App"
+
+
 
 
 }

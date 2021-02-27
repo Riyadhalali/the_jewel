@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:the_jewel/components/imageSliderPro.dart';
 
@@ -9,6 +10,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _search = TextEditingController();
+
+  //-----------------Load username From Shared Pref-----------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class _HomeState extends State<Home> {
                       Align(
                         alignment: Alignment.centerRight + Alignment(-0.5, 0),
                         child: Text(
-                          'Username',
+                          'username'.tr().toString(),
                           style: TextStyle(
                               color: Color(0xFFF5AF4B), fontSize: 26.0),
                         ),
@@ -61,7 +64,7 @@ class _HomeState extends State<Home> {
                     color: Color(0xFFCFAE8E),
                   ),
                   title: Text(
-                    'حسابي',
+                    'myaccount'.tr().toString(),
                   ),
                   onTap: () {
                     //   Navigator.pushNamed(context, Search.id);
@@ -72,7 +75,7 @@ class _HomeState extends State<Home> {
                     Icons.monetization_on,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('الرصيد'),
+                  title: Text('balance'.tr().toString()),
                   onTap: () {
                     // Navigator.pushNamed(
                     //     context, AddSeekService.id); // add service
@@ -83,7 +86,7 @@ class _HomeState extends State<Home> {
                     Icons.shopping_cart,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('الطلبات'),
+                  title: Text('orders'.tr().toString()),
                   onTap: () {
                     //  Navigator.pushNamed(context, SeekService.id); // seek service
                   },
@@ -93,7 +96,7 @@ class _HomeState extends State<Home> {
                     Icons.phone,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('تواصل معنا'),
+                  title: Text('contactus'.tr().toString()),
                   onTap: () {
                     //Navigator.pushNamed(context, MyServices.id);
                   },
@@ -103,7 +106,7 @@ class _HomeState extends State<Home> {
                     Icons.settings,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('الإعدادات'),
+                  title: Text('settings'.tr().toString()),
                   onTap: () {
                     //Navigator.pushNamed(context, MyServices.id);
                   },
@@ -113,7 +116,7 @@ class _HomeState extends State<Home> {
                     Icons.emoji_events,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('المسابقات'),
+                  title: Text('competitions'.tr().toString()),
                   onTap: () {
                     //Navigator.pushNamed(context, MyServices.id);
                   },
@@ -123,7 +126,7 @@ class _HomeState extends State<Home> {
                     Icons.share,
                     color: Color(0xFFCFAE8E),
                   ),
-                  title: Text('مشاركة التطبيق'),
+                  title: Text('shareapp'.tr().toString()),
                   onTap: () {},
                 ),
               ],
@@ -167,7 +170,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          imageSliderPro(),
+          imageSliderPro(), // using image slider pro with
           Positioned(
             // To take AppBar Size only
             top: 10.0,
@@ -214,7 +217,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(height);
 }
 //------------------------------------------------------------------------------
-//TODO: add locaozation for all screen
+
 //TODO: add localization for drawer
 //TODO: load username from shared pref and display it in the drawer
 //TODO: work with image picker

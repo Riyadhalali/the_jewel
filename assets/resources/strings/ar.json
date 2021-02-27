@@ -19,6 +19,16 @@
   "city": "المدينة",
   "address": "العنوان",
   "county": "البلد",
-  "valuecannotbeempty": "يرجى تعبئة الحقل"
+  "valuecannotbeempty": "يرجى تعبئة الحقل",
+  "username": "اسم المستخدم",
+  "myaccount": "حسابي",
+  "balance": "رصيدي",
+  "orders": "الطلبات",
+  "contactus": "تواصل معنا",
+  "settings": "الإعدادات",
+  "competitions": "السمابقات",
+  "shareapp": "مشاركة التطبيق"
+
+
 
 }
