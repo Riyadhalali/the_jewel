@@ -50,3 +50,5 @@ class _TabState extends State<Tab> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+//TODO: fix error in adding text in tab properity
