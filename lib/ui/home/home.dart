@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:the_jewel/components/imageSliderPro.dart';
+import 'package:the_jewel/services/sharedpref.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -9,18 +10,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String username;
   final _search = TextEditingController();
+  SharedPref sharedPref = new SharedPref();
 
   //-----------------Load username From Shared Pref-----------------------------
+  //-> this method to get username data and display it the header
+  void getUsernameData() async {
+    try {
+      username = await sharedPref.LoadData('signin_username');
+      print(username.toString());
+    } catch (e) {
+      throw ('Error getting username from shared preferences in home page');
+    }
+  }
+
+  //----------------------------init State--------------------------------
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUsernameData();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: MyCustomAppBar(
-          height: 300,
+          height: 200,
         ),
-        //body: ColumnElements(),
+        body: ColumnElements(),
         drawer: Drawer(
           child: Container(
             color: Color(0xFFE9ECF1), // to get the drawer color
@@ -50,7 +70,7 @@ class _HomeState extends State<Home> {
                       Align(
                         alignment: Alignment.centerRight + Alignment(-0.5, 0),
                         child: Text(
-                          'username'.tr().toString(),
+                          username.toString(), // getting username from shared
                           style: TextStyle(
                               color: Color(0xFFF5AF4B), fontSize: 26.0),
                         ),
@@ -139,18 +159,21 @@ class _HomeState extends State<Home> {
 
 //------------------------------------------------------------------------------
   Widget ColumnElements() {
-    return Column(
-      children: [
-        Stack(
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(),
+
+        /// to delete the overflow og bottom
+        child: Column(
           children: [
-            // TextInputField(
-            //   controller_text: _search,
-            //   hint_text: "Search",
-            //   icon_widget: Icon(Icons.search),
-            // ),
+            Stack(
+              children: [
+                Tab(),
+              ],
+            ),
           ],
         ),
-      ],
+      ),
     );
   }
   //----------------------------------------------------------------------------
@@ -216,8 +239,6 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-//------------------------------------------------------------------------------
+//----------------------------Tab Controller -----------------------------------
 
-//TODO: add localization for drawer
-//TODO: load username from shared pref and display it in the drawer
 //TODO: work with image picker
