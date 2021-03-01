@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
+import 'package:the_jewel/ui/home/TabViewOptionsHome.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -160,19 +161,10 @@ class _HomeState extends State<Home> {
 //------------------------------------------------------------------------------
   Widget ColumnElements() {
     return SingleChildScrollView(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(),
-
-        /// to delete the overflow og bottom
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Tab(),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          TabViewOptionsHome(),
+        ],
       ),
     );
   }
