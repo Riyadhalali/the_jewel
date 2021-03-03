@@ -1,8 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
-import 'package:the_jewel/ui/home/TabViewOptionsHome.dart';
+import 'package:the_jewel/ui/home/components/drawer.dart';
+import 'package:the_jewel/ui/home/components/search_field.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -38,121 +40,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: MyCustomAppBar(
-          height: 200,
-        ),
-        body: ColumnElements(),
-        drawer: Drawer(
-          child: Container(
-            color: Color(0xFFE9ECF1), // to get the drawer color
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/home/drawer/drawer_home.png',
-                        ),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 50,
-                          backgroundImage: AssetImage(
-                            'assets/splashscreen/logo.png',
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight + Alignment(-0.5, 0),
-                        child: Text(
-                          username.toString(), // getting username from shared
-                          style: TextStyle(
-                              color: Color(0xFFF5AF4B), fontSize: 26.0),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.account_circle,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text(
-                    'myaccount'.tr().toString(),
-                  ),
-                  onTap: () {
-                    //   Navigator.pushNamed(context, Search.id);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.monetization_on,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('balance'.tr().toString()),
-                  onTap: () {
-                    // Navigator.pushNamed(
-                    //     context, AddSeekService.id); // add service
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.shopping_cart,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('orders'.tr().toString()),
-                  onTap: () {
-                    //  Navigator.pushNamed(context, SeekService.id); // seek service
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.phone,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('contactus'.tr().toString()),
-                  onTap: () {
-                    //Navigator.pushNamed(context, MyServices.id);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('settings'.tr().toString()),
-                  onTap: () {
-                    //Navigator.pushNamed(context, MyServices.id);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.emoji_events,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('competitions'.tr().toString()),
-                  onTap: () {
-                    //Navigator.pushNamed(context, MyServices.id);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.share,
-                    color: Color(0xFFCFAE8E),
-                  ),
-                  title: Text('shareapp'.tr().toString()),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
+        body: SingleChildScrollView(child: ColumnElements()),
+        drawer: Drawerpage(
+          usernameText: username,
         ),
       ),
     );
@@ -160,12 +50,28 @@ class _HomeState extends State<Home> {
 
 //------------------------------------------------------------------------------
   Widget ColumnElements() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          TabViewOptionsHome(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 1.0.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SearchField(),
+          ],
+        ),
+        SizedBox(
+          height: 1.0.h,
+        ),
+        imageSliderPro(), // using image slider pro with
+
+        //TabViewOptionsHome(),
+        // SizedBox(
+        //   height: 150.0,
+        // ),
+      ],
     );
   }
   //----------------------------------------------------------------------------
@@ -185,7 +91,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          imageSliderPro(), // using image slider pro with
+          //imageSliderPro(), // using image slider pro with
           Positioned(
             // To take AppBar Size only
             top: 10.0,

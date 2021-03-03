@@ -18,6 +18,14 @@ class _imageSliderProState extends State<imageSliderPro> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.amber,
+      ),
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: Carousel(
         boxFit: BoxFit.fill,
         autoplay: true,
