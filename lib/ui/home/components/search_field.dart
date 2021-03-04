@@ -29,6 +29,7 @@ class SearchField extends StatelessWidget {
             prefix: IconButton(
               icon: Icon(Icons.menu),
               onPressed: () {
+                //******************To Solve problem of opening keybaord
                 // Unfocus all focus nodes
                 textFieldFocusNode.unfocus();
 
@@ -43,7 +44,6 @@ class SearchField extends StatelessWidget {
                   textFieldFocusNode.canRequestFocus = true;
                 });
               },
-
             ),
             suffix: Icon(Icons.account_circle),
 
