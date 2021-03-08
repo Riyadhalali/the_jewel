@@ -231,6 +231,7 @@ class _SignInState extends State<SignIn> {
       ),
       child: TextButton(
         onPressed: () async {
+          print('the usernameis' + username_text.text);
           // check if the text field all is not empty
           setState(() {
             username_text.text.isEmpty
