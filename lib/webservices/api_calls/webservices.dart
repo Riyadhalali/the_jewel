@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:the_jewel/constant/constants';
-import 'package:the_jewel/webservices/Signin/Login.dart';
+import 'package:the_jewel/webservices/models/login/Login.dart';
 
 class WebServices {
   //--------------------------Login API----------------------------------------
@@ -53,5 +53,4 @@ class WebServices {
       return message; // to return message from server
     }
   }
-//------------------------------------------------------------------------------
 } // end class

@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/home/components/drawer.dart';
+import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
 
 class Home extends StatefulWidget {
@@ -66,77 +67,12 @@ class _HomeState extends State<Home> {
           height: 1.0.h,
         ),
         imageSliderPro(), // using image slider pro with
-
-        //TabViewOptionsHome(),
-        // SizedBox(
-        //   height: 150.0,
-        // ),
+        SizedBox(
+          height: 1.0.h,
+        ),
+        OffersHeader(),
       ],
     );
   }
   //----------------------------------------------------------------------------
 } // end main class
-
-//-----------------------------App Bar------------------------------------------
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          //imageSliderPro(), // using image slider pro with
-          Positioned(
-            // To take AppBar Size only
-            top: 10.0,
-            left: 50.0,
-            right: 50.0,
-
-            child: AppBar(
-              shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(90.0),
-                ),
-              ),
-              backgroundColor: Color(0xFFEFEFF3),
-              leading: IconButton(
-                color: Theme.of(context).primaryColor,
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer(); // to open the drawer
-                },
-              ),
-              primary: false,
-              title: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search",
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-              ),
-              actions: <Widget>[
-                IconButton(
-                  icon:
-                      Icon(Icons.search, color: Theme.of(context).primaryColor),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-}
-//----------------------------Tab Controller -----------------------------------
-
-//TODO: work with image picker

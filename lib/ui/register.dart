@@ -3,7 +3,8 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/components/button.dart';
 import 'package:the_jewel/components/textfield.dart';
 import 'package:the_jewel/services/showtoast.dart';
-import 'package:the_jewel/webservices/webservices.dart';
+
+import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/webservices/api_calls/webservices.dart';
 
 class RegisterActivity extends StatefulWidget {
   static final id = 'register';

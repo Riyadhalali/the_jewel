@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class SearchField extends StatelessWidget {
             focusNode: textFieldFocusNode,
             textAlign: TextAlign.center,
             autofocus: false,
-            placeholder: "Search",
+            placeholder: "Search".tr().toString(),
 
             prefix: IconButton(
               icon: Icon(Icons.menu),
@@ -48,6 +49,7 @@ class SearchField extends StatelessWidget {
             suffix: Icon(Icons.account_circle),
 
             //****************************Material Design***********************
+            //-> you can use this search feild for material design
             // decoration: InputDecoration(
             //     // prefixIcon: IconButton(
             //     //   icon: Icon(Icons.menu),

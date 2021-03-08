@@ -8,8 +8,8 @@ import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/register.dart';
-import 'package:the_jewel/webservices/Signin/Login.dart';
-import 'package:the_jewel/webservices/webservices.dart';
+import 'package:the_jewel/webservices/api_calls/webservices.dart';
+import 'package:the_jewel/webservices/models/login/Login.dart';
 
 class SignIn extends StatefulWidget {
   static final id = 'sign_in';
