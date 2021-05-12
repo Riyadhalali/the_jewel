@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatelessWidget {
-  final TextEditingController controller_text;
-  final String hint_text;
-  final String error_msg;
-  final Icon icon_widget;
+  final TextEditingController? controller_text;
+  final String? hint_text;
+  final String? error_msg;
+  final Icon? icon_widget;
 
 
   TextInputField(
@@ -25,7 +25,7 @@ class TextInputField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: Color(0xFFCCCAD2),
-          hintText: hint_text.tr().toString(),
+          hintText: hint_text!.tr().toString(),
           errorText: error_msg,
 
           // labelText: "signin_password".tr().toString(),

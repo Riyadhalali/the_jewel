@@ -15,9 +15,9 @@ class Login {
     this.username,
   });
 
-  int customerId;
-  String message;
-  String username;
+  int? customerId;
+  String? message;
+  String? username;
 
   factory Login.fromJson(Map<String, dynamic> json) => Login(
         customerId: json["customer_id"],

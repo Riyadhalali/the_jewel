@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class SearchField extends StatelessWidget {
   SearchField({
-    Key key,
+    Key? key,
   }) : super(key: key);
   final textFieldFocusNode = FocusNode();
   @override

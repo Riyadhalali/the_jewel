@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class snackbarMessage {
-  BuildContext context;
-  String message;
+  BuildContext? context;
+  String? message;
 /*  snackbarMessage(context, message) {
     this.context = context;
     this.message = message;

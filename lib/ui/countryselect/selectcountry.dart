@@ -16,7 +16,7 @@ class SelectCountry extends StatefulWidget {
 class _SelectCountryState extends State<SelectCountry> {
   SharedPref sharedPref = new SharedPref();
   snackbarMessage snackbarmessage = new snackbarMessage();
-  String return_country;
+  String? return_country;
 
   @override
   Widget build(BuildContext context) {

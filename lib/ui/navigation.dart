@@ -13,7 +13,7 @@ class NavigationBar extends StatefulWidget {
 
 class _NavigationBarState extends State<NavigationBar> {
   int _pageIndex = 0;
-  PageController _pageController;
+  PageController? _pageController;
 
   List<Widget> tabPages = [
     Home(),
@@ -32,12 +32,12 @@ class _NavigationBarState extends State<NavigationBar> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _pageController!.dispose();
     super.dispose();
   }
 
   void onTabTapped(int index) {
-    this._pageController.animateToPage(index,
+    this._pageController!.animateToPage(index,
         duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 

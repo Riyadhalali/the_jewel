@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_jewel/ui/home/components/offers_card.dart';
-import 'package:the_jewel/webservices/api_calls/api_home.dart';
-
-import 'file:///C:/Users/RIYAD/AndroidStudioProjects/the_jewel/lib/webservices/models/home/home_models.dart';
 
 class OffersHeader extends StatefulWidget {
   @override
@@ -12,28 +8,29 @@ class OffersHeader extends StatefulWidget {
 
 class _OffersHeaderState extends State<OffersHeader> {
   //-------------------------variables------------------------------------------
-  List<GetOffersModel> offersList; // get the list from model
-  ApiHome apiHome = ApiHome();
+  //List<GetOffersModel> offersList; // get the list from model
+  // ApiHome apiHome = ApiHome();
 
   //------------------------------Methods---------------------------------------
-  // Future<List<GetOffersModel>> getOffers() async {
+  // //Future<List<GetOffersModel>> getOffers() async {
   //   offersList = await ApiHome.getDataImage();
-  //   print(offersList[0].picture);
+  //
+  //   print(offersList);
   //   return offersList;
   // }
 
-  Future<String> getOffers() async {
-    String response;
-    response = await apiHome.getDataImage();
-    print('the response is ' + response.toString());
-    return response;
-  }
+  // Future<String> getOffers() async {
+  //   String response;
+  //   response = await apiHome.getDataImage();
+  //   print('the response is ' + response.toString());
+  //   return response;
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getOffers();
+    //getOffers();
   }
 
 //------------------------------------------------------------------------------
@@ -65,7 +62,6 @@ class _OffersHeaderState extends State<OffersHeader> {
         FlatButton(
           onPressed: () {
             //TODO: Go to more details page
-            getOffers();
           },
           child: Text(
             "Load More",
@@ -86,7 +82,7 @@ class _OffersHeaderState extends State<OffersHeader> {
         height: 25.0.h,
         color: Colors.amber,
         child: FutureBuilder(
-          future: getOffers(),
+          //future: //getOffers(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -97,7 +93,8 @@ class _OffersHeaderState extends State<OffersHeader> {
                 if (snapshot.hasError)
                   return new Text('Error: ${snapshot.error}');
                 else
-                  return OffersCardList();
+                  return Text("hello");
+              //return OffersCardList();
             }
           },
         ),
@@ -106,18 +103,18 @@ class _OffersHeaderState extends State<OffersHeader> {
   }
 
   //--------------------------------Offers Card List----------------------------
-  Widget OffersCardList() {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: offersList.length,
-        itemBuilder: (context, index) {
-          GetOffersModel list = offersList[index];
-
-          return OffersCard(
-            imageURL: list.picture,
-          );
-        });
-  }
+  // Widget OffersCardList() {
+  //   return ListView.builder(
+  //       scrollDirection: Axis.horizontal,
+  //       itemCount: offersList.length,
+  //       itemBuilder: (context, index) {
+  //         GetOffersModel list = offersList[index];
+  //
+  //         return OffersCard(
+  //           imageURL: list.picture,
+  //         );
+  //       });
+  // }
 //------------------------------------------------------------------------------
 
 } //------------------------End class-------------------------------------------

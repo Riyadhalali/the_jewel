@@ -21,7 +21,7 @@ class _SignInState extends State<SignIn> {
   //-----------------------------Varaibles--------------------------------------
   bool _isHidden = false; // this is for hide / show the password
   bool _saving = false;
-  bool _rememberme = false; // checkbox state
+  bool? _rememberme = false; // checkbox state
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
   final TextEditingController password_text =
@@ -196,7 +196,7 @@ class _SignInState extends State<SignIn> {
         ),
         secondary: Icon(Icons.privacy_tip),
         value: _rememberme,
-        onChanged: (bool value) {
+        onChanged: (bool? value) {
           setState(() {
             _rememberme = value; //checkbox remember me
             if (_rememberme == true) {
@@ -209,9 +209,9 @@ class _SignInState extends State<SignIn> {
             // if user changed to not rememmber it will add null for loading null data
             if (_rememberme == false) {
               sharedPref.setData(
-                  'signin_username', null); // save username to shared pref
+                  'signin_username', "null"); // save username to shared pref
               sharedPref.setData(
-                  'signin_password', null); // save password to shared pref
+                  'signin_password', "null"); // save password to shared pref
             }
           });
         },

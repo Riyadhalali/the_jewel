@@ -8,9 +8,9 @@ class WebServices {
   //--------------------------Login API----------------------------------------
   //-> Post Data to Server
   Future<Login> LoginPost(String username, String password) async {
-    http.Response response = await http.post(Constants.api_link + 'Login',
-        body: {"username": username, "password": password});
     try {
+      http.Response response = await http.post(Constants.api_link + 'Login',
+          body: {"username": username, "password": password});
       if (response.statusCode == 200) {
         final Login getLoginData = loginFromJson(response.body);
         return getLoginData;
@@ -18,11 +18,12 @@ class WebServices {
     } catch (e) {
       throw 'Error in getting data from login api';
     }
+    throw "Error in getting data from login api";
   }
 
 //----------------------Sign Up Page--------------------------------------------
 //-> post Data to server for registering user
-  Future<String> RegisterPost(
+  Future<String?> RegisterPost(
       String username,
       String phone,
       String passworrd,

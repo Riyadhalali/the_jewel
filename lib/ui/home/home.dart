@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String username;
+  String? username;
   final _search = TextEditingController();
   SharedPref sharedPref = new SharedPref();
 

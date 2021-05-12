@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Drawerpage extends StatelessWidget {
-  final String usernameText;
+  final String? usernameText;
   Drawerpage({this.usernameText});
   @override
   Widget build(BuildContext context) {

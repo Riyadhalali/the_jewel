@@ -7,7 +7,7 @@ class TabViewOptionsHome extends StatefulWidget {
 
 class _TabViewOptionsHomeState extends State<TabViewOptionsHome>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {

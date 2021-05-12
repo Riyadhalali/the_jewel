@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OffersCard extends StatelessWidget {
-  final String imageURL;
+  final String? imageURL;
   OffersCard({this.imageURL}); // pass the image
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class OffersCard extends StatelessWidget {
       color: Colors.blue,
       height: 150.0,
       child: Card(
-        child: Image.network(imageURL),
+        child: Image.network(imageURL!),
       ),
     );
   }

@@ -157,7 +157,7 @@ class _RegisterActivityState extends State<RegisterActivity> {
   }
 
   //----------------------------------------------------------------------------
-  Future<String> register() async {
+  void register() async {
     setState(() {
       _usernamecontroller.text.isEmpty || _passwordcontroller.text.isEmpty
           ? _validateerrormsg = true

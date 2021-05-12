@@ -14,7 +14,7 @@ class PrivacyPolicy extends StatefulWidget {
 }
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
-  bool _checked = false;
+  bool? _checked = false;
   SharedPref sharedPref = new SharedPref();
   //-> get privay policy state from shared prefereneces
 
@@ -149,7 +149,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         ),
         secondary: Icon(Icons.privacy_tip),
         value: _checked,
-        onChanged: (bool value) {
+        onChanged: (bool? value) {
           setState(() {
             _checked = value;
             sharedPref.setData('privacypolicystate',
