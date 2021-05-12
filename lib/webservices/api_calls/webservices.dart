@@ -8,8 +8,9 @@ class WebServices {
   //--------------------------Login API----------------------------------------
   //-> Post Data to Server
   Future<Login> LoginPost(String username, String password) async {
+    var url = Constants.api_link + 'Login';
     try {
-      http.Response response = await http.post(Constants.api_link + 'Login',
+      http.Response response = await http.post(Uri.parse(url),
           body: {"username": username, "password": password});
       if (response.statusCode == 200) {
         final Login getLoginData = loginFromJson(response.body);
@@ -33,25 +34,29 @@ class WebServices {
       String city,
       String address,
       String picture) async {
-    http.Response response =
-        await http.post(Constants.api_link + 'sign_up', body: {
-      "username": username,
-      "phone": phone,
-      "password": passworrd,
-      "conf_password": con_password,
-      "email": email,
-      "country": country,
-      "city": city,
-      "address": address,
-      "picture": picture
-    });
-    if (response.statusCode == 200) {
-      String data = response.body;
-      var decodedData = jsonDecode(data); // decoding data
-      var id = decodedData['customer_id'];
-      var message = decodedData['message'];
-      print(message);
-      return message; // to return message from server
+    var url = Constants.api_link + 'sign_up';
+    try {
+      http.Response response = await http.post(Uri.parse(url), body: {
+        "username": username,
+        "phone": phone,
+        "password": passworrd,
+        "conf_password": con_password,
+        "email": email,
+        "country": country,
+        "city": city,
+        "address": address,
+        "picture": picture
+      });
+      if (response.statusCode == 200) {
+        String data = response.body;
+        var decodedData = jsonDecode(data); // decoding data
+        var id = decodedData['customer_id'];
+        var message = decodedData['message'];
+        print(message);
+        return message; // to return message from server
+      }
+    } catch (e) {
+      throw "Error in Registering api";
     }
   }
 } // end class

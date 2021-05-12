@@ -95,8 +95,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 onTap: () {
                   setState(() {
-                    EasyLocalization.of(context).locale =
-                        Locale("ar"); // set language to arabic
+                    context.setLocale(Locale("ar")); // set language to arabic)
+
                     sharedPref.setData(
                         'selectedlanguage', 'ar'); // save it to sharedpref
 
@@ -140,8 +140,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 onTap: () {
                   setState(() {
-                    EasyLocalization.of(context).locale =
-                        Locale("en"); // set language to English
+                    context
+                        .setLocale(Locale("en")); // set the language to english
                     sharedPref.setData('selectedlanguage', 'en');
                     Navigator.pushNamed(context,
                         PrivacyPolicy.id); // go to the privacy policy page

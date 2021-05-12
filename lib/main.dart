@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:the_jewel/ui/cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
 import 'package:the_jewel/ui/home/home.dart';
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
           //return OrientationBuilder
           builder: (context, orientation) {
             //initialize SizerUtil()
-            SizerUtil().init(constraints, orientation); //initialize SizerUtil
+
             var lang = context.locale.toString(); // get lang of app
             // print('your app language is:$lang');
             return MaterialApp(
