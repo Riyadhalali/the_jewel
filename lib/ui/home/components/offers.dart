@@ -9,15 +9,35 @@ class OffersHeader extends StatefulWidget {
 
 class _OffersHeaderState extends State<OffersHeader> {
   int index = 0;
-  List<Map<String, Object>> images = [
-    {
-      'categoryName': 'Phones',
-      'categoryImagesPath': 'assets/signin/signin_background.png',
-    },
-    {
-      'categoryName': 'Computers',
-      'categoryImagesPath': 'assets/signin/signin_background.png',
-    },
+  // List<Map<String, Object>> images = [
+  //   {
+  //     'categoryName': 'Phones',
+  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  //   },
+  //   {
+  //     'categoryName': 'Computers',
+  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  //   },
+  //   {
+  //     'categoryName': 'Labtops',
+  //     'categoryImagesPath':'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  //   },
+  //   {
+  //     'categoryName': 'Desktops',
+  //     'categoryImagesPath':'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+  //   },
+  //   {
+  //     'categoryName': 'iphones',
+  //     'categoryImagesPath':'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+  //   }
+  // ];
+
+  List imgList = [
+    'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
 
   @override
@@ -38,10 +58,10 @@ class _OffersHeaderState extends State<OffersHeader> {
           width: MediaQuery.of(context).size.width * 0.95,
           height: MediaQuery.of(context).size.height * 0.2,
           child: ListView.builder(
-              itemCount: 8,
+              itemCount: 4,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return Offers();
+                return Offers(index);
               }),
         ),
       ],
@@ -74,15 +94,16 @@ class _OffersHeaderState extends State<OffersHeader> {
   }
 
   //------------------------------Offers----------------------------------------
-  Widget Offers() {
+  Widget Offers(int index) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(5),
       height: 100,
       width: 100,
       decoration: BoxDecoration(
+          color: Colors.grey.shade100,
           borderRadius: BorderRadius.circular(10.0),
           image: DecorationImage(
-            image: AssetImage(images[index]['categoryImagesPath'].toString()),
+            image: NetworkImage(imgList[index].toString()),
             fit: BoxFit.fill,
           )),
     );
