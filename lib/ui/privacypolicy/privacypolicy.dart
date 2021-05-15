@@ -1,5 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -53,11 +51,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             top: 75.0.h,
             child: AcceptPrivacyPolicyRadioButton(),
           ),
-          Positioned(
-            top: 30.0.h,
-            right: 17.0.w,
-            child: PrivacyPolicyText(),
-          ),
+          // Positioned(
+          //   top: 30.0.h,
+          //   right: 17.0.w,
+          // //  child: PrivacyPolicyText(),
+          // ),
           ImageBottomBar(), // bar background
           Positioned(
             top: 45.0.h,
@@ -103,17 +101,17 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   }
 
   //-> Privacy Policy Text
-  Widget PrivacyPolicyText() {
-    return AutoSizeText(
-      "privacypolicy".tr().toString(),
-      textAlign: TextAlign.right,
-      style: TextStyle(
-        fontSize: 20.0.sp,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
+  // Widget PrivacyPolicyText() {
+  //   return AutoSizeText(
+  //     "privacypolicy".tr().toString(),
+  //     textAlign: TextAlign.right,
+  //     style: TextStyle(
+  //       fontSize: 20.0.sp,
+  //       color: Colors.white,
+  //       fontWeight: FontWeight.bold,
+  //     ),
+  //   );
+  // }
 
   //-------------------------Privacy Policy Logo--------------------------------
   //-> Privacy Policy Logo

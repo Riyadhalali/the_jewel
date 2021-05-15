@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_jewel/components/imageSliderPro.dart';
+//import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/home/components/drawer.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
         SizedBox(
           height: 1.0.h,
         ),
-        imageSliderPro(), // using image slider pro with
+        //imageSliderPro(), // using image slider pro with
         SizedBox(
           height: 1.0.h,
         ),

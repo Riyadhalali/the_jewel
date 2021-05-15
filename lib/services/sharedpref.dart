@@ -16,9 +16,9 @@ class SharedPref {
 
   //-> function for loading data from shared preferences
   Future<String> LoadData(String key) async {
-    var returned_data;
+    String returnedData;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    returned_data = sharedPreferences.getString(key);
-    return returned_data;
+    returnedData = sharedPreferences.getString(key).toString();
+    return returnedData;
   }
 } // end class
