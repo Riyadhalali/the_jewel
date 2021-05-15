@@ -209,9 +209,9 @@ class _SignInState extends State<SignIn> {
             // if user changed to not rememmber it will add null for loading null data
             if (_rememberme == false) {
               sharedPref.setData(
-                  'signin_username', "null"); // save username to shared pref
+                  'signin_username', ""); // save username to shared pref
               sharedPref.setData(
-                  'signin_password', "null"); // save password to shared pref
+                  'signin_password', ""); // save password to shared pref
             }
           });
         },
@@ -337,7 +337,7 @@ class _SignInState extends State<SignIn> {
     String password_sharedpref; // get password from shared pref
     username_sharedpref = await sharedPref.LoadData('signin_username');
     password_sharedpref = await sharedPref.LoadData('signin_password');
-    if (username_sharedpref != null && password_sharedpref != null) {
+    if (username_sharedpref != '' && password_sharedpref != '') {
       setState(() {
         username_text.text = username_sharedpref.toString();
         password_text.text = password_sharedpref.toString();
@@ -347,3 +347,4 @@ class _SignInState extends State<SignIn> {
   }
 //------------------------------------------------------------------------------
 } // end class
+//TODO: when failed to sign in display it as message

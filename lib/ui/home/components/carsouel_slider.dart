@@ -2,12 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class imageSlider extends StatefulWidget {
+class ImageSlider extends StatefulWidget {
   @override
-  _imageSliderState createState() => _imageSliderState();
+  _ImageSliderState createState() => _ImageSliderState();
 }
 
-class _imageSliderState extends State<imageSlider> {
+class _ImageSliderState extends State<ImageSlider> {
   int _current = 0;
   List imgList = [
     'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',

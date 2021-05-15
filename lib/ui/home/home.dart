@@ -7,6 +7,8 @@ import 'package:the_jewel/ui/home/components/drawer.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
 
+import 'components/carsouel_slider.dart';
+
 class Home extends StatefulWidget {
   static final id = 'home';
   @override
@@ -66,10 +68,10 @@ class _HomeState extends State<Home> {
         SizedBox(
           height: 1.0.h,
         ),
-        //imageSliderPro(), // using image slider pro with
         SizedBox(
           height: 1.0.h,
         ),
+        ImageSlider(),
         OffersHeader(),
       ],
     );
