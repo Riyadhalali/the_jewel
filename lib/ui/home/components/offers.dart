@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -7,24 +8,17 @@ class OffersHeader extends StatefulWidget {
 }
 
 class _OffersHeaderState extends State<OffersHeader> {
-  //-------------------------variables------------------------------------------
-  //List<GetOffersModel> offersList; // get the list from model
-  // ApiHome apiHome = ApiHome();
-
-  //------------------------------Methods---------------------------------------
-  // //Future<List<GetOffersModel>> getOffers() async {
-  //   offersList = await ApiHome.getDataImage();
-  //
-  //   print(offersList);
-  //   return offersList;
-  // }
-
-  // Future<String> getOffers() async {
-  //   String response;
-  //   response = await apiHome.getDataImage();
-  //   print('the response is ' + response.toString());
-  //   return response;
-  // }
+  int index = 0;
+  List<Map<String, Object>> images = [
+    {
+      'categoryName': 'Phones',
+      'categoryImagesPath': 'assets/signin/signin_background.png',
+    },
+    {
+      'categoryName': 'Computers',
+      'categoryImagesPath': 'assets/signin/signin_background.png',
+    },
+  ];
 
   @override
   void initState() {
@@ -40,7 +34,16 @@ class _OffersHeaderState extends State<OffersHeader> {
     return Column(
       children: [
         OffersText(),
-        //Products(),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.95,
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: ListView.builder(
+              itemCount: 8,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return Offers();
+              }),
+        ),
       ],
     );
   }
@@ -52,19 +55,17 @@ class _OffersHeaderState extends State<OffersHeader> {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Text(
-            "Last Offers ",
-            style: TextStyle(fontSize: 12.0.sp),
+            "last_offers".tr().toString(),
+            style: TextStyle(fontSize: 12.0.sp, fontWeight: FontWeight.bold),
           ),
         ),
-        SizedBox(
-          width: 42.0.w,
-        ),
-        FlatButton(
+        Spacer(),
+        TextButton(
           onPressed: () {
             //TODO: Go to more details page
           },
           child: Text(
-            "Load More",
+            "load_more".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp),
           ),
         ),
@@ -72,49 +73,22 @@ class _OffersHeaderState extends State<OffersHeader> {
     );
   }
 
-//-----------------------------------------------------------------------------
-  Widget Products() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        // general container
-        width: 100.0.w,
-        height: 25.0.h,
-        color: Colors.amber,
-        child: FutureBuilder(
-          //future: //getOffers(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-
-              case ConnectionState.waiting:
-                return Center(child: new CircularProgressIndicator());
-              default:
-                if (snapshot.hasError)
-                  return new Text('Error: ${snapshot.error}');
-                else
-                  return Text("hello");
-              //return OffersCardList();
-            }
-          },
-        ),
-      ),
+  //------------------------------Offers----------------------------------------
+  Widget Offers() {
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 100,
+      width: 100,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          image: DecorationImage(
+            image: AssetImage(images[index]['categoryImagesPath'].toString()),
+            fit: BoxFit.fill,
+          )),
     );
   }
 
-  //--------------------------------Offers Card List----------------------------
-  // Widget OffersCardList() {
-  //   return ListView.builder(
-  //       scrollDirection: Axis.horizontal,
-  //       itemCount: offersList.length,
-  //       itemBuilder: (context, index) {
-  //         GetOffersModel list = offersList[index];
-  //
-  //         return OffersCard(
-  //           imageURL: list.picture,
-  //         );
-  //       });
-  // }
 //------------------------------------------------------------------------------
 
 } //------------------------End class-------------------------------------------
+//TODO: arrange code in seperate classes and add information of offers under each item
