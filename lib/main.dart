@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/ui/cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
+import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/languageselect/languagescreen.dart';
 import 'package:the_jewel/ui/navigation.dart';
@@ -69,6 +70,9 @@ class MyApp extends StatelessWidget {
             RegisterActivity.id: (context) => RegisterActivity(),
             SelectCountry.id: (context) => SelectCountry(),
             SignIn.id: (context) => SignIn(),
+            Offers.id: (context) => Offers(),
+            //MostSales.id: (context) => MostSales(),
+            MostVisited.id: (context) => MostVisited(),
           }, // routes
         );
       },

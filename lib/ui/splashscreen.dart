@@ -2,7 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:the_jewel/services/sharedpref.dart';
+import 'package:the_jewel/ui/privacypolicy/privacypolicy.dart';
 import 'package:the_jewel/ui/signin/signin.dart';
+
+import 'countryselect/selectcountry.dart';
+import 'languageselect/languagescreen.dart';
+import 'navigation.dart';
 
 class StartScreen extends StatefulWidget {
   static final id = 'splash_screen';
@@ -27,49 +32,49 @@ class _StartScreenState extends State<StartScreen> {
 
   //-> this function will check if user already selected all startup programs features.
   onDoneLoading() async {
-    Navigator.pushNamed(context, SignIn.id);
-    // String userId;
-    // String selected_lang;
-    // String privacypolicy;
-    // String selectCountry;
-    // userId = await sharedPref.LoadData('userID');
-    // selected_lang = await sharedPref.LoadData('selectedlanguage');
-    // privacypolicy = await sharedPref.LoadData('privacypolicystate');
-    // selectCountry = await sharedPref.LoadData('selectedcountry');
-    //
-    // try {
-    //   if ((selected_lang == 'en' ||
-    //           selected_lang ==
-    //               'ar') && // first level check language selection and privacy policy and user id selection and select country
-    //       (privacypolicy == 'privacypolicyaccepted' &&
-    //           selectCountry != '' &&
-    //           userId != "")) {
-    //     Navigator.pushNamed(context, NavigationBar.id);
-    //   } else if ((selected_lang == 'en' ||
-    //           selected_lang ==
-    //               'ar') && // second level check select language and privacy policy
-    //       (privacypolicy == 'privacypolicyaccepted' &&
-    //           selectCountry != "" &&
-    //           userId == "")) {
-    //     Navigator.pushNamed(context, SignIn.id);
-    //   } else if ((selected_lang == 'en' ||
-    //           selected_lang ==
-    //               'ar') && // second level check select language and privacy policy
-    //       (privacypolicy == 'privacypolicyaccepted' &&
-    //           selectCountry == '' &&
-    //           userId == '')) {
-    //     Navigator.pushNamed(context, SelectCountry.id);
-    //   } else if ((selected_lang == 'en' ||
-    //           selected_lang == 'ar') && // third level check select language
-    //       (privacypolicy == null && selectCountry == '' && userId == '')) {
-    //     Navigator.pushNamed(context, PrivacyPolicy.id);
-    //   } else {
-    //     Navigator.pushNamed(
-    //         context, LanguageScreen.id); // return to the first path
-    //   }
-    // } catch (e) {
-    //   throw 'Execption in getting data in splash screen ';
-    // }
+    // Navigator.pushNamed(context, SignIn.id);
+    String userId;
+    String selected_lang;
+    String privacypolicy;
+    String selectCountry;
+    userId = await sharedPref.LoadData('userID');
+    selected_lang = await sharedPref.LoadData('selectedlanguage');
+    privacypolicy = await sharedPref.LoadData('privacypolicystate');
+    selectCountry = await sharedPref.LoadData('selectedcountry');
+
+    try {
+      if ((selected_lang == 'en' ||
+              selected_lang ==
+                  'ar') && // first level check language selection and privacy policy and user id selection and select country
+          (privacypolicy == 'privacypolicyaccepted' &&
+              selectCountry != '' &&
+              userId != "")) {
+        Navigator.pushNamed(context, NavigationBar.id);
+      } else if ((selected_lang == 'en' ||
+              selected_lang ==
+                  'ar') && // second level check select language and privacy policy
+          (privacypolicy == 'privacypolicyaccepted' &&
+              selectCountry != "" &&
+              userId == "")) {
+        Navigator.pushNamed(context, SignIn.id);
+      } else if ((selected_lang == 'en' ||
+              selected_lang ==
+                  'ar') && // second level check select language and privacy policy
+          (privacypolicy == 'privacypolicyaccepted' &&
+              selectCountry == '' &&
+              userId == '')) {
+        Navigator.pushNamed(context, SelectCountry.id);
+      } else if ((selected_lang == 'en' ||
+              selected_lang == 'ar') && // third level check select language
+          (privacypolicy == null && selectCountry == '' && userId == '')) {
+        Navigator.pushNamed(context, PrivacyPolicy.id);
+      } else {
+        Navigator.pushNamed(
+            context, LanguageScreen.id); // return to the first path
+      }
+    } catch (e) {
+      throw 'Execption in getting data in splash screen ';
+    }
   }
 
   //----------------------------------------------------------------------------

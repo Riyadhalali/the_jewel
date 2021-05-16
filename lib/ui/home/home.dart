@@ -4,6 +4,8 @@ import 'package:sizer/sizer.dart';
 //import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/ui/home/components/drawer.dart';
+import 'package:the_jewel/ui/home/components/mostsales.dart';
+import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
 
@@ -73,6 +75,8 @@ class _HomeState extends State<Home> {
         ),
         ImageSlider(),
         OffersHeader(),
+        MostSales(),
+        MostVisited(),
       ],
     );
   }

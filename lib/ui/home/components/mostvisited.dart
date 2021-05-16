@@ -2,36 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class OffersHeader extends StatefulWidget {
-  static final id = 'offers';
+class MostVisited extends StatefulWidget {
+  static final id = 'most_visted';
   @override
-  _OffersHeaderState createState() => _OffersHeaderState();
+  _MostVisitedState createState() => _MostVisitedState();
 }
 
-class _OffersHeaderState extends State<OffersHeader> {
+class _MostVisitedState extends State<MostVisited> {
   int index = 0;
-  // List<Map<String, Object>> images = [
-  //   {
-  //     'categoryName': 'Phones',
-  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  //   },
-  //   {
-  //     'categoryName': 'Computers',
-  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  //   },
-  //   {
-  //     'categoryName': 'Labtops',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-  //   },
-  //   {
-  //     'categoryName': 'Desktops',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-  //   },
-  //   {
-  //     'categoryName': 'iphones',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-  //   }
-  // ];
 
   List imgList = [
     'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -48,7 +26,6 @@ class _OffersHeaderState extends State<OffersHeader> {
     //getOffers();
   }
 
-//------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     //   getOffers();
@@ -69,7 +46,6 @@ class _OffersHeaderState extends State<OffersHeader> {
     );
   }
 
-//------------------------------------------------------------------------------
   Widget OffersText() {
     return Row(
       children: [
@@ -86,7 +62,7 @@ class _OffersHeaderState extends State<OffersHeader> {
             //TODO: Go to more details page
           },
           child: Text(
-            "load_more".tr().toString(),
+            "most_visited".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp),
           ),
         ),
@@ -94,7 +70,6 @@ class _OffersHeaderState extends State<OffersHeader> {
     );
   }
 
-  //------------------------------Offers----------------------------------------
   Widget Offers(int index) {
     return Container(
       width: 100,
@@ -117,11 +92,11 @@ class _OffersHeaderState extends State<OffersHeader> {
             child: Column(
               children: [
                 Text(
-                  "Apple Watch",
+                  "Samsung Tap S2",
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "10 \$",
+                  "550 \$",
                   style: TextStyle(color: Colors.red),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -132,8 +107,5 @@ class _OffersHeaderState extends State<OffersHeader> {
       ),
     );
   }
-
-//------------------------------------------------------------------------------
-
 } //------------------------End class-------------------------------------------
 //TODO: arrange code in seperate classes and add information of offers under each item
