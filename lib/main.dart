@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_jewel/ui/cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
+import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/languageselect/languagescreen.dart';
@@ -14,6 +15,8 @@ import 'package:the_jewel/ui/profile.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/ui/signin/signin.dart';
 import 'package:the_jewel/ui/splashscreen.dart';
+
+import 'home_widgets.dart';
 
 //this just for preview design on different screen sizes
 /*void main() => runApp(
@@ -71,8 +74,9 @@ class MyApp extends StatelessWidget {
             SelectCountry.id: (context) => SelectCountry(),
             SignIn.id: (context) => SignIn(),
             Offers.id: (context) => Offers(),
-            //MostSales.id: (context) => MostSales(),
+            MostSales.id: (context) => MostSales(),
             MostVisited.id: (context) => MostVisited(),
+            Categories.id: (context) => Categories(),
           }, // routes
         );
       },
