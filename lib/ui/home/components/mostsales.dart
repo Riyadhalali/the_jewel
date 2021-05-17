@@ -34,7 +34,7 @@ class _MostSalesState extends State<MostSales> {
         OffersText(),
         Container(
           width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
               itemCount: 4,
               scrollDirection: Axis.horizontal,
@@ -50,9 +50,9 @@ class _MostSalesState extends State<MostSales> {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(right: 10.0, left: 10.0),
           child: Text(
-            "last_offers".tr().toString(),
+            "most_sales".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp, fontWeight: FontWeight.bold),
           ),
         ),
@@ -62,7 +62,7 @@ class _MostSalesState extends State<MostSales> {
             //TODO: Go to more details page
           },
           child: Text(
-            "most_sales".tr().toString(),
+            "load_more".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp),
           ),
         ),

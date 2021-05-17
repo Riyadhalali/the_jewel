@@ -34,7 +34,7 @@ class _MostVisitedState extends State<MostVisited> {
         OffersText(),
         Container(
           width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
               itemCount: 4,
               scrollDirection: Axis.horizontal,
@@ -50,9 +50,9 @@ class _MostVisitedState extends State<MostVisited> {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(right: 10.0, left: 10.0),
           child: Text(
-            "last_offers".tr().toString(),
+            "most_visited".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp, fontWeight: FontWeight.bold),
           ),
         ),
@@ -62,7 +62,7 @@ class _MostVisitedState extends State<MostVisited> {
             //TODO: Go to more details page
           },
           child: Text(
-            "most_visited".tr().toString(),
+            "load_more".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp),
           ),
         ),
@@ -92,7 +92,7 @@ class _MostVisitedState extends State<MostVisited> {
             child: Column(
               children: [
                 Text(
-                  "Samsung Tap S2",
+                  "Samsung Tap S2222",
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
@@ -108,4 +108,4 @@ class _MostVisitedState extends State<MostVisited> {
     );
   }
 } //------------------------End class-------------------------------------------
-//TODO: arrange code in seperate classes and add information of offers under each item
+//TODO: get api data for images and change the number of items to be retrieved

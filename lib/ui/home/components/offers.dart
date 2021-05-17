@@ -10,29 +10,6 @@ class OffersHeader extends StatefulWidget {
 
 class _OffersHeaderState extends State<OffersHeader> {
   int index = 0;
-  // List<Map<String, Object>> images = [
-  //   {
-  //     'categoryName': 'Phones',
-  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  //   },
-  //   {
-  //     'categoryName': 'Computers',
-  //     'categoryImagesPath': 'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  //   },
-  //   {
-  //     'categoryName': 'Labtops',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-  //   },
-  //   {
-  //     'categoryName': 'Desktops',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
-  //   },
-  //   {
-  //     'categoryName': 'iphones',
-  //     'categoryImagesPath':'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-  //   }
-  // ];
-
   List imgList = [
     'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
     'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -51,13 +28,12 @@ class _OffersHeaderState extends State<OffersHeader> {
 //------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
-    //   getOffers();
     return Column(
       children: [
         OffersText(),
         Container(
           width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
               itemCount: 4,
               scrollDirection: Axis.horizontal,
@@ -74,7 +50,7 @@ class _OffersHeaderState extends State<OffersHeader> {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(right: 10.0, left: 10.0),
           child: Text(
             "last_offers".tr().toString(),
             style: TextStyle(fontSize: 12.0.sp, fontWeight: FontWeight.bold),
