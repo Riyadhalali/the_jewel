@@ -50,33 +50,40 @@ class _NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Color(0xFF707070), // color of the
       body: PageView(
         children: tabPages,
         onPageChanged: onPageChanged,
         controller: _pageController,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer), label: 'Offers'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'Cart'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notifications'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity), label: 'Profile'),
-        ],
-        currentIndex: _pageIndex,
-        showUnselectedLabels: true,
-        unselectedItemColor: Color(0xFFB1B1B1),
-        selectedItemColor: Colors.amber,
-        backgroundColor: Color(0xFF707070),
-        onTap: onTabTapped,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.local_offer), label: 'Offers'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart), label: 'Cart'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.notifications), label: 'Notifications'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.perm_identity), label: 'Profile'),
+          ],
+          currentIndex: _pageIndex,
+          showUnselectedLabels: true,
+          unselectedItemColor: Color(0xFFB1B1B1),
+          selectedItemColor: Colors.amber,
+          backgroundColor: Color(0xFF707070),
+          onTap: onTabTapped,
+        ),
       ),
     );
   }
 }
 
 //----------------------------Custom App Bar------------------------------------
+/*
+
+ */
