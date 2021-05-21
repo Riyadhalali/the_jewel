@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:sizer/sizer.dart';
 
 class Categories extends StatefulWidget {
@@ -10,6 +11,13 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   int index = 0;
+
+  List items = [
+    Container(
+      width: 50,
+      height: 50,
+    )
+  ];
   List imgList = [
     'assets/home/categories/makeup.png',
     'assets/home/categories/men_accessories.png',
@@ -23,7 +31,6 @@ class _CategoriesState extends State<Categories> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getOffers();
   }
 
 //------------------------------------------------------------------------------
@@ -31,17 +38,20 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        OffersText(),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.95,
-          height: MediaQuery.of(context).size.height * 0.21,
-          child: ListView.builder(
-              itemCount: imgList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return Offers(index);
-              }),
-        ),
+        //OffersText(),
+        //-> container for categories as listview
+        // Container(
+        //   width: MediaQuery.of(context).size.width * 0.95,
+        //   height: MediaQuery.of(context).size.height * 0.21,
+        //   child: ListView.builder(
+        //       itemCount: imgList.length,
+        //       scrollDirection: Axis.horizontal,
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return Offers(index);
+        //       }),
+        // ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+        gridView(),
       ],
     );
   }
@@ -106,5 +116,33 @@ class _CategoriesState extends State<Categories> {
   }
 
 //------------------------------------------------------------------------------
+  Widget gridView() {
+    return Container(
+      child: GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1,
+        mainAxisSpacing: 4.0,
+        crossAxisSpacing: 2,
+        shrinkWrap: true, //to hide error message
+        children: <Widget>[
+          categoriesImages('assets/home/categories/makeup.svg'),
+          categoriesImages('assets/home/categories/men_accessories.svg'),
+          categoriesImages('assets/home/categories/woman_accessories.svg'),
+          categoriesImages('assets/home/categories/men_perfume.svg'),
+          categoriesImages('assets/home/categories/woman_perfume.svg'),
+          categoriesImages('assets/home/categories/other.svg'),
+        ],
+      ),
+    );
+  }
+
+  //----------------------------------------------------------------------------
+
+  Widget categoriesImages(String svg_asset) {
+    return Container(
+      decoration: BoxDecoration(image: DecorationImage(image: Svg(svg_asset))),
+    );
+  }
+//-----------------------------------------------------------------------------
 }
-//TODO: make it gridview and give it names for every categories using listvoew and retrive it from api
+//TODO: make it gridview and give it names for every categories using listview and retreive it from api
