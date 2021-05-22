@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_jewel/ui/cart.dart';
+import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
 import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';

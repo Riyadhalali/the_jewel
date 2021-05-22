@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_jewel/ui/cart.dart';
+import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
@@ -56,27 +56,30 @@ class _NavigationBarState extends State<NavigationBar> {
         onPageChanged: onPageChanged,
         controller: _pageController,
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(50)),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.local_offer), label: 'Offers'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart), label: 'Cart'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: 'Notifications'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.perm_identity), label: 'Profile'),
-          ],
-          currentIndex: _pageIndex,
-          showUnselectedLabels: true,
-          unselectedItemColor: Color(0xFFB1B1B1),
-          selectedItemColor: Colors.amber,
-          backgroundColor: Color(0xFF707070),
-          onTap: onTabTapped,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.local_offer), label: 'Offers'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart), label: 'Cart'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications), label: 'Notifications'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.perm_identity), label: 'Profile'),
+            ],
+            currentIndex: _pageIndex,
+            showUnselectedLabels: true,
+            unselectedItemColor: Color(0xFFB1B1B1),
+            selectedItemColor: Colors.amber,
+            backgroundColor: Color(0xFFD8D8D8),
+            onTap: onTabTapped,
+          ),
         ),
       ),
     );

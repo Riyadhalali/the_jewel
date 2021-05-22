@@ -80,6 +80,7 @@ flutter:
      - assets/register/
      - assets/home/drawer/
      - assets/home/categories/
+     - assets/cart/emptycart/
 
 
   fonts:
