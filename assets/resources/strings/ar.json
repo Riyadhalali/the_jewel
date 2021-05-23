@@ -33,5 +33,7 @@
   "load_more": "المزيد",
   "most_sales": "الأكثر مبيعاً",
   "most_visited": "الأكثر مشاهدة",
-  "categories": "الأصناف"
+  "categories": "الأصناف",
+  "yourcartisempty": "سلة المشتريات فارغة!",
+  "shopnow": "تسوق الآن"
 }
