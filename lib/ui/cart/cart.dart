@@ -22,36 +22,52 @@ class _CartState extends State<Cart> {
           )
         : Scaffold(
             backgroundColor: Colors.white,
-            body: columnElements(),
+            body: columnElements(context),
           );
   }
 
   //------------------------------Column Elements-------------------------------
-  Widget columnElements() {
+  Widget columnElements(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(
         context); // to have access to the cart provider class
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/cart/emptycart/cart.jpg',
-                fit: BoxFit.fill,
-              ),
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset(
+              'assets/cart/emptycart/cart.jpg',
+              fit: BoxFit.fill,
             ),
-            SizedBox(
-              height: 30,
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          SingleChildScrollView(
+            child: Container(
+              height: 200.0, // very important to adjust the height
+              child: ListView.builder(
+                  itemCount: cartProvider.getCartItems.length,
+                  itemBuilder: (BuildContext context, index) {
+                    return FullCart(
+                        productId:
+                            cartProvider.getCartItems.values.toList()[index].id,
+                        title: cartProvider.getCartItems.values
+                            .toList()[index]
+                            .title,
+                        price: cartProvider.getCartItems.values
+                            .toList()[index]
+                            .price,
+                        quantity: cartProvider.getCartItems.values
+                            .toList()[index]
+                            .quantity,
+                        imageUrl: cartProvider.getCartItems.values
+                            .toList()[index]
+                            .imageUrl);
+                  }),
             ),
-            FullCart(
-                productId: cartProvider.getCartItems.values.toList()[0].id,
-                title: cartProvider.getCartItems.values.toList()[0].title,
-                price: cartProvider.getCartItems.values.toList()[0].price,
-                quantity: cartProvider.getCartItems.values.toList()[0].quantity,
-                imageUrl: cartProvider.getCartItems.values.toList()[0].imageUrl)
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
