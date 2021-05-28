@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class FullCart extends StatelessWidget {
+class FullCart extends StatefulWidget {
   static final id = 'full_cart';
+
+  @override
+  _FullCartState createState() => _FullCartState();
+}
+
+class _FullCartState extends State<FullCart> {
+  List<String> imageList = [
+    'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78976477/mobile_786_587_png/APPLE-Mac-mini-%282020%29---M1-256GB-8GB',
+    'Intel M1',
+    '\$60',
+  ];
+
+  int quantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +47,6 @@ class FullCart extends StatelessWidget {
     );
   }
 
-  //-----------------------------Widget Tree------------------------------------
-  //-> Container of the Image product with Box Shadow
   Widget cartItemsWithShadow() {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -56,7 +67,7 @@ class FullCart extends StatelessWidget {
             ],
             image: DecorationImage(
                 image: NetworkImage(
-                  'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78976477/mobile_786_587_png/APPLE-Mac-mini-%282020%29---M1-256GB-8GB',
+                  imageList[0],
                 ),
                 fit: BoxFit.fill),
           ),
@@ -65,8 +76,6 @@ class FullCart extends StatelessWidget {
     );
   }
 
-  //------------------------------------Item name--------------------------------
-  //-> item Name and Specifications
   Widget itemSpecifications() {
     return Flexible(
       flex: 4,
@@ -76,7 +85,7 @@ class FullCart extends StatelessWidget {
             // color: Colors.blue,
 
             child: Text(
-              "Intel Core i777777777777777777777777777777777",
+              imageList[1],
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -92,7 +101,7 @@ class FullCart extends StatelessWidget {
               Flexible(
                 child: Container(
                   child: Text(
-                    "Price: \$60 ",
+                    "Price: ${imageList[2]}",
                     style: TextStyle(fontSize: 20.0, color: Colors.red),
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
@@ -108,13 +117,17 @@ class FullCart extends StatelessWidget {
                   Icons.add_box_rounded,
                   color: Colors.blue,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    quantity++;
+                  });
+                },
               ),
             ),
             Container(
               color: Colors.amber,
               child: Text(
-                "1",
+                quantity.toString(),
                 style: TextStyle(fontSize: 25),
               ),
             ),
@@ -124,7 +137,11 @@ class FullCart extends StatelessWidget {
                   Icons.remove_circle,
                   color: Colors.blue,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    quantity--;
+                  });
+                },
               ),
             ),
           ]),
@@ -133,7 +150,6 @@ class FullCart extends StatelessWidget {
     );
   }
 
-  //----------------------------------Delete Product----------------------------
   Widget deleteProduct() {
     return Flexible(
       flex: 1,
