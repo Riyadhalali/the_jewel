@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/ui/cart/empty_cart.dart';
 import 'package:the_jewel/ui/cart/full_cart.dart';
@@ -47,43 +49,46 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          initialRoute: StartScreen.id,
-          // the initial route for the app
-          theme: ThemeData(
-            fontFamily: context.locale.toString() == 'ar'
-                ? 'Ajannat'
-                : 'Roboto', // select font based on country
-          ),
-          routes: {
-            StartScreen.id: (context) =>
-                StartScreen(), // creating the routes of the page
-            LanguageScreen.id: (context) => LanguageScreen(),
-            Cart.id: (context) => Cart(),
-            Home.id: (context) => Home(),
-            NavigationBar.id: (context) => NavigationBar(),
-            Notifications.id: (context) => Notifications(),
-            Offers.id: (context) => Offers(),
-            PrivacyPolicy.id: (context) => PrivacyPolicy(),
-            Profile.id: (context) => PrivacyPolicy(),
-            RegisterActivity.id: (context) => RegisterActivity(),
-            SelectCountry.id: (context) => SelectCountry(),
-            SignIn.id: (context) => SignIn(),
-            Offers.id: (context) => Offers(),
-            MostSales.id: (context) => MostSales(),
-            MostVisited.id: (context) => MostVisited(),
-            Categories.id: (context) => Categories(),
-            EmptyCart.id: (context) => EmptyCart(),
-            FullCart.id: (context) => FullCart(),
-          }, // routes
-        );
-      },
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => CartProvider())],
+      child: Sizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            initialRoute: StartScreen.id,
+            // the initial route for the app
+            theme: ThemeData(
+              fontFamily: context.locale.toString() == 'ar'
+                  ? 'Ajannat'
+                  : 'Roboto', // select font based on country
+            ),
+            routes: {
+              StartScreen.id: (context) =>
+                  StartScreen(), // creating the routes of the page
+              LanguageScreen.id: (context) => LanguageScreen(),
+              Cart.id: (context) => Cart(),
+              Home.id: (context) => Home(),
+              NavigationBar.id: (context) => NavigationBar(),
+              Notifications.id: (context) => Notifications(),
+              Offers.id: (context) => Offers(),
+              PrivacyPolicy.id: (context) => PrivacyPolicy(),
+              Profile.id: (context) => PrivacyPolicy(),
+              RegisterActivity.id: (context) => RegisterActivity(),
+              SelectCountry.id: (context) => SelectCountry(),
+              SignIn.id: (context) => SignIn(),
+              Offers.id: (context) => Offers(),
+              MostSales.id: (context) => MostSales(),
+              MostVisited.id: (context) => MostVisited(),
+              Categories.id: (context) => Categories(),
+              EmptyCart.id: (context) => EmptyCart(),
+              FullCart.id: (context) => FullCart(),
+            }, // routes
+          );
+        },
+      ),
     );
   }
 }

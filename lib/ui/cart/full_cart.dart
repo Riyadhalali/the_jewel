@@ -5,22 +5,11 @@ class FullCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Container(
+      child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/cart/emptycart/cart.jpg',
-                fit: BoxFit.fill,
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -116,7 +105,7 @@ class FullCart extends StatelessWidget {
             Container(
               child: IconButton(
                 icon: Icon(
-                  Icons.add,
+                  Icons.add_box_rounded,
                   color: Colors.blue,
                 ),
                 onPressed: () {},
@@ -132,7 +121,7 @@ class FullCart extends StatelessWidget {
             Container(
               child: IconButton(
                 icon: Icon(
-                  Icons.remove,
+                  Icons.remove_circle,
                   color: Colors.blue,
                 ),
                 onPressed: () {},
