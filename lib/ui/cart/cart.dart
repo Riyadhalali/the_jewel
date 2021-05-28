@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
 import 'package:the_jewel/ui/cart/empty_cart.dart';
+import 'package:the_jewel/ui/cart/full_cart.dart';
 
 class Cart extends StatefulWidget {
   static final id = 'cart';
@@ -27,6 +28,8 @@ class _CartState extends State<Cart> {
 
   //------------------------------Column Elements-------------------------------
   Widget columnElements() {
+    final cartProvider = Provider.of<CartProvider>(
+        context); // to have access to the cart provider class
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
@@ -41,6 +44,12 @@ class _CartState extends State<Cart> {
             SizedBox(
               height: 30,
             ),
+            FullCart(
+                productId: cartProvider.getCartItems.values.toList()[0].id,
+                title: cartProvider.getCartItems.values.toList()[0].title,
+                price: cartProvider.getCartItems.values.toList()[0].price,
+                quantity: cartProvider.getCartItems.values.toList()[0].quantity,
+                imageUrl: cartProvider.getCartItems.values.toList()[0].imageUrl)
           ],
         ),
       ),

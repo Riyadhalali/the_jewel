@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 //import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
+import 'package:the_jewel/ui/home/components/carsouel_slider.dart';
 import 'package:the_jewel/ui/home/components/categories.dart';
 import 'package:the_jewel/ui/home/components/drawer.dart';
 import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
-
-import 'components/carsouel_slider.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -44,6 +45,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(
+        context); // to have access to the cart provider class
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(child: ColumnElements()),

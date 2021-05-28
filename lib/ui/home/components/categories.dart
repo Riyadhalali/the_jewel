@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 
 class Categories extends StatefulWidget {
   static final id = 'categories';
@@ -30,18 +32,20 @@ class _CategoriesState extends State<Categories> {
 //------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          gridView(),
+          gridView(context),
         ],
       ),
     );
   }
 
 //------------------------------------------------------------------------------
-  Widget gridView() {
+  Widget gridView(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Container(
       child: GridView.count(
         crossAxisCount: 3,
@@ -51,10 +55,12 @@ class _CategoriesState extends State<Categories> {
         shrinkWrap: true, //to hide error message
         children: <Widget>[
           InkWell(
-            child:
-                categoriesImages('assets/home/categories/makeup.svg', 'Makeup'),
-            onTap: () => debugPrint(" make up is pressed "),
-          ),
+              child: categoriesImages(
+                  'assets/home/categories/makeup.svg', 'Makeup'),
+              onTap: () => cartProvider.addProduct(
+                  "dsdwwe", 5, "intel core i9", "imageUrl")
+              //debugPrint(" make up is pressed "),
+              ),
           InkWell(
             child: categoriesImages(
                 'assets/home/categories/men_accessories.svg',
