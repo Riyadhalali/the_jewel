@@ -5,7 +5,6 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
 import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/ui/cart/empty_cart.dart';
-import 'package:the_jewel/ui/cart/full_cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
 import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';
@@ -84,7 +83,6 @@ class MyApp extends StatelessWidget {
               MostVisited.id: (context) => MostVisited(),
               Categories.id: (context) => Categories(),
               EmptyCart.id: (context) => EmptyCart(),
-              FullCart.id: (context) => FullCart(),
             }, // routes
           );
         },

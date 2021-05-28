@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
-import 'package:the_jewel/ui/cart/full_cart.dart';
+import 'package:the_jewel/ui/cart/empty_cart.dart';
 
 class Cart extends StatefulWidget {
   static final id = 'cart';
@@ -14,10 +14,15 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(
         context); // to have access to the cart provider class
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: columnElements(),
-    );
+    return cartProvider.getCartItems.isEmpty
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: EmptyCart(),
+          )
+        : Scaffold(
+            backgroundColor: Colors.white,
+            body: columnElements(),
+          );
   }
 
   //------------------------------Column Elements-------------------------------
@@ -36,11 +41,6 @@ class _CartState extends State<Cart> {
             SizedBox(
               height: 30,
             ),
-            FullCart(),
-            FullCart(),
-            FullCart(),
-            FullCart(),
-            FullCart(),
           ],
         ),
       ),

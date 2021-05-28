@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 
 class FullCart extends StatefulWidget {
   static final id = 'full_cart';
+  final String productId;
+  final String title;
+  final double price;
+  final int quantity;
+  final String imageUrl;
+
+  const FullCart(
+      {required this.productId,
+      required this.title,
+      required this.price,
+      required this.quantity,
+      required this.imageUrl});
 
   @override
   _FullCartState createState() => _FullCartState();
 }
 
 class _FullCartState extends State<FullCart> {
-  List<String> imageList = [
-    'https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78976477/mobile_786_587_png/APPLE-Mac-mini-%282020%29---M1-256GB-8GB',
-    'Intel M1',
-    '\$60',
-  ];
-
   int quantity = 0;
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Container(
       child: SafeArea(
         child: Column(
@@ -67,7 +76,7 @@ class _FullCartState extends State<FullCart> {
             ],
             image: DecorationImage(
                 image: NetworkImage(
-                  imageList[0],
+                  widget.imageUrl,
                 ),
                 fit: BoxFit.fill),
           ),
@@ -85,7 +94,7 @@ class _FullCartState extends State<FullCart> {
             // color: Colors.blue,
 
             child: Text(
-              imageList[1],
+              widget.title,
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -101,7 +110,7 @@ class _FullCartState extends State<FullCart> {
               Flexible(
                 child: Container(
                   child: Text(
-                    "Price: ${imageList[2]}",
+                    "Price: " + widget.price.toString(),
                     style: TextStyle(fontSize: 20.0, color: Colors.red),
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
