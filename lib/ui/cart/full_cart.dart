@@ -26,7 +26,6 @@ class _FullCartState extends State<FullCart> {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
     return Container(
       child: SafeArea(
         child: Column(
@@ -42,7 +41,7 @@ class _FullCartState extends State<FullCart> {
                   child: Row(
                     children: [
                       cartItemsWithShadow(),
-                      itemSpecifications(),
+                      itemSpecifications(context),
                       Spacer(),
                       deleteProduct(),
                     ],
@@ -85,7 +84,8 @@ class _FullCartState extends State<FullCart> {
     );
   }
 
-  Widget itemSpecifications() {
+  Widget itemSpecifications(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Flexible(
       flex: 4,
       child: Column(
@@ -127,16 +127,15 @@ class _FullCartState extends State<FullCart> {
                   color: Colors.blue,
                 ),
                 onPressed: () {
-                  setState(() {
-                    quantity++;
-                  });
+                  cartProvider.addItemByOne( widget.productId);
+
                 },
               ),
             ),
             Container(
               color: Colors.amber,
               child: Text(
-                quantity.toString(),
+                widget.quantity.toString(),
                 style: TextStyle(fontSize: 25),
               ),
             ),
@@ -147,9 +146,9 @@ class _FullCartState extends State<FullCart> {
                   color: Colors.blue,
                 ),
                 onPressed: () {
-                  setState(() {
-                    quantity--;
-                  });
+                  cartProvider.reduceItemByOne(
+                    widget.productId,
+                  );
                 },
               ),
             ),

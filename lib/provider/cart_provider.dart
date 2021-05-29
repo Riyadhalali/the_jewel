@@ -34,11 +34,51 @@ class CartProvider with ChangeNotifier {
               existingCartItem.price,
               existingCartItem.imageUrl));
     } else {
-      _cartItems.putIfAbsent(productId,
-          () => CartAttr(DateTime.now().toString(), title, 1, price, imageUrl));
+      _cartItems.putIfAbsent(
+          productId, () => CartAttr(productId, title, 1, price, imageUrl));
     }
     notifyListeners(); // Notify Listeners
   }
 
-//-------------------------------------------------------------------
-}
+//---------------------Remove Product from Cart --------------------------------
+  void reduceItemByOne(String productId) {
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (existingCartItem) => CartAttr(
+              existingCartItem.id,
+              existingCartItem.title,
+              existingCartItem.quantity - 1,
+              existingCartItem.price,
+              existingCartItem.imageUrl));
+    }
+    notifyListeners();
+  }
+
+  //-----------------Add Item By One--------------------------------------------
+  void addItemByOne(String productId) {
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (existingCartItem) => CartAttr(
+              existingCartItem.id,
+              existingCartItem.title,
+              existingCartItem.quantity + 1,
+              existingCartItem.price,
+              existingCartItem.imageUrl));
+    }
+    notifyListeners();
+  }
+
+  //------------------------Remove Item-----------------------------------------
+  void removeItem(String productId) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  //-------------------------------Clear Cart-----------------------------------
+  void clearCart() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+} //---------------------------------End Class----------------------------------

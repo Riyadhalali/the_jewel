@@ -65,7 +65,8 @@ class _CategoriesState extends State<Categories> {
             child: categoriesImages(
                 'assets/home/categories/men_accessories.svg',
                 'Men Accessories'),
-            onTap: () => debugPrint(" men accessories is pressed "),
+            onTap: () => cartProvider.addProduct(
+                "dsdww5555e", 3, "men accessories", "imageUrl"),
           ),
           InkWell(
             child: categoriesImages(
@@ -76,12 +77,12 @@ class _CategoriesState extends State<Categories> {
           InkWell(
             child: categoriesImages(
                 'assets/home/categories/men_perfume.svg', 'Men Perfume'),
-            onTap: () => debugPrint(" men perfume is pressed "),
+            onTap: () => cartProvider.removeItem("dsdww5555e"),
           ),
           InkWell(
             child: categoriesImages(
                 'assets/home/categories/woman_perfume.svg', 'Woman Perfume'),
-            onTap: () => debugPrint(" woman perfume is pressed "),
+            onTap: () => cartProvider.reduceItemByOne("dsdwwe"),
           ),
           InkWell(
             child:

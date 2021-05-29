@@ -45,7 +45,9 @@ class _CartState extends State<Cart> {
           ),
           SingleChildScrollView(
             child: Container(
-              height: 200.0, // very important to adjust the height
+              //color: Colors.black26,
+              height: MediaQuery.of(context).size.height *
+                  0.55, // very important to adjust the height
               child: ListView.builder(
                   itemCount: cartProvider.getCartItems.length,
                   itemBuilder: (BuildContext context, index) {
