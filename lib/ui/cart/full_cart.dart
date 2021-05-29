@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_jewel/models/cart_attr.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
 
 class FullCart extends StatefulWidget {
   static final id = 'full_cart';
   final String productId;
-  final String title;
-  final double price;
-  final int quantity;
-  final String imageUrl;
 
-  const FullCart(
-      {required this.productId,
-      required this.title,
-      required this.price,
-      required this.quantity,
-      required this.imageUrl});
+  const FullCart({required this.productId});
+  // final String title;
+  // final double price;
+  // final int quantity;
+  // final String imageUrl;
+  //
+  // const FullCart(
+  //     {required this.productId,
+  //     required this.title,
+  //     required this.price,
+  //     required this.quantity,
+  //     required this.imageUrl});
 
   @override
   _FullCartState createState() => _FullCartState();
@@ -56,6 +59,7 @@ class _FullCartState extends State<FullCart> {
   }
 
   Widget cartItemsWithShadow() {
+    final cartAttr = Provider.of<CartAttr>(context);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ClipRRect(
@@ -75,7 +79,7 @@ class _FullCartState extends State<FullCart> {
             ],
             image: DecorationImage(
                 image: NetworkImage(
-                  widget.imageUrl,
+                  cartAttr.imageUrl,
                 ),
                 fit: BoxFit.fill),
           ),
@@ -86,6 +90,7 @@ class _FullCartState extends State<FullCart> {
 
   Widget itemSpecifications(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final cartAttr = Provider.of<CartAttr>(context);
     return Flexible(
       flex: 4,
       child: Column(
@@ -94,7 +99,7 @@ class _FullCartState extends State<FullCart> {
             // color: Colors.blue,
 
             child: Text(
-              widget.title,
+              cartAttr.title,
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -110,7 +115,7 @@ class _FullCartState extends State<FullCart> {
               Flexible(
                 child: Container(
                   child: Text(
-                    "Price: " + widget.price.toString(),
+                    "Price: " + cartAttr.price.toString(),
                     style: TextStyle(fontSize: 20.0, color: Colors.red),
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
@@ -119,40 +124,41 @@ class _FullCartState extends State<FullCart> {
               ),
             ],
           ),
-          Row(children: [
-            Container(
-              child: IconButton(
-                icon: Icon(
-                  Icons.add_box_rounded,
-                  color: Colors.blue,
+          Row(
+            children: [
+              Container(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.add_box_rounded,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    cartProvider.addItemByOne(widget.productId);
+                  },
                 ),
-                onPressed: () {
-                  cartProvider.addItemByOne( widget.productId);
-
-                },
               ),
-            ),
-            Container(
-              color: Colors.amber,
-              child: Text(
-                widget.quantity.toString(),
-                style: TextStyle(fontSize: 25),
-              ),
-            ),
-            Container(
-              child: IconButton(
-                icon: Icon(
-                  Icons.remove_circle,
-                  color: Colors.blue,
+              Container(
+                color: Colors.amber,
+                child: Text(
+                  cartAttr.quantity.toString(),
+                  style: TextStyle(fontSize: 25),
                 ),
-                onPressed: () {
-                  cartProvider.reduceItemByOne(
-                    widget.productId,
-                  );
-                },
               ),
-            ),
-          ]),
+              Container(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.remove_circle,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    cartProvider.reduceItemByOne(
+                      widget.productId,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

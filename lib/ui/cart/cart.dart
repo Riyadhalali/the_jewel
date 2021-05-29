@@ -51,21 +51,28 @@ class _CartState extends State<Cart> {
               child: ListView.builder(
                   itemCount: cartProvider.getCartItems.length,
                   itemBuilder: (BuildContext context, index) {
-                    return FullCart(
+                    return ChangeNotifierProvider.value(
+                      value: cartProvider.getCartItems.values.toList()[index],
+                      child: FullCart(
                         productId:
                             cartProvider.getCartItems.values.toList()[index].id,
-                        title: cartProvider.getCartItems.values
-                            .toList()[index]
-                            .title,
-                        price: cartProvider.getCartItems.values
-                            .toList()[index]
-                            .price,
-                        quantity: cartProvider.getCartItems.values
-                            .toList()[index]
-                            .quantity,
-                        imageUrl: cartProvider.getCartItems.values
-                            .toList()[index]
-                            .imageUrl);
+                        //-> using depenendcy injection
+                        //   productId:
+                        //       cartProvider.getCartItems.values.toList()[index].id,
+                        //   title: cartProvider.getCartItems.values
+                        //       .toList()[index]
+                        //       .title,
+                        //   price: cartProvider.getCartItems.values
+                        //       .toList()[index]
+                        //       .price,
+                        //   quantity: cartProvider.getCartItems.values
+                        //       .toList()[index]
+                        //       .quantity,
+                        //   imageUrl: cartProvider.getCartItems.values
+                        //       .toList()[index]
+                        //       .imageUrl
+                      ),
+                    );
                   }),
             ),
           ),
