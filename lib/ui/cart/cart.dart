@@ -43,37 +43,40 @@ class _CartState extends State<Cart> {
           SizedBox(
             height: 30,
           ),
-          SingleChildScrollView(
-            child: Container(
-              //color: Colors.black26,
-              height: MediaQuery.of(context).size.height *
-                  0.55, // very important to adjust the height
-              child: ListView.builder(
-                  itemCount: cartProvider.getCartItems.length,
-                  itemBuilder: (BuildContext context, index) {
-                    return ChangeNotifierProvider.value(
-                      value: cartProvider.getCartItems.values.toList()[index],
-                      child: FullCart(
-                        productId:
-                            cartProvider.getCartItems.values.toList()[index].id,
-                        //-> using depenendcy injection
-                        //   productId:
-                        //       cartProvider.getCartItems.values.toList()[index].id,
-                        //   title: cartProvider.getCartItems.values
-                        //       .toList()[index]
-                        //       .title,
-                        //   price: cartProvider.getCartItems.values
-                        //       .toList()[index]
-                        //       .price,
-                        //   quantity: cartProvider.getCartItems.values
-                        //       .toList()[index]
-                        //       .quantity,
-                        //   imageUrl: cartProvider.getCartItems.values
-                        //       .toList()[index]
-                        //       .imageUrl
-                      ),
-                    );
-                  }),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                //color: Colors.black26,
+                height: MediaQuery.of(context).size.height *
+                    0.55, // very important to adjust the height
+                child: ListView.builder(
+                    itemCount: cartProvider.getCartItems.length,
+                    itemBuilder: (BuildContext context, index) {
+                      return ChangeNotifierProvider.value(
+                        value: cartProvider.getCartItems.values.toList()[index],
+                        child: FullCart(
+                          productId: cartProvider.getCartItems.values
+                              .toList()[index]
+                              .id,
+                          //-> using depenendcy injection
+                          //   productId:
+                          //       cartProvider.getCartItems.values.toList()[index].id,
+                          //   title: cartProvider.getCartItems.values
+                          //       .toList()[index]
+                          //       .title,
+                          //   price: cartProvider.getCartItems.values
+                          //       .toList()[index]
+                          //       .price,
+                          //   quantity: cartProvider.getCartItems.values
+                          //       .toList()[index]
+                          //       .quantity,
+                          //   imageUrl: cartProvider.getCartItems.values
+                          //       .toList()[index]
+                          //       .imageUrl
+                        ),
+                      );
+                    }),
+              ),
             ),
           ),
         ],
