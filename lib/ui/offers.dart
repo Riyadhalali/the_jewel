@@ -104,3 +104,5 @@ class _OffersState extends State<Offers> {
     );
   }
 }
+
+//TODO: orgainise code and rename screen to feeds
