@@ -21,6 +21,17 @@ class _OffersState extends State<Offers> {
           shrinkWrap: true, //to hide error message
           children: List.generate(10, (index) => GridViewWidget()),
         ),
+//-> if we want to use staggered GridView
+        // body: StaggeredGridView.countBuilder(
+        //   //padding: 1,
+        //   crossAxisCount: 6,
+        //   itemCount: 8,
+        //   itemBuilder: (BuildContext context, int index) => GridViewWidget(),
+        //   staggeredTileBuilder: (int index) =>
+        //   new StaggeredTile.count(3, index.isEven ? 4 : 5),
+        //   mainAxisSpacing: 8.0,
+        //   crossAxisSpacing: 6.0,
+        // ),
       ),
     );
   }

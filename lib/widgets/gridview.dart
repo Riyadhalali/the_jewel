@@ -18,7 +18,6 @@ class GridViewWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Container(
-                  // color: Colors.amber,
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.2,
                   constraints: BoxConstraints(
