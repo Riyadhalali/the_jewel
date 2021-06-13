@@ -123,4 +123,4 @@ class _CategoriesState extends State<Categories> {
   }
 //-----------------------------------------------------------------------------
 }
-//TODO: get the api
+//TODO: get the api and add the gridview straggered
