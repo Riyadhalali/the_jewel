@@ -94,6 +94,7 @@ class _FullCartState extends State<FullCart> {
     return Flexible(
       flex: 4,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             // color: Colors.blue,
@@ -123,6 +124,9 @@ class _FullCartState extends State<FullCart> {
                 ),
               ),
             ],
+          ),
+          Container(
+            child: Text("Sub price: " + cartProvider.getItemPrice().toString()),
           ),
           Row(
             children: [

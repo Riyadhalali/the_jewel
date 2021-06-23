@@ -9,7 +9,7 @@ class GridViewWidget extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.4,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color(0xFFE0E0E0),
+          color: Colors.white,
         ),
         child: Column(
           children: [

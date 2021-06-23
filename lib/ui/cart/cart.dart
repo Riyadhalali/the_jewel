@@ -30,6 +30,7 @@ class _CartState extends State<Cart> {
   Widget columnElements(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(
         context); // to have access to the cart provider class
+
     return SafeArea(
       child: Column(
         children: [
@@ -79,6 +80,7 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
+          Text("Total:" + cartProvider.getItemPrice().toString())
         ],
       ),
     );

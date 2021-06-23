@@ -12,7 +12,7 @@ class _OffersState extends State<Offers> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:  Color(0xFFE0E0E0),
         body: GridView.count(
           crossAxisSpacing: 4,
           mainAxisSpacing: 10,

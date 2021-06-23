@@ -81,4 +81,13 @@ class CartProvider with ChangeNotifier {
     _cartItems.clear();
     notifyListeners();
   }
+
+  //---------------------------Get Item Price-----------------------------------
+  double getItemPrice() {
+    var itemPrice = 0.0;
+    _cartItems.forEach((key, value) {
+      itemPrice = value.price * value.quantity;
+    });
+    return itemPrice;
+  }
 } //---------------------------------End Class----------------------------------
