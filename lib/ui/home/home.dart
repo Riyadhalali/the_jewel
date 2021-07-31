@@ -12,6 +12,8 @@ import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
+import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/models/home/home_models.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -23,6 +25,7 @@ class _HomeState extends State<Home> {
   String? username;
   final _search = TextEditingController();
   SharedPref sharedPref = new SharedPref();
+  List<GetSliderImages> getImageSliderList = [];
 
   //-----------------Load username From Shared Pref-----------------------------
   //-> this method to get username data and display it the header
@@ -33,6 +36,13 @@ class _HomeState extends State<Home> {
     } catch (e) {
       throw ('Error getting username from shared preferences in home page');
     }
+  }
+
+  //--------------------------------------------------------------------
+  Future<List<GetSliderImages>> getImageSliderData() async {
+    getImageSliderList = await ApiHome.getSliderImage();
+    print(getImageSliderList[0].picture);
+    return getImageSliderList;
   }
 
   //----------------------------init State--------------------------------

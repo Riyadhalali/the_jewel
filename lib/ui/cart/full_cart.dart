@@ -183,3 +183,4 @@ class _FullCartState extends State<FullCart> {
     );
   }
 } //-------------------------------------------End Class--------------------------
+//TODO: don't allow negative prices

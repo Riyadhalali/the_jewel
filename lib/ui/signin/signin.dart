@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    getLoginInfo();
+    // getLoginInfo();
     super.didChangeDependencies();
   }
 
@@ -134,7 +134,7 @@ class _SignInState extends State<SignIn> {
       child: TextField(
         controller: username_text,
         decoration: InputDecoration(
-            // hintText: 'Enter u',
+            hintText: 'Enter password',
             errorText:
                 validatorUsername ? "valuecannotbeempty".tr().toString() : null,
             labelText: "signin_username".tr().toString(),
@@ -337,13 +337,19 @@ class _SignInState extends State<SignIn> {
     String password_sharedpref; // get password from shared pref
     username_sharedpref = await sharedPref.LoadData('signin_username');
     password_sharedpref = await sharedPref.LoadData('signin_password');
-    if (username_sharedpref != '' && password_sharedpref != '') {
+    if (username_sharedpref != null && password_sharedpref != null) {
       setState(() {
         username_text.text = username_sharedpref.toString();
         password_text.text = password_sharedpref.toString();
         _rememberme = true; // change the remember check box to true
       });
     }
+    // else {
+    //   setState(() {
+    //     username_text.text = '';
+    //     password_text.text = '';
+    //   });
+    // }
   }
 //------------------------------------------------------------------------------
 } // end class

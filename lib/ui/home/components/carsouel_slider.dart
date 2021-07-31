@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/models/home/home_models.dart';
 
 class ImageSlider extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class ImageSlider extends StatefulWidget {
 
 class _ImageSliderState extends State<ImageSlider> {
   int _current = 0;
+  List<GetSliderImages> getImageSliderList = [];
+
   List imgList = [
     'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
     'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -16,6 +20,21 @@ class _ImageSliderState extends State<ImageSlider> {
     'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
     'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
+  //------------------------------Get Slider Images-----------------------------
+
+  Future<List<GetSliderImages>> getImageSliderData() async {
+    getImageSliderList = await ApiHome.getSliderImage();
+    print(getImageSliderList[0].picture);
+    return getImageSliderList;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getImageSliderData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +50,7 @@ class _ImageSliderState extends State<ImageSlider> {
           autoPlayAnimationDuration: Duration(milliseconds: 5000),
           scrollDirection: Axis.horizontal,
         ),
-        items: imgList.map((imgUrl) {
+        items: getImageSliderList.map((imgUrl) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
@@ -39,7 +58,7 @@ class _ImageSliderState extends State<ImageSlider> {
                 margin: EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(color: Colors.amber),
                 child: Image.network(
-                  imgUrl,
+                  imgUrl.picture,
                   fit: BoxFit.fill,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
@@ -63,3 +82,4 @@ class _ImageSliderState extends State<ImageSlider> {
   } //  end build
 //-----------------------------------------------------------------------------
 } // end class
+// https://stackoverflow.com/questions/58375939/display-json-data-to-the-carouselslider-widget-in-flutter
