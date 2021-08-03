@@ -24,7 +24,8 @@ class _ImageSliderState extends State<ImageSlider> {
 
   Future<List<GetSliderImages>> getImageSliderData() async {
     getImageSliderList = await ApiHome.getSliderImage();
-    print(getImageSliderList[0].picture);
+    print("getting image slider data ....");
+    print(getImageSliderList);
     return getImageSliderList;
   }
 
@@ -32,11 +33,36 @@ class _ImageSliderState extends State<ImageSlider> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getImageSliderData();
+    // getImageSliderData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    // getImageSliderData();
   }
 
   @override
   Widget build(BuildContext context) {
+    int _current = 0;
+    int inded = 1;
+    return FutureBuilder<List<GetSliderImages>>(
+        future: getImageSliderData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
+          // return snapshot.hasData
+          //     ? carouselSliderWidget()
+          //     : Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          // we can make it display circle progress indicator or we can make it display empty until it full wi images
+          return carouselSliderWidget();
+        });
+  } //  end build
+
+//-----------------------------------------------------------------------------
+  Widget carouselSliderWidget() {
     return Container(
       child: CarouselSlider(
         options: CarouselOptions(
@@ -60,18 +86,18 @@ class _ImageSliderState extends State<ImageSlider> {
                 child: Image.network(
                   imgUrl.picture,
                   fit: BoxFit.fill,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
+                  // loadingBuilder: (BuildContext context, Widget child,
+                  //     ImageChunkEvent? loadingProgress) {
+                  //   if (loadingProgress == null) return child;
+                  //   return Center(
+                  //     child: CircularProgressIndicator(
+                  //       value: loadingProgress.expectedTotalBytes != null
+                  //           ? loadingProgress.cumulativeBytesLoaded /
+                  //               loadingProgress.expectedTotalBytes!
+                  //           : null,
+                  //     ),
+                  //   );
+                  //       },
                 ),
               );
             },
@@ -79,7 +105,7 @@ class _ImageSliderState extends State<ImageSlider> {
         }).toList(),
       ),
     );
-  } //  end build
+  }
 //-----------------------------------------------------------------------------
 } // end class
 // https://stackoverflow.com/questions/58375939/display-json-data-to-the-carouselslider-widget-in-flutter
