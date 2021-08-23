@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:the_jewel/constant/constants';
+import 'package:the_jewel/webservices/models/home/getlastoffers_model.dart';
 import 'package:the_jewel/webservices/models/home/home_models.dart';
 
 class ApiHome {
@@ -9,7 +10,7 @@ class ApiHome {
     List<GetSliderImages> getMySliderImages = [];
     try {
       final response = await http.get(Uri.parse(url));
-      print('api get image data');
+
       if (response.statusCode == 200) {
         getMySliderImages = getSliderImagesFromJson(response.body);
 
@@ -20,19 +21,23 @@ class ApiHome {
     }
     throw "error in getting image slider data ";
   }
-//--------------------------------Offers Image 2 -------------------------------
 
-  // Future<String> getDataImage() async {
-  //   final response = await http.get(Constants.api_link + 'getdata_image');
-  //   print('api get image data');
-  //   try {
-  //     if (response.statusCode == 200) {
-  //       var data = jsonDecode(response.body)[0]['picture'];
-  //
-  //       print(data);
-  //       return data;
-  //     }
-  //   } catch (e) {}
-  // }
+//--------------------------------Get Last Offers Slider----------------------------------
+  static Future<List<GetLastOffers>> getLastOffer() async {
+    var url = Constants.api_link + 'getdata_offer';
+    List<GetLastOffers> getLastOffers = [];
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        getLastOffers = getLastOffersFromJson(response.body);
+        print(getLastOffers);
+        return getLastOffers;
+      }
+    } catch (e) {
+      return getLastOffers;
+    }
+    throw 'error in getting last offers home slider ';
+  }
+
 //------------------------------------------------------------------------------
 }

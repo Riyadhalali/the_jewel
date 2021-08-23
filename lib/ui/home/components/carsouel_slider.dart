@@ -24,8 +24,8 @@ class _ImageSliderState extends State<ImageSlider> {
 
   Future<List<GetSliderImages>> getImageSliderData() async {
     getImageSliderList = await ApiHome.getSliderImage();
-    print("getting image slider data ....");
-    print(getImageSliderList);
+   // print("getting image slider data ....");
+ //   print(getImageSliderList);
     return getImageSliderList;
   }
 

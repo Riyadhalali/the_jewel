@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/models/home/getlastoffers_model.dart';
 
 class OffersHeader extends StatefulWidget {
   static final id = 'offers';
@@ -18,16 +20,34 @@ class _OffersHeaderState extends State<OffersHeader> {
     'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
 
+  List<GetLastOffers> getOffersList = [];
+
+  //-----------------------------Get Offers------------------------------------
+  Future<List<GetLastOffers>> getOffers() async {
+    getOffersList = await ApiHome.getLastOffer();
+    print('getting last offers data .... ');
+    print(getOffersList);
+    return getOffersList;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getOffers();
   }
 
 //------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<GetLastOffers>>(
+        future: getOffers(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print('error in getting offers ');
+          return columnElements();
+        });
+  }
+
+  Widget columnElements() {
     return Column(
       children: [
         OffersText(),
@@ -35,7 +55,7 @@ class _OffersHeaderState extends State<OffersHeader> {
           width: MediaQuery.of(context).size.width * 0.95,
           height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
-              itemCount: 4,
+              itemCount: getOffersList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Offers(index);
@@ -84,7 +104,7 @@ class _OffersHeaderState extends State<OffersHeader> {
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
-                  image: NetworkImage(imgList[index].toString()),
+                  image: NetworkImage(getOffersList[index].toString()),
                   fit: BoxFit.fill,
                 )),
           ),
@@ -93,11 +113,11 @@ class _OffersHeaderState extends State<OffersHeader> {
             child: Column(
               children: [
                 Text(
-                  "Apple Watch",
+                  getOffersList[index].productName,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "10 \$",
+                  getOffersList[index].price.toString() + '\$',
                   style: TextStyle(color: Colors.red),
                   overflow: TextOverflow.ellipsis,
                 ),
