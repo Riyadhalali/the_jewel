@@ -47,6 +47,9 @@ class _ImageSliderState extends State<ImageSlider> {
   Widget build(BuildContext context) {
     int _current = 0;
     int inded = 1;
+    /*
+    it is better to impement future builder better than putting api in init state because the api will be available after building the ui so future builder solves the problem
+     */
     return FutureBuilder<List<GetSliderImages>>(
         future: getImageSliderData(),
         builder: (context, snapshot) {
