@@ -26,15 +26,17 @@ class ApiHome {
   static Future<List<GetLastOffers>> getLastOffer() async {
     var url = Constants.api_link + 'getdata_offer';
     List<GetLastOffers> getLastOffers = [];
+
     try {
       final response = await http.get(Uri.parse(url));
+
       if (response.statusCode == 200) {
         getLastOffers = getLastOffersFromJson(response.body);
-        print(getLastOffers);
+
         return getLastOffers;
       }
     } catch (e) {
-      return getLastOffers;
+      throw e;
     }
     throw 'error in getting last offers home slider ';
   }

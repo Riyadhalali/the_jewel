@@ -22,7 +22,7 @@ class GetLastOffers {
   int productId;
   String productName;
   String descr;
-  int price;
+  double price;
   String picture;
 
   factory GetLastOffers.fromJson(Map<String, dynamic> json) => GetLastOffers(

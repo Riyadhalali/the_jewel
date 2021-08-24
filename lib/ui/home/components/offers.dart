@@ -25,8 +25,8 @@ class _OffersHeaderState extends State<OffersHeader> {
   //-----------------------------Get Offers------------------------------------
   Future<List<GetLastOffers>> getOffers() async {
     getOffersList = await ApiHome.getLastOffer();
-    print('getting last offers data .... ');
-    print(getOffersList);
+    // print('getting last offers data .... ');
+    //  print(getOffersList);
     return getOffersList;
   }
 
@@ -40,11 +40,21 @@ class _OffersHeaderState extends State<OffersHeader> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<GetLastOffers>>(
-        future: getOffers(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print('error in getting offers ');
-          return columnElements();
-        });
+      future: getOffers(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          default:
+            if (snapshot.hasError)
+              return Text('Error: ${snapshot.error}');
+            else
+              return columnElements();
+        }
+      },
+    );
   }
 
   Widget columnElements() {
@@ -104,9 +114,9 @@ class _OffersHeaderState extends State<OffersHeader> {
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
-                  image: NetworkImage(getOffersList[index].toString()),
-                  fit: BoxFit.fill,
-                )),
+                    image: NetworkImage(getOffersList[index].picture),
+                    fit: BoxFit.cover,
+                    scale: 1.0)),
           ),
           Container(
             width: 90,
