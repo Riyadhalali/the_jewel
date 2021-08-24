@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/models/home/mostsales_model.dart';
 
 class MostSales extends StatefulWidget {
   static final id = 'most_sales';
@@ -19,16 +21,38 @@ class _MostSalesState extends State<MostSales> {
     'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
 
+  List<GetMostSales> getMostSalesList = [];
+
+  Future<List<GetMostSales>> getMostSales() async {
+    getMostSalesList = await ApiHome.getMostSalesProducts();
+    return getMostSalesList;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getOffers();
   }
 
   @override
   Widget build(BuildContext context) {
-    //   getOffers();
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+          default:
+            if (snapshot.hasError)
+              return Text('Error:  ${snapshot.hasError}');
+            else {
+              return columnElements();
+            }
+        }
+      },
+      future: getMostSales(),
+    );
+  }
+
+  Widget columnElements() {
     return Column(
       children: [
         OffersText(),
@@ -36,7 +60,7 @@ class _MostSalesState extends State<MostSales> {
           width: MediaQuery.of(context).size.width * 0.95,
           height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
-              itemCount: 4,
+              itemCount: getMostSalesList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Offers(index);
@@ -83,8 +107,8 @@ class _MostSalesState extends State<MostSales> {
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
-                  image: NetworkImage(imgList[index].toString()),
-                  fit: BoxFit.fill,
+                  image: NetworkImage(getMostSalesList[index].picture),
+                  fit: BoxFit.cover,
                 )),
           ),
           Container(
@@ -92,11 +116,11 @@ class _MostSalesState extends State<MostSales> {
             child: Column(
               children: [
                 Text(
-                  "Xiamoi Watch",
+                  getMostSalesList[index].productName,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "50 \$",
+                  getMostSalesList[index].price.toString() + '\$',
                   style: TextStyle(color: Colors.red),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -108,4 +132,3 @@ class _MostSalesState extends State<MostSales> {
     );
   }
 } //------------------------End class-------------------------------------------
-//TODO: arrange code in seperate classes and add information of offers under each item
