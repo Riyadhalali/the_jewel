@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/models/home/getmostvisited_model.dart';
 
 class MostVisited extends StatefulWidget {
   static final id = 'most_visted';
@@ -19,16 +21,38 @@ class _MostVisitedState extends State<MostVisited> {
     'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
 
+  List<GetMostVisited> getMostVisitedList = [];
+
+  Future<List<GetMostVisited>> getMostVisited() async {
+    getMostVisitedList = await ApiHome.getMostVisitedProducts();
+    return getMostVisitedList;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getOffers();
   }
 
   @override
   Widget build(BuildContext context) {
-    //   getOffers();
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+          default:
+            if (snapshot.hasError)
+              return Text('Error +${snapshot.hasError}');
+            else {
+              return columnElements();
+            }
+        }
+      },
+      future: getMostVisited(),
+    );
+  }
+
+  Widget columnElements() {
     return Column(
       children: [
         OffersText(),
@@ -36,7 +60,7 @@ class _MostVisitedState extends State<MostVisited> {
           width: MediaQuery.of(context).size.width * 0.95,
           height: MediaQuery.of(context).size.height * 0.21,
           child: ListView.builder(
-              itemCount: 4,
+              itemCount: getMostVisitedList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Offers(index);
@@ -83,8 +107,8 @@ class _MostVisitedState extends State<MostVisited> {
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
-                  image: NetworkImage(imgList[index].toString()),
-                  fit: BoxFit.fill,
+                  image: NetworkImage(getMostVisitedList[index].picture),
+                  fit: BoxFit.cover,
                 )),
           ),
           Container(
@@ -92,11 +116,11 @@ class _MostVisitedState extends State<MostVisited> {
             child: Column(
               children: [
                 Text(
-                  "Samsung Tap S2222",
+                  getMostVisitedList[index].productName,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "550 \$",
+                  getMostVisitedList[index].price.toString() + '\$',
                   style: TextStyle(color: Colors.red),
                   overflow: TextOverflow.ellipsis,
                 ),
