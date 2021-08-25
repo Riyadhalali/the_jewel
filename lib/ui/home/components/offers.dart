@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/ui/product_details/product_details.dart';
 import 'package:the_jewel/webservices/api_calls/api_home.dart';
 import 'package:the_jewel/webservices/models/home/getlastoffers_model.dart';
 
@@ -87,7 +88,8 @@ class _OffersHeaderState extends State<OffersHeader> {
         Spacer(),
         TextButton(
           onPressed: () {
-            //TODO: Go to more details page
+            // go to the details
+            Navigator.pushNamed(context, ProductDetails.id);
           },
           child: Text(
             "load_more".tr().toString(),
@@ -140,4 +142,3 @@ class _OffersHeaderState extends State<OffersHeader> {
 //------------------------------------------------------------------------------
 
 } //------------------------End class-------------------------------------------
-//TODO: arrange code in seperate classes and add information of offers under each item

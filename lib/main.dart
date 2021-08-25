@@ -14,6 +14,7 @@ import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/notifications.dart';
 import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/privacypolicy/privacypolicy.dart';
+import 'package:the_jewel/ui/product_details/product_details.dart';
 import 'package:the_jewel/ui/profile.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/ui/signin/signin.dart';
@@ -38,8 +39,7 @@ void main() async {
     EasyLocalization(
         supportedLocales: [Locale('en'), Locale('ar')],
         path: 'assets/resources/strings', // <-- change patch to your
-        fallbackLocale: Locale(
-            'en', 'US'), // when call back failed return the english lanuage
+        fallbackLocale: Locale('en', 'US'), // when call back failed return the english lanuage
         child: MyApp()),
   );
 }
@@ -65,8 +65,7 @@ class MyApp extends StatelessWidget {
                   : 'Roboto', // select font based on country
             ),
             routes: {
-              StartScreen.id: (context) =>
-                  StartScreen(), // creating the routes of the page
+              StartScreen.id: (context) => StartScreen(), // creating the routes of the page
               LanguageScreen.id: (context) => LanguageScreen(),
               Cart.id: (context) => Cart(),
               Home.id: (context) => Home(),
@@ -83,6 +82,7 @@ class MyApp extends StatelessWidget {
               MostVisited.id: (context) => MostVisited(),
               Categories.id: (context) => Categories(),
               EmptyCart.id: (context) => EmptyCart(),
+              ProductDetails.id: (context) => ProductDetails(),
             }, // routes
           );
         },

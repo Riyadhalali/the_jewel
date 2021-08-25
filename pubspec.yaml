@@ -82,6 +82,7 @@ flutter:
      - assets/home/drawer/
      - assets/home/categories/
      - assets/cart/emptycart/
+     - assets/products_details/
 
 
   fonts:

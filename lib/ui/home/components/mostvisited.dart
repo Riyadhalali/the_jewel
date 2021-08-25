@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/ui/product_details/product_details.dart';
 import 'package:the_jewel/webservices/api_calls/api_home.dart';
 import 'package:the_jewel/webservices/models/home/getmostvisited_model.dart';
 
@@ -84,6 +85,7 @@ class _MostVisitedState extends State<MostVisited> {
         TextButton(
           onPressed: () {
             //TODO: Go to more details page
+            Navigator.pushNamed(context, ProductDetails.id);
           },
           child: Text(
             "load_more".tr().toString(),
@@ -132,4 +134,3 @@ class _MostVisitedState extends State<MostVisited> {
     );
   }
 } //------------------------End class-------------------------------------------
-//TODO: get api data for images and change the number of items to be retrieved
