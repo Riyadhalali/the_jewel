@@ -1,15 +1,47 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:the_jewel/webservices/api_calls/webservices.dart';
+import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({Key? key}) : super(key: key);
+  static final id = 'product_id';
 
-  static final id = 'product_details';
+  late String? productId;
+  late String? productName;
+  late String? description;
+  late String? price;
+  late String? picture;
+  // final String categorieId;
+
+  ProductDetails({
+    this.productId,
+    this.productName,
+    this.description,
+    this.price,
+    this.picture,
+  });
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  List<GetDataProductImage> getDataProductImageList = [];
+
+  //-----------------------------Get Other Images for product------------------------------
+  Future<List<GetDataProductImage>> getProductImages() async {
+    getDataProductImageList = await WebServices.getDataProductImages(widget.productId.toString());
+    return getDataProductImageList;
+  }
+  //---------------------------Get Related products--------------------------------------------
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // getProductImages();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +63,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
                 ),
+
+                //-> product image
                 Container(
                   margin: EdgeInsets.all(5),
                   height: MediaQuery.of(context).size.height * 0.15,
@@ -39,7 +73,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       color: Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                          image: NetworkImage('http://87.98.187.79/picture/2.jpg'),
+                          image: NetworkImage(widget.picture.toString()),
                           fit: BoxFit.cover,
                           scale: 1.0)),
                 ),
@@ -54,7 +88,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Flexible(
                         flex: 3,
                         child: Text(
-                          "Man Watchh",
+                          widget.productName.toString(),
                           style: TextStyle(color: Colors.black, fontSize: 20.0),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -63,7 +97,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Flexible(
                         flex: 2,
                         child: Text(
-                          "200.0 \$",
+                          widget.price.toString(),
                           style: TextStyle(color: Colors.red, fontSize: 20.0),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -79,7 +113,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
                 productImagesWidget(),
-                Text('Specifications'),
+                Text('Specifications'.tr().toString()),
                 Divider(),
                 productTextSpecifications(),
                 Container(
@@ -91,7 +125,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: () {},
-                          child: Text('add to cart'),
+                          child: Text('add to cart'.tr().toString()),
                           style: ElevatedButton.styleFrom(primary: Colors.amber, elevation: 20),
                         ),
                       ),
@@ -110,7 +144,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ],
                   ),
                 ),
-                Text('Related Producs'),
+                Text('Related Products'.tr().toString()),
                 relatedProducts(),
               ],
             )
@@ -123,20 +157,28 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   Widget productImagesWidget() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.15,
-      child: ListView.builder(
-          itemCount: 10,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) {
-            return images();
-          }),
-    );
+    return FutureBuilder(
+        future: getProductImages(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            default:
+              return Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.15,
+                child: ListView.builder(
+                    itemCount: getDataProductImageList.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, int index) {
+                      return images(getDataProductImageList[index].picture);
+                    }),
+              );
+          }
+        });
   }
 
-//----------------------------------------------
-  Widget images() {
+//--------------------------------------Product Other Images-----------------------------
+  Widget images(String image) {
     return Container(
       width: 100,
       child: Column(
@@ -148,8 +190,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
-                image:
-                    DecorationImage(image: NetworkImage('hello'), fit: BoxFit.cover, scale: 1.0)),
+                image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0)),
           ),
         ],
       ),
@@ -162,8 +203,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.2,
       color: Colors.grey.shade100,
-      child: Text(
-          "هذا المنتج للبيع بسعر مغري جداً حيث يتضمن لوحة مفاتيح وأرقام وراوتر بالإضافة أنه يدعم عدة لغات منها العربي والانكليزي"),
+      child: Text(widget.description.toString()),
     );
   }
 
@@ -194,8 +234,10 @@ class _ProductDetailsState extends State<ProductDetails> {
             decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10.0),
-                image:
-                    DecorationImage(image: NetworkImage('hello'), fit: BoxFit.cover, scale: 1.0)),
+                image: DecorationImage(
+                    image: NetworkImage('http://87.98.187.79/picture/2.jpg'),
+                    fit: BoxFit.cover,
+                    scale: 1.0)),
           ),
         ],
       ),

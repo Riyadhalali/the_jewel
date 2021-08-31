@@ -28,12 +28,15 @@
   "settings": "الإعدادات",
   "competitions": "السمابقات",
   "shareapp": "مشاركة التطبيق",
-  "search": "البحث عن منتجات",
+  "Search": "البحث عن منتجات",
   "last_offers": "العروض",
   "load_more": "المزيد",
   "most_sales": "الأكثر مبيعاً",
   "most_visited": "الأكثر مشاهدة",
   "categories": "الأصناف",
   "yourcartisempty": "سلة المشتريات فارغة!",
-  "shopnow": "تسوق الآن"
+  "shopnow": "تسوق الآن",
+  "Specifications": "المواصفات",
+  "add to cart":"إضافة إلى السلة",
+  "Related Products": "منتجات مشابهة"
 }

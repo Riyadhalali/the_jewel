@@ -13,7 +13,9 @@ import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
 import 'package:the_jewel/webservices/api_calls/api_home.dart';
+import 'package:the_jewel/webservices/api_calls/webservices.dart';
 import 'package:the_jewel/webservices/models/home/home_models.dart';
+import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
@@ -45,6 +47,16 @@ class _HomeState extends State<Home> {
     return getImageSliderList;
   }
 
+  //---------------------------------------get Data product------------------------------
+  List<GetdataProduct> getDataProductList = [];
+
+  //-> get data product related to the categorie required by user
+  Future<List<GetdataProduct>> getdataproduct() async {
+    getDataProductList = await WebServices.getDataProducts('1');
+    print(getDataProductList[1].productName);
+    return getDataProductList;
+  }
+
   //----------------------------init State--------------------------------
   @override
   void initState() {
@@ -55,8 +67,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(
-        context); // to have access to the cart provider class
+    final cartProvider =
+        Provider.of<CartProvider>(context); // to have access to the cart provider class
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(child: ColumnElements()),
@@ -88,7 +100,7 @@ class _HomeState extends State<Home> {
           height: 1.0.h,
         ),
         ImageSlider(),
-        OffersHeader(),
+        OffersHeader(), // last offers
         MostSales(),
         MostVisited(),
         Categories(),

@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
+import 'package:the_jewel/webservices/api_calls/webservices.dart';
+import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 
 class Categories extends StatefulWidget {
   static final id = 'categories';
+
   @override
   _CategoriesState createState() => _CategoriesState();
 }
@@ -22,6 +25,15 @@ class _CategoriesState extends State<Categories> {
     'assets/home/categories/woman_accessories.png',
     'assets/home/categories/woman_perfume.png',
   ];
+
+  List<GetdataProduct> getDataProductList = [];
+
+  //-> get data product related to the categorie required by user
+  Future<List<GetdataProduct>> getdataproduct() async {
+    getDataProductList = await WebServices.getDataProducts('1');
+    print(getDataProductList[1].productName);
+    return getDataProductList;
+  }
 
   @override
   void initState() {
@@ -55,38 +67,30 @@ class _CategoriesState extends State<Categories> {
         shrinkWrap: true, //to hide error message
         children: <Widget>[
           InkWell(
-              child: categoriesImages(
-                  'assets/home/categories/makeup.svg', 'Makeup'),
-              onTap: () => cartProvider.addProduct(
-                  "dsdwwe", 5, "intel core i9", "imageUrl")
+              child: categoriesImages('assets/home/categories/makeup.svg', 'Makeup'),
+              onTap: () => cartProvider.addProduct("dsdwwe", 5, "intel core i9", "imageUrl")
               //debugPrint(" make up is pressed "),
               ),
           InkWell(
-            child: categoriesImages(
-                'assets/home/categories/men_accessories.svg',
-                'Men Accessories'),
-            onTap: () => cartProvider.addProduct(
-                "dsdww5555e", 3, "men accessories", "imageUrl"),
+            child:
+                categoriesImages('assets/home/categories/men_accessories.svg', 'Men Accessories'),
+            onTap: () => cartProvider.addProduct("dsdww5555e", 3, "men accessories", "imageUrl"),
           ),
           InkWell(
             child: categoriesImages(
-                'assets/home/categories/woman_accessories.svg',
-                'Woman Accessories'),
+                'assets/home/categories/woman_accessories.svg', 'Woman Accessories'),
             onTap: () => debugPrint(" woman accessories is pressed "),
           ),
           InkWell(
-            child: categoriesImages(
-                'assets/home/categories/men_perfume.svg', 'Men Perfume'),
+            child: categoriesImages('assets/home/categories/men_perfume.svg', 'Men Perfume'),
             onTap: () => cartProvider.removeItem("dsdww5555e"),
           ),
           InkWell(
-            child: categoriesImages(
-                'assets/home/categories/woman_perfume.svg', 'Woman Perfume'),
+            child: categoriesImages('assets/home/categories/woman_perfume.svg', 'Woman Perfume'),
             onTap: () => cartProvider.reduceItemByOne("dsdwwe"),
           ),
           InkWell(
-            child:
-                categoriesImages('assets/home/categories/other.svg', 'Other'),
+            child: categoriesImages('assets/home/categories/other.svg', 'Other'),
             onTap: () => debugPrint(" other is pressed "),
           ),
         ],
@@ -102,9 +106,8 @@ class _CategoriesState extends State<Categories> {
         Flexible(
           flex: 2,
           child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: Svg(svg_asset), fit: BoxFit.contain)),
+            decoration:
+                BoxDecoration(image: DecorationImage(image: Svg(svg_asset), fit: BoxFit.contain)),
           ),
         ),
         Flexible(

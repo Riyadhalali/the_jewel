@@ -89,7 +89,6 @@ class _OffersHeaderState extends State<OffersHeader> {
         TextButton(
           onPressed: () {
             // go to the details
-            Navigator.pushNamed(context, ProductDetails.id);
           },
           child: Text(
             "load_more".tr().toString(),
@@ -102,39 +101,52 @@ class _OffersHeaderState extends State<OffersHeader> {
 
   //------------------------------Offers----------------------------------------
   Widget Offers(int index) {
-    return Container(
-      width: 100,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                    image: NetworkImage(getOffersList[index].picture),
-                    fit: BoxFit.cover,
-                    scale: 1.0)),
-          ),
-          Container(
-            width: 90,
-            child: Column(
-              children: [
-                Text(
-                  getOffersList[index].productName,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  getOffersList[index].price.toString() + '\$',
-                  style: TextStyle(color: Colors.red),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+    return InkWell(
+      onTap: () {
+        //-> when pressing or selecting the product pass the parameter with the id of the product
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDetails(
+                productId: getOffersList[index].productId.toString(),
+                productName: getOffersList[index].productName.toString(),
+                description: getOffersList[index].descr.toString(),
+                price: getOffersList[index].price.toString(),
+                picture: getOffersList[index].picture.toString())));
+        // Navigator.pushNamed(context, ProductDetails.id);
+      },
+      child: Container(
+        width: 100,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                      image: NetworkImage(getOffersList[index].picture),
+                      fit: BoxFit.cover,
+                      scale: 1.0)),
             ),
-          ),
-        ],
+            Container(
+              width: 90,
+              child: Column(
+                children: [
+                  Text(
+                    getOffersList[index].productName,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    getOffersList[index].price.toString() + '\$',
+                    style: TextStyle(color: Colors.red),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

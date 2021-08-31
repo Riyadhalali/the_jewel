@@ -28,14 +28,17 @@
   "settings": "Settings",
   "competitions": "Competitions",
   "shareapp": "Share App",
-  "search": "Search Products",
+  "Search": "Search Products",
   "last_offers": "Last Offers",
   "load_more": "Load More",
   "most_sales": "Most Sales",
   "most_visited": "Most visited",
   "categories": "Categories",
   "yourcartisempty": "Your Cart is Empty!",
-  "shopnow": "Shop Now!"
+  "shopnow": "Shop Now!",
+  "Specifications": "Specifications",
+  "add to cart":"Add to Cart" ,
+  "Related Products": "Related Products"
 
 
 
