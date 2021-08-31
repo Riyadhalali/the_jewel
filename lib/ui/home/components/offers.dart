@@ -104,13 +104,18 @@ class _OffersHeaderState extends State<OffersHeader> {
     return InkWell(
       onTap: () {
         //-> when pressing or selecting the product pass the parameter with the id of the product
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).push(
+          MaterialPageRoute(
             builder: (context) => ProductDetails(
-                productId: getOffersList[index].productId.toString(),
-                productName: getOffersList[index].productName.toString(),
-                description: getOffersList[index].descr.toString(),
-                price: getOffersList[index].price.toString(),
-                picture: getOffersList[index].picture.toString())));
+              productId: getOffersList[index].productId.toString(),
+              productName: getOffersList[index].productName.toString(),
+              description: getOffersList[index].descr.toString(),
+              price: getOffersList[index].price.toString(),
+              picture: getOffersList[index].picture.toString(),
+              categorieId: "1", // get it from api
+            ),
+          ),
+        );
         // Navigator.pushNamed(context, ProductDetails.id);
       },
       child: Container(
@@ -154,3 +159,4 @@ class _OffersHeaderState extends State<OffersHeader> {
 //------------------------------------------------------------------------------
 
 } //------------------------End class-------------------------------------------
+//TODO: get the categories id

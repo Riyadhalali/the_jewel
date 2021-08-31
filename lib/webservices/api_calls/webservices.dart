@@ -5,6 +5,7 @@ import 'package:the_jewel/constant/constants';
 import 'package:the_jewel/webservices/models/login/Login.dart';
 import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
+import 'package:the_jewel/webservices/models/products/getdatarelatedproduct.dart';
 
 class WebServices {
   //--------------------------Login API----------------------------------------
@@ -77,11 +78,10 @@ class WebServices {
   static Future<List<GetDataProductImage>> getDataProductImages(String productId) async {
     var url = Constants.api_link + 'getdata_product_image';
     List<GetDataProductImage> getDataProductImage = [];
-    print("getting product images ...");
+
     try {
       final response = await http.post(Uri.parse(url), body: {"product_id": productId});
 
-      print(response.body);
       if (response.statusCode == 200) {
         getDataProductImage = getDataProductImageFromJson(response.body);
         return getDataProductImage;
@@ -93,4 +93,22 @@ class WebServices {
   }
 //--------------------------------------Get Related Products---------------------------
 
+  static Future<List<GetDataRelatedProduct>> getDataRelatedProducts(String catergoryID) async {
+    var url = Constants.api_link + 'getdata_related_product';
+    List<GetDataRelatedProduct> getDataRelatedProduct = [];
+    print("getting data related products ");
+
+    try {
+      final response = await http.post(Uri.parse(url), body: {"category_id": catergoryID});
+      print(response.body);
+      if (response.statusCode == 200) {
+        getDataRelatedProduct = getDataRelatedProductFromJson(response.body);
+        return getDataRelatedProduct;
+      }
+    } catch (e) {
+      throw e;
+    }
+    throw "error in getting data related product";
+  }
+//-----------------------------------------------------------------------------------------
 } // end class
