@@ -26,8 +26,6 @@ class _OffersHeaderState extends State<OffersHeader> {
   //-----------------------------Get Offers------------------------------------
   Future<List<GetLastOffers>> getOffers() async {
     getOffersList = await ApiHome.getLastOffer();
-    // print('getting last offers data .... ');
-    //  print(getOffersList);
     return getOffersList;
   }
 

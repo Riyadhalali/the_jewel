@@ -29,6 +29,7 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   List<GetDataProductImage> getDataProductImageList = [];
   List<GetDataRelatedProduct> getDataRelatedProductList = [];
+  //String mainImageProduct=widget.picture.toString();
 
   //-----------------------------Get Other Images for product------------------------------
   Future<List<GetDataProductImage>> getProductImages() async {
@@ -45,7 +46,6 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -72,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
 
-                  //-> product image
+                  //-> product image main
                   Container(
                     margin: EdgeInsets.all(5),
                     height: MediaQuery.of(context).size.height * 0.15,
@@ -120,7 +120,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       thickness: 3.0,
                     ),
                   ),
-                  productImagesWidget(),
+                  productImagesWidget(), // other product images
                   Text('Specifications'.tr().toString()),
                   Divider(),
                   productTextSpecifications(),
@@ -192,14 +192,24 @@ class _ProductDetailsState extends State<ProductDetails> {
       width: 100,
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0)),
+          InkWell(
+            child: Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.amber, width: 1.0),
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(10.0),
+                  image:
+                      DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0)),
+            ),
+            onTap: () {
+              setState(() {
+                // setting the new image the user have selected
+                widget.picture = image;
+              });
+            },
           ),
         ],
       ),
@@ -286,4 +296,5 @@ class _ProductDetailsState extends State<ProductDetails> {
 //------------------------------------------------------------------------------
 
 }
-//TODO: 1- make all widgets using Media Query , 2- add support for langauges 3- build the page using api 4- when user tabs on other image the image change
+//TODO: make the  widgets using media query
+//TODO: add supporting languages
