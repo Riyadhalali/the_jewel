@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
@@ -52,6 +53,20 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber,
+        title: Text("Product Details"),
+        leading: Badge(
+          position: BadgePosition.topEnd(top: 10, end: 10),
+          // here we can add number of item added to the cart
+          //we can use provider to get the number of the item
+          badgeContent: Text('3'),
+          child: IconButton(
+            icon: Icon(Icons.shopping_cart_sharp),
+            onPressed: () {},
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Stack(
@@ -171,6 +186,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.15,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
             default:
               return Container(
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -236,6 +257,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.15,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
 
             default:
               if (snapshot.hasError) {
@@ -316,4 +343,4 @@ class _ProductDetailsState extends State<ProductDetails> {
 //TODO: make the  widgets using media query
 //TODO: add supporting languages
 //TODO: add to cart and use provider
-//TODO: add quantity update
+//TODO: add quantity update cart and use provider
