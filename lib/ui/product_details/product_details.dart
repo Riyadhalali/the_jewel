@@ -258,39 +258,56 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   //-----------------------Related Product Images----------------------------------
   Widget relatedProductImages(String image, int index) {
-    return Container(
-      width: 100,
-      // height: 500,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0),
+    return InkWell(
+      child: Container(
+        width: 100,
+        // height: 500,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0),
+              ),
             ),
-          ),
-          Container(
-            width: 90,
-            child: Column(
-              children: [
-                Text(
-                  getDataRelatedProductList[index].productName,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  getDataRelatedProductList[index].price.toString() + '\$',
-                  style: TextStyle(color: Colors.red),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+            Container(
+              width: 90,
+              child: Column(
+                children: [
+                  Text(
+                    getDataRelatedProductList[index].productName,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    getDataRelatedProductList[index].price.toString() + '\$',
+                    style: TextStyle(color: Colors.red),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () {
+        // go the product details
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(
+              productId: getDataRelatedProductList[index].productId.toString(),
+              productName: getDataRelatedProductList[index].productName.toString(),
+              description: getDataRelatedProductList[index].descr.toString(),
+              price: getDataRelatedProductList[index].price.toString(),
+              picture: getDataRelatedProductList[index].picture.toString(),
+              categorieId: widget.categorieId.toString(),
+            ),
+          ),
+        );
+      },
     );
   }
 //------------------------------------------------------------------------------
@@ -298,3 +315,5 @@ class _ProductDetailsState extends State<ProductDetails> {
 }
 //TODO: make the  widgets using media query
 //TODO: add supporting languages
+//TODO: add to cart and use provider
+//TODO: add quantity update
