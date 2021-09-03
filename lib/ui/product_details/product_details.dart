@@ -31,6 +31,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   List<GetDataProductImage> getDataProductImageList = [];
   List<GetDataRelatedProduct> getDataRelatedProductList = [];
   //String mainImageProduct=widget.picture.toString();
+  int cartItemCount = 0; // show number of items in the cart
 
   //-----------------------------Get Other Images for product------------------------------
   Future<List<GetDataProductImage>> getProductImages() async {
@@ -57,13 +58,19 @@ class _ProductDetailsState extends State<ProductDetails> {
         backgroundColor: Colors.amber,
         title: Text("Product Details"),
         leading: Badge(
+          badgeColor: Colors.amber,
           position: BadgePosition.topEnd(top: 10, end: 10),
+          animationType: BadgeAnimationType.slide,
           // here we can add number of item added to the cart
           //we can use provider to get the number of the item
-          badgeContent: Text('3'),
+          badgeContent: Text(cartItemCount.toString()),
           child: IconButton(
             icon: Icon(Icons.shopping_cart_sharp),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                cartItemCount++;
+              });
+            },
           ),
         ),
       ),
