@@ -96,11 +96,11 @@ class WebServices {
   static Future<List<GetDataRelatedProduct>> getDataRelatedProducts(String catergoryID) async {
     var url = Constants.api_link + 'getdata_related_product';
     List<GetDataRelatedProduct> getDataRelatedProduct = [];
-    print("getting data related products ");
+    //print("getting data related products ");
 
     try {
       final response = await http.post(Uri.parse(url), body: {"category_id": catergoryID});
-      print(response.body);
+      // print(response.body);
       if (response.statusCode == 200) {
         getDataRelatedProduct = getDataRelatedProductFromJson(response.body);
         return getDataRelatedProduct;

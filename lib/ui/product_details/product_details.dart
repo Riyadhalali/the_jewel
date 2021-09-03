@@ -228,6 +228,9 @@ class _ProductDetailsState extends State<ProductDetails> {
             case ConnectionState.waiting:
 
             default:
+              if (snapshot.hasError) {
+                print(snapshot.error);
+              }
               return Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -235,7 +238,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   itemCount: getDataRelatedProductList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return relatedProductImages(index);
+                    return relatedProductImages(getDataRelatedProductList[index].picture, index);
                   },
                 ),
               );
@@ -244,7 +247,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   //-----------------------Related Product Images----------------------------------
-  Widget relatedProductImages(int index) {
+  Widget relatedProductImages(String image, int index) {
     return Container(
       width: 100,
       // height: 500,
@@ -257,10 +260,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                  image: NetworkImage(getDataRelatedProductList[index].picture),
-                  fit: BoxFit.cover,
-                  scale: 1.0),
+              image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover, scale: 1.0),
             ),
           ),
           Container(
