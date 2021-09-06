@@ -1,6 +1,9 @@
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
 import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
 import 'package:the_jewel/webservices/models/products/getdatarelatedproduct.dart';
@@ -53,6 +56,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
@@ -63,13 +67,16 @@ class _ProductDetailsState extends State<ProductDetails> {
           animationType: BadgeAnimationType.slide,
           // here we can add number of item added to the cart
           //we can use provider to get the number of the item
-          badgeContent: Text(cartItemCount.toString()),
+          badgeContent: Text(cartProvider.getCartItems.length.toString()),
           child: IconButton(
             icon: Icon(Icons.shopping_cart_sharp),
             onPressed: () {
+              // TODO: add provider here
+              /*
               setState(() {
                 cartItemCount++;
               });
+              */
             },
           ),
         ),
@@ -149,28 +156,41 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          width: 150,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text('add to cart'.tr().toString()),
-                            style: ElevatedButton.styleFrom(primary: Colors.amber, elevation: 20),
-                          ),
-                        ),
-                        Spacer(),
-                        SizedBox(
-                          width: 150,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text('add amount'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.amber,
-                              elevation: 20,
+                        Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // adding product to the card
+                                cartProvider.addProduct(
+                                    widget.productId.toString(),
+                                    double.parse(widget.price.toString()),
+                                    widget.productName.toString(),
+                                    widget.picture.toString());
+                              },
+                              child: Text('add to cart'.tr().toString()),
+                              style: ElevatedButton.styleFrom(primary: Colors.amber, elevation: 20),
                             ),
                           ),
                         ),
+                        // Spacer(),
+                        // Flexible(
+                        //   flex: 1,
+                        //   child: SizedBox(
+                        //     // width: 150,
+                        //     child: ElevatedButton(
+                        //       onPressed: () {},
+                        //       child: Text('add amount'),
+                        //       style: ElevatedButton.styleFrom(
+                        //         primary: Colors.amber,
+                        //         elevation: 20,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -193,12 +213,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+            // return Container(
+            //   height: MediaQuery.of(context).size.height * 0.15,
+            //   child: Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // );
             default:
               return Container(
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -217,7 +237,6 @@ class _ProductDetailsState extends State<ProductDetails> {
 //--------------------------------------Product Other Images-----------------------------
   Widget images(String image) {
     return Container(
-      width: 100,
       child: Column(
         children: [
           InkWell(
@@ -264,12 +283,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+            // return Container(
+            //   height: MediaQuery.of(context).size.height * 0.15,
+            //   child: Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // );
 
             default:
               if (snapshot.hasError) {
