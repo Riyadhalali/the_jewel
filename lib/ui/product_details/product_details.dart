@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
+import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
 import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
 import 'package:the_jewel/webservices/models/products/getdatarelatedproduct.dart';
@@ -60,7 +61,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Product Details"),
+        title: Text("Product Details".tr().toString()),
         leading: Badge(
           badgeColor: Colors.amber,
           position: BadgePosition.topEnd(top: 10, end: 10),
@@ -71,12 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           child: IconButton(
             icon: Icon(Icons.shopping_cart_sharp),
             onPressed: () {
-              // TODO: add provider here
-              /*
-              setState(() {
-                cartItemCount++;
-              });
-              */
+              Navigator.pushNamed(context, Cart.id);
             },
           ),
         ),
@@ -366,7 +362,3 @@ class _ProductDetailsState extends State<ProductDetails> {
 //------------------------------------------------------------------------------
 
 }
-//TODO: make the  widgets using media query
-//TODO: add supporting languages
-//TODO: add to cart and use provider
-//TODO: add quantity update cart and use provider

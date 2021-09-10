@@ -1,28 +1,43 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:the_jewel/constant/constants';
+import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/webservices/models/login/Login.dart';
 import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
 import 'package:the_jewel/webservices/models/products/getdatarelatedproduct.dart';
 
 class WebServices {
+  ShowToast _showToast = new ShowToast();
   //--------------------------Login API----------------------------------------
   //-> Post Data to Server
   Future<Login> LoginPost(String username, String password) async {
     var url = Constants.api_link + 'Login';
+
+    http.Response response;
+
     try {
-      http.Response response =
-          await http.post(Uri.parse(url), body: {"username": username, "password": password});
+      response = await http.post(Uri.parse(url),
+          body: {"username": username, "password": password}).timeout(Duration(seconds: 60));
+      print(response.statusCode);
       if (response.statusCode == 200) {
         final Login getLoginData = loginFromJson(response.body);
         return getLoginData;
       }
-    } catch (e) {
-      throw 'Error in getting data from login api';
+    } on TimeoutException {
+      throw 'Time out ';
+    } on SocketException {
+      throw 'No internent Connection';
+    } on http.ClientException {
+      throw "Service is not available, try later";
+    } catch (e, stackTrace) {
+      print(e);
+      print(stackTrace);
     }
-    throw "Error in getting data from login api";
+    throw 'Something went Wrong';
   }
 
 //----------------------Sign Up Page--------------------------------------------
@@ -96,7 +111,6 @@ class WebServices {
   static Future<List<GetDataRelatedProduct>> getDataRelatedProducts(String catergoryID) async {
     var url = Constants.api_link + 'getdata_related_product';
     List<GetDataRelatedProduct> getDataRelatedProduct = [];
-    //print("getting data related products ");
 
     try {
       final response = await http.post(Uri.parse(url), body: {"category_id": catergoryID});

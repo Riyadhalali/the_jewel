@@ -42,39 +42,32 @@ class _StartScreenState extends State<StartScreen> {
     privacypolicy = await sharedPref.LoadData('privacypolicystate');
     selectCountry = await sharedPref.LoadData('selectedcountry');
 
-    try {
-      if ((selected_lang == 'en' ||
-              selected_lang ==
-                  'ar') && // first level check language selection and privacy policy and user id selection and select country
-          (privacypolicy == 'privacypolicyaccepted' &&
-              selectCountry != '' &&
-              userId != "")) {
-        Navigator.pushNamed(context, NavigationBar.id);
-      } else if ((selected_lang == 'en' ||
-              selected_lang ==
-                  'ar') && // second level check select language and privacy policy
-          (privacypolicy == 'privacypolicyaccepted' &&
-              selectCountry != "" &&
-              userId == "")) {
-        Navigator.pushNamed(context, SignIn.id);
-      } else if ((selected_lang == 'en' ||
-              selected_lang ==
-                  'ar') && // second level check select language and privacy policy
-          (privacypolicy == 'privacypolicyaccepted' &&
-              selectCountry == '' &&
-              userId == '')) {
-        Navigator.pushNamed(context, SelectCountry.id);
-      } else if ((selected_lang == 'en' ||
-              selected_lang == 'ar') && // third level check select language
-          (privacypolicy == null && selectCountry == '' && userId == '')) {
-        Navigator.pushNamed(context, PrivacyPolicy.id);
-      } else {
-        Navigator.pushNamed(
-            context, LanguageScreen.id); // return to the first path
-      }
-    } catch (e) {
-      throw 'Execption in getting data in splash screen ';
-    }
+    Navigator.pushNamed(context, SignIn.id);
+    //
+    // try {
+    //   if ((selected_lang == 'en' ||
+    //           selected_lang ==
+    //               'ar') && // first level check language selection and privacy policy and user id selection and select country
+    //       (privacypolicy == 'privacypolicyaccepted' && selectCountry != '' && userId != '')) {
+    //     Navigator.pushNamed(context, NavigationBar.id);
+    //   } else if ((selected_lang == 'en' ||
+    //           selected_lang == 'ar') && // second level check select language and privacy policy
+    //       (privacypolicy == 'privacypolicyaccepted' && selectCountry != "" && userId == "")) {
+    //     Navigator.pushNamed(context, SignIn.id);
+    //   } else if ((selected_lang == 'en' ||
+    //           selected_lang == 'ar') && // second level check select language and privacy policy
+    //       (privacypolicy == 'privacypolicyaccepted' && selectCountry == '' && userId == '')) {
+    //     Navigator.pushNamed(context, SelectCountry.id);
+    //   } else if ((selected_lang == 'en' ||
+    //           selected_lang == 'ar') && // third level check select language
+    //       (privacypolicy == null && selectCountry == '' && userId == '')) {
+    //     Navigator.pushNamed(context, PrivacyPolicy.id);
+    //   } else {
+    //     Navigator.pushNamed(context, LanguageScreen.id); // return to the first path
+    //   }
+    // } catch (e) {
+    //   throw 'Execption in getting data in splash screen ';
+    // }
   }
 
   //----------------------------------------------------------------------------
@@ -86,8 +79,7 @@ class _StartScreenState extends State<StartScreen> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(
-                    'assets/splashscreen/splashscreenbackground.png'),
+                image: AssetImage('assets/splashscreen/splashscreenbackground.png'),
                 fit: BoxFit.cover),
           ),
         ),

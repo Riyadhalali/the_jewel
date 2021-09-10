@@ -21,7 +21,7 @@ class ApiHome {
     } catch (e) {
       return getMySliderImages;
     }
-    throw "error in getting image slider data ";
+    throw "error in getting image slider  ";
   }
 
 //--------------------------------Get Last Offers Slider----------------------------------

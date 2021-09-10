@@ -38,8 +38,7 @@ class _FullCartState extends State<FullCart> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Flexible(
                   child: Row(
                     children: [
@@ -183,4 +182,5 @@ class _FullCartState extends State<FullCart> {
     );
   }
 } //-------------------------------------------End Class--------------------------
-//TODO: don't allow negative prices
+//TODO: don't allow negative prices, and activate the delete button.
+//TODO: handle errors

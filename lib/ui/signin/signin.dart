@@ -2,11 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_jewel/provider/progress_provider.dart';
 import 'package:the_jewel/services/sharedpref.dart';
 import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/services/snackbarmessage.dart';
-import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
 import 'package:the_jewel/webservices/models/login/Login.dart';
@@ -20,7 +21,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   //-----------------------------Varaibles--------------------------------------
   bool _isHidden = false; // this is for hide / show the password
-  bool _saving = false;
+  static bool saving = false;
   bool? _rememberme = false; // checkbox state
   final TextEditingController username_text =
       TextEditingController(); // variable for holding username
@@ -32,7 +33,27 @@ class _SignInState extends State<SignIn> {
   WebServices webServices = new WebServices();
   ShowToast _showToast = new ShowToast();
   SharedPref sharedPref = new SharedPref();
-  //----------------------------------------------------------------------------
+
+  var messageResponse; // get the message from the api
+  var userId; //  get the user id and save it to shared
+  //----------------------------get response for user login--------------------------------------
+  // Future<Login> loginUser() async {
+  //   try {
+  //     Login login = await webServices.LoginPost(username_text.text, password_text.text);
+  //     if (login.message != null && login.customerId != null) {
+  //       setState(() {
+  //         messageResponse = login.message;
+  //         userId = login.customerId;
+  //       });
+  //       print("getting user data ...");
+  //       return login;
+  //     }
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
+  //------------------------------
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -49,6 +70,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final progressState = Provider.of<ProgressProvider>(context);
     return ModalProgressHUD(
       child: Scaffold(
         //resizeToAvoidBottomInset:       false, // to avoid overflow when keyboard opens or just wrap the content with singlechildscrollview
@@ -71,7 +93,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
-      inAsyncCall: _saving,
+      inAsyncCall: saving,
     );
   } // end build
 
@@ -91,8 +113,7 @@ class _SignInState extends State<SignIn> {
         Positioned(
           bottom: 0,
           right: 10,
-          child:
-              SignInIcon(), // stacking icon in the botto of the background at the right postion
+          child: SignInIcon(), // stacking icon in the botto of the background at the right postion
         ),
       ],
     );
@@ -135,8 +156,7 @@ class _SignInState extends State<SignIn> {
         controller: username_text,
         decoration: InputDecoration(
             hintText: 'Enter password',
-            errorText:
-                validatorUsername ? "valuecannotbeempty".tr().toString() : null,
+            errorText: validatorUsername ? "valuecannotbeempty".tr().toString() : null,
             labelText: "signin_username".tr().toString(),
             suffixIcon: Icon(Icons.sentiment_satisfied_alt)),
       ),
@@ -154,8 +174,7 @@ class _SignInState extends State<SignIn> {
         obscureText: _isHidden,
         controller: password_text,
         decoration: InputDecoration(
-          errorText:
-              validatorPassword ? "valuecannotbeempty".tr().toString() : null,
+          errorText: validatorPassword ? "valuecannotbeempty".tr().toString() : null,
           labelText: "signin_password".tr().toString(),
           suffix: InkWell(
             onTap: () {
@@ -163,8 +182,7 @@ class _SignInState extends State<SignIn> {
                 _isHidden = !_isHidden;
               });
             },
-            child:
-                _isHidden ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+            child: _isHidden ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
           ),
 
           // helperText: "Please put your password",
@@ -183,8 +201,7 @@ class _SignInState extends State<SignIn> {
       height: 7.0.h,
       child: CheckboxListTile(
         activeColor: Colors.black87,
-        controlAffinity:
-            ListTileControlAffinity.leading, // to make checkbox left aligned
+        controlAffinity: ListTileControlAffinity.leading, // to make checkbox left aligned
         title: Text(
           "rememberme".tr().toString(),
           textAlign: TextAlign.left,
@@ -200,18 +217,16 @@ class _SignInState extends State<SignIn> {
           setState(() {
             _rememberme = value; //checkbox remember me
             if (_rememberme == true) {
-              sharedPref.setData('signin_username',
-                  username_text.text); // save username to shared pref
-              sharedPref.setData('signin_password',
-                  password_text.text); // save password to shared pref
+              sharedPref.setData(
+                  'signin_username', username_text.text); // save username to shared pref
+              sharedPref.setData(
+                  'signin_password', password_text.text); // save password to shared pref
             }
 
             // if user changed to not rememmber it will add null for loading null data
             if (_rememberme == false) {
-              sharedPref.setData(
-                  'signin_username', ""); // save username to shared pref
-              sharedPref.setData(
-                  'signin_password', ""); // save password to shared pref
+              sharedPref.setData('signin_username', ""); // save username to shared pref
+              sharedPref.setData('signin_password', ""); // save password to shared pref
             }
           });
         },
@@ -230,49 +245,7 @@ class _SignInState extends State<SignIn> {
         color: const Color(0xff2d2e39),
       ),
       child: TextButton(
-        onPressed: () async {
-          print('the usernameis' + username_text.text);
-          // check if the text field all is not empty
-          setState(() {
-            username_text.text.isEmpty
-                ? validatorUsername = true
-                : validatorUsername = false;
-
-            password_text.text.isEmpty
-                ? validatorPassword = true
-                : validatorPassword = false;
-          });
-
-          // if username and password are empty return
-          if (validatorUsername || validatorPassword) {
-            return;
-          }
-          setState(() {
-            _saving = true;
-          });
-
-          Login login = await webServices.LoginPost(
-              username_text.text, password_text.text);
-          var messageResponse = login.message; // get the message from the api
-          var userId =
-              login.customerId; //  get the user id and save it to shared
-
-          // var messageResponse = await webServices.LoginPost(
-          //     username_text.text, password_text.text); // get the responose
-          //print(messageResponse);
-          _showToast.showToast(messageResponse.toString());
-
-          setState(() {
-            _saving = false;
-          });
-          //  if we have a success user login in then navigate to another activity
-          if (messageResponse == 'login success') {
-            sharedPref.setData(
-                'userID', userId.toString()); // save the user id to shared pref
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => NavigationBar()));
-          }
-        },
+        onPressed: signInFunction,
         child: Text(
           "signin_button".tr().toString(),
           style: TextStyle(color: Colors.white),
@@ -280,6 +253,48 @@ class _SignInState extends State<SignIn> {
         style: ButtonStyle(),
       ),
     );
+  }
+
+  //-------------------------Sign In Function------------------------------------
+  void signInFunction() async {
+    // check if text field is not empty
+    setState(() {
+      username_text.text.isEmpty ? validatorUsername = true : validatorUsername = false;
+
+      password_text.text.isEmpty ? validatorPassword = true : validatorPassword = false;
+    });
+
+    // if username and password are empty return
+    if (validatorUsername || validatorPassword) {
+      return;
+    }
+    setState(() {
+      saving = true;
+    });
+    try {
+      Login login = await webServices.LoginPost(username_text.text, password_text.text);
+
+      var messageResponse = login.message; // get the message from the api
+      var userId = login.customerId; //  get the user id and save it to shared
+
+      print(messageResponse);
+      _showToast.showToast(messageResponse.toString());
+    } catch (e) {
+      _showToast.showToast(e.toString());
+      setState(() {
+        saving = false;
+      });
+    }
+
+    // if we have a success user login in then navigate to another activity
+    ///if (messageResponse == 'login success') {
+    ///  sharedPref.setData('userID', userId.toString()); // save the user id to shared pref
+    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => NavigationBar()));
+    ///   }
+
+    // setState(() {
+    //   saving = false;
+    // });
   }
 
 //---------------------------Don't have an account------------------------------
@@ -318,7 +333,7 @@ class _SignInState extends State<SignIn> {
       child: TextButton(
         onPressed: () {
           setState(() {
-            _saving = true;
+            saving = true;
           });
         },
         child: Text(
