@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:the_jewel/constant/constants';
+import 'package:the_jewel/constant/constants.dart';
 import 'package:the_jewel/webservices/models/home/getlastoffers_model.dart';
 import 'package:the_jewel/webservices/models/home/getmostvisited_model.dart';
 import 'package:the_jewel/webservices/models/home/home_models.dart';

@@ -7,13 +7,13 @@ import 'package:the_jewel/provider/progress_provider.dart';
 import 'package:the_jewel/ui/cart/cart.dart';
 import 'package:the_jewel/ui/cart/empty_cart.dart';
 import 'package:the_jewel/ui/countryselect/selectcountry.dart';
+import 'package:the_jewel/ui/feeds.dart';
 import 'package:the_jewel/ui/home/components/mostsales.dart';
 import 'package:the_jewel/ui/home/components/mostvisited.dart';
 import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/languageselect/languagescreen.dart';
 import 'package:the_jewel/ui/navigation.dart';
 import 'package:the_jewel/ui/notifications.dart';
-import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/privacypolicy/privacypolicy.dart';
 import 'package:the_jewel/ui/product_details/product_details.dart';
 import 'package:the_jewel/ui/profile.dart';
@@ -75,13 +75,13 @@ class MyApp extends StatelessWidget {
               Home.id: (context) => Home(),
               NavigationBar.id: (context) => NavigationBar(),
               Notifications.id: (context) => Notifications(),
-              Offers.id: (context) => Offers(),
+              Feeds.id: (context) => Feeds(),
               PrivacyPolicy.id: (context) => PrivacyPolicy(),
               Profile.id: (context) => PrivacyPolicy(),
               RegisterActivity.id: (context) => RegisterActivity(),
               SelectCountry.id: (context) => SelectCountry(),
               SignIn.id: (context) => SignIn(),
-              Offers.id: (context) => Offers(),
+              Feeds.id: (context) => Feeds(),
               MostSales.id: (context) => MostSales(),
               MostVisited.id: (context) => MostVisited(),
               Categories.id: (context) => Categories(),

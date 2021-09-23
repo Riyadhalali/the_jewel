@@ -97,39 +97,54 @@ class _MostSalesState extends State<MostSales> {
   }
 
   Widget Offers(int index) {
-    return Container(
-      width: 100,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: NetworkImage(getMostSalesList[index].picture),
-                  fit: BoxFit.cover,
-                )),
-          ),
-          Container(
-            width: 90,
-            child: Column(
-              children: [
-                Text(
-                  getMostSalesList[index].productName,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  getMostSalesList[index].price.toString() + '\$',
-                  style: TextStyle(color: Colors.red),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+    return InkWell(
+      onTap: () {
+        //-> when user press the button do to the details page
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDetails(
+                  productId: getMostSalesList[index].productId.toString(),
+
+                  productName: getMostSalesList[index].productName.toString(),
+                  description: getMostSalesList[index].descr.toString(),
+                  price: getMostSalesList[index].price.toString(),
+                  picture: getMostSalesList[index].picture.toString(),
+                  categorieId: "2", // get it from api
+                )));
+      },
+      child: Container(
+        width: 100,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                    image: NetworkImage(getMostSalesList[index].picture),
+                    fit: BoxFit.cover,
+                  )),
             ),
-          ),
-        ],
+            Container(
+              width: 90,
+              child: Column(
+                children: [
+                  Text(
+                    getMostSalesList[index].productName,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    getMostSalesList[index].price.toString() + '\$',
+                    style: TextStyle(color: Colors.red),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

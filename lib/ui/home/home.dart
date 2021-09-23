@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:the_jewel/provider/cart_provider.dart';
 //import 'package:the_jewel/components/imageSliderPro.dart';
 import 'package:the_jewel/services/sharedpref.dart';
+import 'package:the_jewel/services/showtoast.dart';
 import 'package:the_jewel/ui/home/components/carsouel_slider.dart';
 import 'package:the_jewel/ui/home/components/categories.dart';
 import 'package:the_jewel/ui/home/components/drawer.dart';
@@ -14,11 +15,13 @@ import 'package:the_jewel/ui/home/components/offers.dart';
 import 'package:the_jewel/ui/home/components/search_field.dart';
 import 'package:the_jewel/webservices/api_calls/api_home.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
+import 'package:the_jewel/webservices/models/home/categories_model.dart';
 import 'package:the_jewel/webservices/models/home/home_models.dart';
 import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 
 class Home extends StatefulWidget {
   static final id = 'home';
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -28,6 +31,8 @@ class _HomeState extends State<Home> {
   final _search = TextEditingController();
   SharedPref sharedPref = new SharedPref();
   List<GetSliderImages> getImageSliderList = [];
+  List<GetCategories> getCategroiesList = [];
+  ShowToast _showToast = ShowToast();
 
   //-----------------Load username From Shared Pref-----------------------------
   //-> this method to get username data and display it the header
@@ -57,12 +62,20 @@ class _HomeState extends State<Home> {
     return getDataProductList;
   }
 
+//--------------------------------Get Categories of products---------------------------
+  Future<List<GetCategories>> getCategories() async {
+    getCategroiesList = await WebServices.getCategories();
+    print(getCategroiesList);
+    return getCategroiesList;
+  }
+
   //----------------------------init State--------------------------------
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getUsernameData();
+    getCategories();
   }
 
   @override
@@ -107,5 +120,5 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-  //----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 } // end main class

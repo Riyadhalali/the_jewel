@@ -97,39 +97,56 @@ class _MostVisitedState extends State<MostVisited> {
   }
 
   Widget Offers(int index) {
-    return Container(
-      width: 100,
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: NetworkImage(getMostVisitedList[index].picture),
-                  fit: BoxFit.cover,
-                )),
-          ),
-          Container(
-            width: 90,
-            child: Column(
-              children: [
-                Text(
-                  getMostVisitedList[index].productName,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  getMostVisitedList[index].price.toString() + '\$',
-                  style: TextStyle(color: Colors.red),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(
+              productId: getMostVisitedList[index].productId.toString(),
+
+              productName: getMostVisitedList[index].productName.toString(),
+              description: getMostVisitedList[index].descr.toString(),
+              price: getMostVisitedList[index].price.toString(),
+              picture: getMostVisitedList[index].picture.toString(),
+              categorieId: "3", // get it from api
             ),
           ),
-        ],
+        );
+      },
+      child: Container(
+        width: 100,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                    image: NetworkImage(getMostVisitedList[index].picture),
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            Container(
+              width: 90,
+              child: Column(
+                children: [
+                  Text(
+                    getMostVisitedList[index].productName,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    getMostVisitedList[index].price.toString() + '\$',
+                    style: TextStyle(color: Colors.red),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

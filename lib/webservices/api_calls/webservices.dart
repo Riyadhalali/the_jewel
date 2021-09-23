@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:the_jewel/constant/constants';
+import 'package:the_jewel/constant/constants.dart';
 import 'package:the_jewel/services/showtoast.dart';
+import 'package:the_jewel/webservices/models/home/categories_model.dart';
 import 'package:the_jewel/webservices/models/login/Login.dart';
 import 'package:the_jewel/webservices/models/products/getdataproduct.dart';
 import 'package:the_jewel/webservices/models/products/getdataproductimage.dart';
@@ -79,6 +80,7 @@ class WebServices {
       final response = await http.post(Uri.parse(url), body: {"category_id": categorieId});
       if (response.statusCode == 200) {
         getDataProduct = getdataProductFromJson(response.body);
+
         return getDataProduct;
       }
     } catch (e) {
@@ -124,5 +126,21 @@ class WebServices {
     }
     throw "error in getting data related product";
   }
-//-----------------------------------------------------------------------------------------
+
+//----------------------------Get Categories in Home Page-----------------------------
+  static Future<List<GetCategories>> getCategories() async {
+    var url = Constants.api_link + 'getdata_categories';
+    List<GetCategories> getCategoriesData = [];
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        getCategoriesData = getCategoriesFromJson(response.body);
+        return getCategoriesData;
+      }
+    } catch (e) {
+      throw e;
+    }
+    throw 'error in getting data from categories';
+  }
+  //------------------------------------------------------------------------------------
 } // end class

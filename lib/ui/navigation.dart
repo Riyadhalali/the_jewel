@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:the_jewel/ui/cart/cart.dart';
+import 'package:the_jewel/ui/feeds.dart';
 import 'package:the_jewel/ui/home/home.dart';
 import 'package:the_jewel/ui/notifications.dart';
-import 'package:the_jewel/ui/offers.dart';
 import 'package:the_jewel/ui/profile.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -17,7 +17,7 @@ class _NavigationBarState extends State<NavigationBar> {
 
   List<Widget> tabPages = [
     Home(),
-    Offers(),
+    Feeds(),
     Cart(),
     Notifications(),
     Profile(),
@@ -37,8 +37,9 @@ class _NavigationBarState extends State<NavigationBar> {
   }
 
   void onTabTapped(int index) {
-    this._pageController!.animateToPage(index,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+    this
+        ._pageController!
+        .animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
   }
 
   void onPageChanged(int page) {
@@ -64,14 +65,10 @@ class _NavigationBarState extends State<NavigationBar> {
             type: BottomNavigationBarType.fixed,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.local_offer), label: 'Offers'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart), label: 'Cart'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications), label: 'Notifications'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.perm_identity), label: 'Profile'),
+              BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: 'Offers'),
+              BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+              BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifications'),
+              BottomNavigationBarItem(icon: Icon(Icons.perm_identity), label: 'Profile'),
             ],
             currentIndex: _pageIndex,
             showUnselectedLabels: true,

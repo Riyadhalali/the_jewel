@@ -13,8 +13,8 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(
-        context); // to have access to the cart provider class
+    final cartProvider =
+        Provider.of<CartProvider>(context); // to have access to the cart provider class
     return cartProvider.getCartItems.isEmpty
         ? Scaffold(
             backgroundColor: Colors.white,
@@ -28,8 +28,8 @@ class _CartState extends State<Cart> {
 
   //------------------------------Column Elements-------------------------------
   Widget columnElements(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(
-        context); // to have access to the cart provider class
+    final cartProvider =
+        Provider.of<CartProvider>(context); // to have access to the cart provider class
 
     return SafeArea(
       child: Column(
@@ -56,9 +56,7 @@ class _CartState extends State<Cart> {
                       return ChangeNotifierProvider.value(
                         value: cartProvider.getCartItems.values.toList()[index],
                         child: FullCart(
-                          productId: cartProvider.getCartItems.values
-                              .toList()[index]
-                              .id,
+                          productId: cartProvider.getCartItems.values.toList()[index].id,
                           //-> using depenendcy injection
                           //   productId:
                           //       cartProvider.getCartItems.values.toList()[index].id,
@@ -80,7 +78,7 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
-          Text("Total:" + cartProvider.getItemPrice().toString())
+          Text("Total:" + cartProvider.totalAmount.toString())
         ],
       ),
     );

@@ -107,7 +107,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(10.0),
                         image: DecorationImage(
                             image: NetworkImage(widget.picture.toString()),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             scale: 1.0)),
                   ),
                   SizedBox(

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:the_jewel/widgets/gridview.dart';
 
-class Offers extends StatefulWidget {
+class Feeds extends StatefulWidget {
   static final id = 'offers';
+  final String? categorieId;
+
+  Feeds({this.categorieId});
   @override
-  _OffersState createState() => _OffersState();
+  _FeedsState createState() => _FeedsState();
 }
 
-class _OffersState extends State<Offers> {
+class _FeedsState extends State<Feeds> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor:  Color(0xFFE0E0E0),
+        backgroundColor: Color(0xFFE0E0E0),
         body: GridView.count(
           crossAxisSpacing: 4,
           mainAxisSpacing: 10,
