@@ -20,22 +20,22 @@ class CartProvider with ChangeNotifier {
   }
 
   //----------------Add Product to Cart------------------------------
-  void addProduct(
-      String productId, double price, String title, String imageUrl) {
+  void addProduct(String productId, double price, String title, String imageUrl) {
     // check if product already exists in cart update this product
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
           (existingCartItem) => CartAttr(
-              existingCartItem.id,
-              existingCartItem.title,
-              existingCartItem.quantity +
-                  1, // because item already exists so add 1
-              existingCartItem.price,
-              existingCartItem.imageUrl));
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              quantity: existingCartItem.quantity + 1, // because item already exists so add 1
+              price: existingCartItem.price,
+              imageUrl: existingCartItem.imageUrl));
     } else {
       _cartItems.putIfAbsent(
-          productId, () => CartAttr(productId, title, 1, price, imageUrl));
+          productId,
+          () =>
+              CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
     }
     notifyListeners(); // Notify Listeners
   }
@@ -46,11 +46,11 @@ class CartProvider with ChangeNotifier {
       _cartItems.update(
           productId,
           (existingCartItem) => CartAttr(
-              existingCartItem.id,
-              existingCartItem.title,
-              existingCartItem.quantity - 1,
-              existingCartItem.price,
-              existingCartItem.imageUrl));
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              quantity: existingCartItem.quantity - 1,
+              price: existingCartItem.price,
+              imageUrl: existingCartItem.imageUrl));
     }
     notifyListeners();
   }
@@ -61,11 +61,11 @@ class CartProvider with ChangeNotifier {
       _cartItems.update(
           productId,
           (existingCartItem) => CartAttr(
-              existingCartItem.id,
-              existingCartItem.title,
-              existingCartItem.quantity + 1,
-              existingCartItem.price,
-              existingCartItem.imageUrl));
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              quantity: existingCartItem.quantity + 1,
+              price: existingCartItem.price,
+              imageUrl: existingCartItem.imageUrl));
     }
     notifyListeners();
   }
@@ -90,4 +90,6 @@ class CartProvider with ChangeNotifier {
     });
     return itemPrice;
   }
+  //--------------------------------Database Functions--------------------------
+
 } //---------------------------------End Class----------------------------------

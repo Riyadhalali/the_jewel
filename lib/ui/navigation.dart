@@ -17,7 +17,11 @@ class _NavigationBarState extends State<NavigationBar> {
 
   List<Widget> tabPages = [
     Home(),
-    Feeds(),
+
+    //TODO: pass the id for feeds
+    Feeds(
+      categorieId: '1',
+    ),
     Cart(),
     Notifications(),
     Profile(),
