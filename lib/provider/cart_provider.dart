@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_jewel/database/cartdatabase.dart';
 import 'package:the_jewel/models/cart_attr.dart';
 
 class CartProvider with ChangeNotifier {
@@ -7,6 +8,13 @@ class CartProvider with ChangeNotifier {
   //-> Get the Cart Attributes using Map methods
   Map<String, CartAttr> get getCartItems {
     return {..._cartItems};
+  }
+
+  // make instance of database
+  final CartDataBase cartDataBase = new CartDataBase();
+
+  CartProvider() {
+    getData();
   }
 
 //----------------------Get total prices-------------------------
@@ -31,12 +39,17 @@ class CartProvider with ChangeNotifier {
               quantity: existingCartItem.quantity + 1, // because item already exists so add 1
               price: existingCartItem.price,
               imageUrl: existingCartItem.imageUrl));
+
+      // use update function in database
     } else {
       _cartItems.putIfAbsent(
           productId,
           () =>
               CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
     }
+    // add product to cart model class and save it in the database
+    cartDataBase.insertData(
+        CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
     notifyListeners(); // Notify Listeners
   }
 
@@ -90,6 +103,17 @@ class CartProvider with ChangeNotifier {
     });
     return itemPrice;
   }
-  //--------------------------------Database Functions--------------------------
 
+  //--------------------------------Database Functions--------------------------
+  Future<void> getData() async {
+    final dataList = await cartDataBase.getData(); // get the data stored in database
+    _cartItems = dataList.map((item) => CartAttr(
+        id: item["productId"],
+        title: item["productTitle"],
+        quantity: item["productQuantity"],
+        price: item["productPrice"],
+        imageUrl: item["productImage"])) as Map<String, CartAttr>;
+
+    notifyListeners();
+  }
 } //---------------------------------End Class----------------------------------

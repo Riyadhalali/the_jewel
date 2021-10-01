@@ -21,7 +21,7 @@ class CartDataBase with ChangeNotifier {
           productTitle TEXT,
           productQuantity INT,
           productPrice REAL,
-          productImage TEXT
+          productImage TEXT)
           
         ''');
       },
