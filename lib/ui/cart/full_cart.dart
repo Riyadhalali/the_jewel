@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:the_jewel/provider/cart_provider.dart';
 
 class FullCart extends StatefulWidget {
   static final id = 'full_cart';
@@ -84,6 +86,7 @@ class _FullCartState extends State<FullCart> {
   }
 
   Widget itemSpecifications(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Flexible(
       flex: 4,
       child: Column(
@@ -131,7 +134,7 @@ class _FullCartState extends State<FullCart> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    //   cartProvider.addItemByOne(widget.productId);
+                    cartProvider.addItemQuantity(widget.productId);
                   },
                 ),
               ),
@@ -149,9 +152,9 @@ class _FullCartState extends State<FullCart> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    // cartProvider.reduceItemByOne(
-                    //   widget.productId,
-                    // );
+                    cartProvider.reduceItemQuantity(
+                      widget.productId,
+                    );
                   },
                 ),
               ),

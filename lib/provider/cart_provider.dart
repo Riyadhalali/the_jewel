@@ -29,6 +29,7 @@ class CartProvider with ChangeNotifier {
         CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
   }
 
+  /// old functions using provider
 //----------------------Get total prices-------------------------
   //-> get the total prices for all items
   double get totalAmount {
@@ -66,34 +67,34 @@ class CartProvider with ChangeNotifier {
   // }
 
 //---------------------Remove Product from Cart --------------------------------
-  void reduceItemByOne(String productId) {
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(
-          productId,
-          (existingCartItem) => CartAttr(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              quantity: existingCartItem.quantity - 1,
-              price: existingCartItem.price,
-              imageUrl: existingCartItem.imageUrl));
-    }
-    notifyListeners();
-  }
+//   void reduceItemByOne(String productId) {
+//     if (_cartItems.containsKey(productId)) {
+//       _cartItems.update(
+//           productId,
+//           (existingCartItem) => CartAttr(
+//               id: existingCartItem.id,
+//               title: existingCartItem.title,
+//               quantity: existingCartItem.quantity - 1,
+//               price: existingCartItem.price,
+//               imageUrl: existingCartItem.imageUrl));
+//     }
+//     notifyListeners();
+//   }
 
   //-----------------Add Item By One--------------------------------------------
-  void addItemByOne(String productId) {
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(
-          productId,
-          (existingCartItem) => CartAttr(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              quantity: existingCartItem.quantity + 1,
-              price: existingCartItem.price,
-              imageUrl: existingCartItem.imageUrl));
-    }
-    notifyListeners();
-  }
+  // void addItemByOne(String productId) {
+  //   if (_cartItems.containsKey(productId)) {
+  //     _cartItems.update(
+  //         productId,
+  //         (existingCartItem) => CartAttr(
+  //             id: existingCartItem.id,
+  //             title: existingCartItem.title,
+  //             quantity: existingCartItem.quantity + 1,
+  //             price: existingCartItem.price,
+  //             imageUrl: existingCartItem.imageUrl));
+  //   }
+  //   notifyListeners();
+  // }
 
   //------------------------Remove Item-----------------------------------------
   void removeItem(String productId) {
@@ -108,13 +109,13 @@ class CartProvider with ChangeNotifier {
   }
 
   //---------------------------Get Item Price-----------------------------------
-  double getItemPrice() {
-    var itemPrice = 0.0;
-    _cartItems.forEach((key, value) {
-      itemPrice = value.price * value.quantity;
-    });
-    return itemPrice;
-  }
+  // double getItemPrice() {
+  //   var itemPrice = 0.0;
+  //   _cartItems.forEach((key, value) {
+  //     itemPrice = value.price * value.quantity;
+  //   });
+  //   return itemPrice;
+  // }
 
   //--------------------------------Database Functions--------------------------
   // Future<void> getData() async {
@@ -134,7 +135,7 @@ class CartProvider with ChangeNotifier {
   //
   //   notifyListeners();
   // }
-
+  ///------------------the end of old functions using provider----------------------------------
   //--------------------------------Get Data----------------------------------
   Future<void> getDataList() async {
     final dataList = await cartDataBase.getData();
@@ -149,4 +150,25 @@ class CartProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  //---------------------Add Item to cart using provider and list-----------------------
+  Future<void> addItemQuantity(String productId) async {
+    for (int i = 0; i < _lst.length; i++) {
+      if (_lst[i].id == productId) {
+        _lst[i].quantity = _lst[i].quantity + 1;
+        notifyListeners();
+      }
+    }
+  }
+
+  //---------------------Decrease Item by One using provider and list---------------------
+  Future<void> reduceItemQuantity(String productId) async {
+    for (int i = 0; i < _lst.length; i++) {
+      if (_lst[i].id == productId) {
+        _lst[i].quantity = _lst[i].quantity - 1;
+        notifyListeners();
+      }
+    }
+  }
 } //---------------------------------End Class----------------------------------
+//TODO: update specific row in sql
