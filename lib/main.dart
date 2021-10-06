@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_) => ProgressProvider())
+        ChangeNotifierProvider(create: (_) => ProgressProvider()),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {

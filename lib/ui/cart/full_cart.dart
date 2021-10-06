@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:the_jewel/models/cart_attr.dart';
-import 'package:the_jewel/provider/cart_provider.dart';
 
 class FullCart extends StatefulWidget {
   static final id = 'full_cart';
   final String productId;
 
-  const FullCart({required this.productId});
-  // final String title;
-  // final double price;
-  // final int quantity;
-  // final String imageUrl;
-  //
-  // const FullCart(
-  //     {required this.productId,
-  //     required this.title,
-  //     required this.price,
-  //     required this.quantity,
-  //     required this.imageUrl});
+  //const FullCart({required this.productId});
+  final String title;
+  final double price;
+  final int quantity;
+  final String imageUrl;
+
+  const FullCart(
+      {required this.productId,
+      required this.title,
+      required this.price,
+      required this.quantity,
+      required this.imageUrl});
 
   @override
   _FullCartState createState() => _FullCartState();
@@ -42,7 +39,7 @@ class _FullCartState extends State<FullCart> {
                 child: Flexible(
                   child: Row(
                     children: [
-                      cartItemsWithShadow(),
+                      cartItemsWithShadow(context),
                       itemSpecifications(context),
                       Spacer(),
                       deleteProduct(),
@@ -57,8 +54,7 @@ class _FullCartState extends State<FullCart> {
     );
   }
 
-  Widget cartItemsWithShadow() {
-    final cartAttr = Provider.of<CartAttr>(context);
+  Widget cartItemsWithShadow(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ClipRRect(
@@ -78,7 +74,7 @@ class _FullCartState extends State<FullCart> {
             ],
             image: DecorationImage(
                 image: NetworkImage(
-                  cartAttr.imageUrl,
+                  widget.imageUrl,
                 ),
                 fit: BoxFit.fill),
           ),
@@ -88,8 +84,6 @@ class _FullCartState extends State<FullCart> {
   }
 
   Widget itemSpecifications(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
-    final cartAttr = Provider.of<CartAttr>(context);
     return Flexible(
       flex: 4,
       child: Column(
@@ -99,7 +93,7 @@ class _FullCartState extends State<FullCart> {
             // color: Colors.blue,
 
             child: Text(
-              cartAttr.title,
+              widget.title,
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -115,7 +109,7 @@ class _FullCartState extends State<FullCart> {
               Flexible(
                 child: Container(
                   child: Text(
-                    "Price: " + cartAttr.price.toString(),
+                    "Price: " + widget.price.toString(),
                     style: TextStyle(fontSize: 20.0, color: Colors.red),
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
@@ -125,7 +119,8 @@ class _FullCartState extends State<FullCart> {
             ],
           ),
           Container(
-            child: Text("Sub price: " + cartProvider.getItemPrice().toString()),
+            //child: Text("Sub price: " + cartProvider.getItemPrice().toString()),
+            child: Text("Sub price: "),
           ),
           Row(
             children: [
@@ -136,14 +131,14 @@ class _FullCartState extends State<FullCart> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    cartProvider.addItemByOne(widget.productId);
+                    //   cartProvider.addItemByOne(widget.productId);
                   },
                 ),
               ),
               Container(
                 color: Colors.amber,
                 child: Text(
-                  cartAttr.quantity.toString(),
+                  widget.quantity.toString(),
                   style: TextStyle(fontSize: 25),
                 ),
               ),
@@ -154,9 +149,9 @@ class _FullCartState extends State<FullCart> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    cartProvider.reduceItemByOne(
-                      widget.productId,
-                    );
+                    // cartProvider.reduceItemByOne(
+                    //   widget.productId,
+                    // );
                   },
                 ),
               ),

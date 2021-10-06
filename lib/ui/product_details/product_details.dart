@@ -68,7 +68,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           animationType: BadgeAnimationType.slide,
           // here we can add number of item added to the cart
           //we can use provider to get the number of the item
-          badgeContent: Text(cartProvider.getCartItems.length.toString()),
+          badgeContent: Text(cartProvider.lst.length.toString()),
           child: IconButton(
             icon: Icon(Icons.shopping_cart_sharp),
             onPressed: () {
@@ -161,7 +161,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             child: ElevatedButton(
                               onPressed: () {
                                 // adding product to the card
-                                cartProvider.addProduct(
+                                cartProvider.add(
                                     widget.productId.toString(),
                                     double.parse(widget.price.toString()),
                                     widget.productName.toString(),

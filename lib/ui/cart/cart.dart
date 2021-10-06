@@ -13,9 +13,9 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    final cartProvider =
-        Provider.of<CartProvider>(context); // to have access to the cart provider class
-    return cartProvider.getCartItems.isEmpty
+    // final cartProvider =
+    //     Provider.of<CartProvider>(context); // to have access to the cart provider class
+    return Provider.of<CartProvider>(context).lst.length == 0
         ? Scaffold(
             backgroundColor: Colors.white,
             body: EmptyCart(),
@@ -50,31 +50,45 @@ class _CartState extends State<Cart> {
                 //color: Colors.black26,
                 height: MediaQuery.of(context).size.height *
                     0.55, // very important to adjust the height
-                child: ListView.builder(
-                    itemCount: cartProvider.getCartItems.length,
-                    itemBuilder: (BuildContext context, index) {
-                      return ChangeNotifierProvider.value(
-                        value: cartProvider.getCartItems.values.toList()[index],
-                        child: FullCart(
-                          productId: cartProvider.getCartItems.values.toList()[index].id,
-                          //-> using depenendcy injection
-                          //   productId:
-                          //       cartProvider.getCartItems.values.toList()[index].id,
-                          //   title: cartProvider.getCartItems.values
-                          //       .toList()[index]
-                          //       .title,
-                          //   price: cartProvider.getCartItems.values
-                          //       .toList()[index]
-                          //       .price,
-                          //   quantity: cartProvider.getCartItems.values
-                          //       .toList()[index]
-                          //       .quantity,
-                          //   imageUrl: cartProvider.getCartItems.values
-                          //       .toList()[index]
-                          //       .imageUrl
-                        ),
+                /// child: ListView.builder(
+                /// itemCount: cartProvider.lst.length,
+                /// itemBuilder: (BuildContext context, index) {
+                ///   return ChangeNotifierProvider.value(
+                ///     value: cartProvider.getCartItems.values.toList()[index],
+                ///     child: FullCart(
+                ///       productId: cartProvider.getCartItems.values.toList()[index].id,
+                //       //-> using depenendcy injection
+                //       //   productId:
+                //       //       cartProvider.getCartItems.values.toList()[index].id,
+                //       //   title: cartProvider.getCartItems.values
+                //       //       .toList()[index]
+                //       //       .title,
+                //       //   price: cartProvider.getCartItems.values
+                //       //       .toList()[index]
+                //       //       .price,
+                //       //   quantity: cartProvider.getCartItems.values
+                //       //       .toList()[index]
+                //       //       .quantity,
+                //       //   imageUrl: cartProvider.getCartItems.values
+                //       //       .toList()[index]
+                //       //       .imageUrl
+                ///     ),
+                ///   );
+                ///  }),
+                child: Consumer<CartProvider>(
+                  builder: (BuildContext context, cartProvider, child) => ListView.builder(
+                    itemCount: cartProvider.lst.length,
+                    itemBuilder: (context, index) {
+                      return FullCart(
+                        productId: cartProvider.lst[index].id.toString(),
+                        title: cartProvider.lst[index].title,
+                        price: cartProvider.lst[index].price,
+                        imageUrl: cartProvider.lst[index].imageUrl,
+                        quantity: cartProvider.lst[index].quantity,
                       );
-                    }),
+                    },
+                  ),
+                ),
               ),
             ),
           ),

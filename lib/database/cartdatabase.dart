@@ -16,12 +16,12 @@ class CartDataBase with ChangeNotifier {
       onCreate: (database, version) async {
         await database.execute('''
           CREATE TABLE CART(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          productId TEXT,
-          productTitle TEXT,
-          productQuantity INT,
-          productPrice REAL,
-          productImage TEXT)
+          sql_id INTEGER PRIMARY KEY,
+          id TEXT ,
+          title TEXT,
+          quantity INT,
+          price REAL,
+          imageUrl TEXT)
           
         ''');
       },
@@ -32,25 +32,27 @@ class CartDataBase with ChangeNotifier {
   // insert data into database
   Future<bool> insertData(CartAttr data) async {
     final Database db = await initDB();
-    db.insert("Cart_db", data.toMap());
+    db.insert("CART", data.toMap());
+    print('data added successfully to database');
     return true;
   }
 
   // get data from database
   Future<List<Map<String, dynamic>>> getData() async {
     final Database db = await initDB();
-    return await db.query("Cart_db");
+    // print(db.query("CART"));
+    return await db.query("CART");
   }
 
   // update data in the database
   Future<void> update(CartAttr dataModel, String productId) async {
     final Database db = await initDB();
-    await db.update("Cart_db", dataModel.toMap(), where: "productId=?", whereArgs: [productId]);
+    await db.update("CART", dataModel.toMap(), where: "id=?", whereArgs: [productId]);
   }
 
   // delete data in database
   Future<void> delete(String productId) async {
     final Database db = await initDB();
-    await db.delete("Cart_db", where: "productId=?", whereArgs: [productId]);
+    await db.delete("CART", where: "id=?", whereArgs: [productId]);
   }
 } // end class

@@ -12,6 +12,8 @@ import 'package:the_jewel/ui/register.dart';
 import 'package:the_jewel/webservices/api_calls/webservices.dart';
 import 'package:the_jewel/webservices/models/login/Login.dart';
 
+import '../navigation.dart';
+
 class SignIn extends StatefulWidget {
   static final id = 'sign_in';
   @override
@@ -287,14 +289,14 @@ class _SignInState extends State<SignIn> {
     }
 
     // if we have a success user login in then navigate to another activity
-    ///if (messageResponse == 'login success') {
-    ///  sharedPref.setData('userID', userId.toString()); // save the user id to shared pref
-    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => NavigationBar()));
-    ///   }
+    if (messageResponse == 'login success') {
+      sharedPref.setData('userID', userId.toString()); // save the user id to shared pref
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => NavigationBar()));
+    }
 
-    // setState(() {
-    //   saving = false;
-    // });
+    setState(() {
+      saving = false;
+    });
   }
 
 //---------------------------Don't have an account------------------------------

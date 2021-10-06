@@ -3,7 +3,13 @@ import 'package:the_jewel/database/cartdatabase.dart';
 import 'package:the_jewel/models/cart_attr.dart';
 
 class CartProvider with ChangeNotifier {
+  CartDataBase cartDataBase = CartDataBase();
+
   Map<String, CartAttr> _cartItems = {};
+
+  List<CartAttr> _lst = [];
+
+  List<CartAttr> get lst => [..._lst]; // to get all items in the cart
 
   //-> Get the Cart Attributes using Map methods
   Map<String, CartAttr> get getCartItems {
@@ -11,10 +17,16 @@ class CartProvider with ChangeNotifier {
   }
 
   // make instance of database
-  final CartDataBase cartDataBase = new CartDataBase();
 
   CartProvider() {
-    getData();
+    getDataList();
+  }
+  //-> add product to provider and database
+  add(String productId, double price, String title, String imageUrl) {
+    _lst.add(CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
+    notifyListeners();
+    cartDataBase.insertData(
+        CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
   }
 
 //----------------------Get total prices-------------------------
@@ -27,31 +39,31 @@ class CartProvider with ChangeNotifier {
     return total;
   }
 
-  //----------------Add Product to Cart------------------------------
-  void addProduct(String productId, double price, String title, String imageUrl) {
-    // check if product already exists in cart update this product
-    if (_cartItems.containsKey(productId)) {
-      _cartItems.update(
-          productId,
-          (existingCartItem) => CartAttr(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              quantity: existingCartItem.quantity + 1, // because item already exists so add 1
-              price: existingCartItem.price,
-              imageUrl: existingCartItem.imageUrl));
-
-      // use update function in database
-    } else {
-      _cartItems.putIfAbsent(
-          productId,
-          () =>
-              CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
-    }
-    // add product to cart model class and save it in the database
-    cartDataBase.insertData(
-        CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
-    notifyListeners(); // Notify Listeners
-  }
+  //----------------Add Product to Cart------------------------------using old way
+  // void addProduct(String productId, double price, String title, String imageUrl) {
+  //   // check if product already exists in cart update this product
+  //   if (_cartItems.containsKey(productId)) {
+  //     _cartItems.update(
+  //         productId,
+  //         (existingCartItem) => CartAttr(
+  //             id: existingCartItem.id,
+  //             title: existingCartItem.title,
+  //             quantity: existingCartItem.quantity + 1, // because item already exists so add 1
+  //             price: existingCartItem.price,
+  //             imageUrl: existingCartItem.imageUrl));
+  //
+  //     // use update function in database
+  //   } else {
+  //     _cartItems.putIfAbsent(
+  //         productId,
+  //         () =>
+  //             CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
+  //   }
+  //   // add product to cart model class and save it in the database
+  //   cartDataBase.insertData(
+  //       CartAttr(id: productId, title: title, quantity: 1, price: price, imageUrl: imageUrl));
+  //   notifyListeners(); // Notify Listeners
+  // }
 
 //---------------------Remove Product from Cart --------------------------------
   void reduceItemByOne(String productId) {
@@ -85,13 +97,13 @@ class CartProvider with ChangeNotifier {
 
   //------------------------Remove Item-----------------------------------------
   void removeItem(String productId) {
-    _cartItems.remove(productId);
+    _lst.remove(productId);
     notifyListeners();
   }
 
   //-------------------------------Clear Cart-----------------------------------
   void clearCart() {
-    _cartItems.clear();
+    _lst.clear();
     notifyListeners();
   }
 
@@ -105,14 +117,35 @@ class CartProvider with ChangeNotifier {
   }
 
   //--------------------------------Database Functions--------------------------
-  Future<void> getData() async {
-    final dataList = await cartDataBase.getData(); // get the data stored in database
-    _cartItems = dataList.map((item) => CartAttr(
-        id: item["productId"],
-        title: item["productTitle"],
-        quantity: item["productQuantity"],
-        price: item["productPrice"],
-        imageUrl: item["productImage"])) as Map<String, CartAttr>;
+  // Future<void> getData() async {
+  //   // get the data stored in database
+  //   ///  Map<String, CartAttr> _cartItems = {};
+  //   ///  returned from api call : Future<List<Map<String, dynamic>>> => returned from database
+  //   ///
+  //   var dataList = await cartDataBase.getData();
+  //
+  //   _cartItems = dataList.map((item) => CartAttr(
+  //           id: item["id"],
+  //           title: item["title"],
+  //           quantity: item["quantity"],
+  //           price: item["price"],
+  //           imageUrl: item["imageUrl"])
+  //       .toMap()) as Map<String, CartAttr>;
+  //
+  //   notifyListeners();
+  // }
+
+  //--------------------------------Get Data----------------------------------
+  Future<void> getDataList() async {
+    final dataList = await cartDataBase.getData();
+    _lst = dataList
+        .map((item) => CartAttr(
+            id: item["id"],
+            title: item["title"],
+            quantity: item["quantity"],
+            price: item["price"],
+            imageUrl: item["imageUrl"]))
+        .toList();
 
     notifyListeners();
   }

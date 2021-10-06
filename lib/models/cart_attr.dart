@@ -19,7 +19,7 @@ class CartAttr with ChangeNotifier {
   factory CartAttr.fromMap(Map<String, dynamic> json) => CartAttr(
       id: json["id"],
       title: json["title"],
-      quantity: json["title"],
+      quantity: json["quantity"],
       price: json["price"],
       imageUrl: json["imageUrl"]);
 
