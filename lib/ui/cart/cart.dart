@@ -76,15 +76,15 @@ class _CartState extends State<Cart> {
                 ///   );
                 ///  }),
                 child: Consumer<CartProvider>(
-                  builder: (BuildContext context, cartProvider, child) => ListView.builder(
+                  builder: (BuildContext context, cartProvider2, child) => ListView.builder(
                     itemCount: cartProvider.lst.length,
                     itemBuilder: (context, index) {
                       return FullCart(
-                        productId: cartProvider.lst[index].id.toString(),
-                        title: cartProvider.lst[index].title,
-                        price: cartProvider.lst[index].price,
-                        imageUrl: cartProvider.lst[index].imageUrl,
-                        quantity: cartProvider.lst[index].quantity,
+                        productId: cartProvider2.lst[index].id.toString(),
+                        title: cartProvider2.lst[index].title,
+                        price: cartProvider2.lst[index].price,
+                        imageUrl: cartProvider2.lst[index].imageUrl,
+                        quantity: cartProvider2.lst[index].quantity,
                       );
                     },
                   ),
@@ -92,7 +92,7 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
-          Text("Total:" + cartProvider.totalAmount.toString())
+          Text("Total:" + cartProvider.getTotalPrice.toString())
         ],
       ),
     );

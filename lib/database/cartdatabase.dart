@@ -55,4 +55,13 @@ class CartDataBase with ChangeNotifier {
     final Database db = await initDB();
     await db.delete("CART", where: "id=?", whereArgs: [productId]);
   }
+
+  //Delete row in database
+  Future<void> deleteRaw(String productId) async {
+    final Database db = await initDB();
+    db.rawDelete('''
+      DELETE FROM CART
+      WHERE id=?  
+    ''', [productId]);
+  }
 } // end class

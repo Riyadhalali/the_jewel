@@ -138,7 +138,7 @@ class WebServices {
         return getCategoriesData;
       }
     } catch (e) {
-      throw e;
+      // throw e;
     }
     throw 'error in getting data from categories';
   }

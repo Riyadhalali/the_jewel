@@ -38,15 +38,13 @@ class _FullCartState extends State<FullCart> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Flexible(
-                  child: Row(
-                    children: [
-                      cartItemsWithShadow(context),
-                      itemSpecifications(context),
-                      Spacer(),
-                      deleteProduct(),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    cartItemsWithShadow(context),
+                    itemSpecifications(context),
+                    Spacer(),
+                    deleteProduct(),
+                  ],
                 ),
               ),
             ),
@@ -110,6 +108,7 @@ class _FullCartState extends State<FullCart> {
           Row(
             children: [
               Flexible(
+                flex: 1,
                 child: Container(
                   child: Text(
                     "Price: " + widget.price.toString(),
@@ -134,7 +133,8 @@ class _FullCartState extends State<FullCart> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    cartProvider.addItemQuantity(widget.productId);
+                    cartProvider.addItemQuantity(
+                        widget.productId, widget.price, widget.title, widget.imageUrl);
                   },
                 ),
               ),
@@ -153,8 +153,8 @@ class _FullCartState extends State<FullCart> {
                   ),
                   onPressed: () {
                     cartProvider.reduceItemQuantity(
-                      widget.productId,
-                    );
+                        widget.productId, widget.price, widget.title, widget.imageUrl);
+                    // update data in database
                   },
                 ),
               ),
@@ -166,6 +166,7 @@ class _FullCartState extends State<FullCart> {
   }
 
   Widget deleteProduct() {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Flexible(
       flex: 1,
       child: Container(
@@ -175,7 +176,11 @@ class _FullCartState extends State<FullCart> {
               Icons.delete_forever_rounded,
               color: Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                cartProvider.removeItem(widget.productId);
+              });
+            },
           )),
     );
   }

@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
   //--------------------------------------------------------------------
   Future<List<GetSliderImages>> getImageSliderData() async {
     getImageSliderList = await ApiHome.getSliderImage();
-    print(getImageSliderList[0].picture);
+    // print(getImageSliderList[0].picture);
     return getImageSliderList;
   }
 
@@ -58,14 +58,14 @@ class _HomeState extends State<Home> {
   //-> get data product related to the categorie required by user
   Future<List<GetdataProduct>> getdataproduct() async {
     getDataProductList = await WebServices.getDataProducts('1');
-    print(getDataProductList[1].productName);
+    //print(getDataProductList[1].productName);
     return getDataProductList;
   }
 
 //--------------------------------Get Categories of products---------------------------
   Future<List<GetCategories>> getCategories() async {
     getCategroiesList = await WebServices.getCategories();
-    print(getCategroiesList);
+    //   print(getCategroiesList);
     return getCategroiesList;
   }
 
